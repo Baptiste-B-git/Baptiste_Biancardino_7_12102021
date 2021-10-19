@@ -14,6 +14,11 @@ if (config.use_env_variable) {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+sequelize.authenticate().then(res => {
+  console.log('Connected to MySQL');
+},error => {
+  console.error('Unable to connect to the database:', error);
+})
 
 fs
   .readdirSync(__dirname)

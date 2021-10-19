@@ -30,10 +30,6 @@ module.exports = {
       },
       likes: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      likes: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
