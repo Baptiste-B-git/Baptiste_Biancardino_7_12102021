@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'amethyste595278',
-  database: 'goupomania'
+  database: 'database_development'
 });
 
 // simple query

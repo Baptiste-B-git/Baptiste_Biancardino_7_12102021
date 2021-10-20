@@ -22,3 +22,12 @@ module.exports = (sequelize, DataTypes) => {
   });
   return User;
 };
+
+// // crypter le password
+// const bcrypt = require('bcrypt');
+
+// userSchema.pre("save", async function(next){
+//   const salt = await bcrypt.genSalt();
+//   this.password = await bcrypt.hash(this.password, salt);
+//   next();
+// });
