@@ -31,3 +31,5 @@ module.exports = (sequelize, DataTypes) => {
 //   this.password = await bcrypt.hash(this.password, salt);
 //   next();
 // });
+
+
