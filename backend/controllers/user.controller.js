@@ -2,58 +2,38 @@ const UserModel = require('../models').User;
 
 // Afficher tous les users
 module.exports.getAllUsers = async (req, res) => {
-    const users = await UserModel.find().select('-password');
-    res.status(200).json(users);
+    try{
+        const users = await UserModel.findAll();
+        res.status(200).json(users);
+    
+    }
+    catch (err) {
+
+        return res.status(500).json({ message: err});
+    }
 }
 
 // Afficher un seul user
-module.exports.userInfo = (req, res) => {
-    // console.log(req.param);
-    if (!ObjetcID.isValid(req.params.id))
-        return res.status(400).send ('ID unknown :' + req.params.id)
-
-    UserModel.findById(req.params.id, (err, docs) => {
-        if (!err) res.send(docs);
-        else console.log('ID unknown :' + err);
-    }).select('-password');
-    };
-
-// Update User
-module.exports.updateUser = async (req, res) => {
-    if (!ObjetcID.isValid(req.params.id))
-    return res.status(400).send ('ID unknown :' + req.params.id)
-    // Selection du usermodel
+module.exports.userInfo = async (req, res) => {
     try{ 
-        // On lui passe l'id du message qu'on veut éviter 
-        await UserModel.findOneAndUpdate(
-            {_id: req.params.id},
-            { 
-                // On "set" la bio
-                $set: {
-                    bio: req.body.bio
-                }
-            },
-            { new: true, upsert: true, setDefaultsOnInsert: true},
-            (err, docs) => {
-                if (!err) return res.send(docs);
-                if (err) return res.status(500).send({message: err});
-            }
-        )
+        const user = await UserModel.findByPk(req.params.id);
+        if (!user) return res.status(404).json({ message: 'Utilisateur inexistant !'});
+        return res.status(200).json(user);
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ message: err});
     }
 };
 
-
 // DELETE user
 module.exports.deleteUser = async (req, res) => {
-    if (!ObjetcID.isValid(req.params.id))
-    return res.status(400).send ('ID unknown :' + req.params.id)
-
     try{
-        await UserModel.remove({ _id: req.params.id}).exec();
+        const user = await UserModel.findByPk(req.params.id);
+        if (!user) return res.status(404).json({ message: 'Utilisateur inexistant !'});
+        await user.destroy();
         res.status(200).json({ message: "successfully deleted."});
     } catch (err){
+        console.log(err);
         return res.status(500).json({ message: err});
     }
 }
