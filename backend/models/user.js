@@ -35,4 +35,18 @@ module.exports = (sequelize, DataTypes) => {
 //   next();
 // });
 
+// // auth.controller.js
+// // Quand on va tenter de se log, récupération de l'email et password et bcrypt compare les deux crypt et valider si OK
+// user.Schema.statics.login = async function (email, password){
+//   const user = await this.findOne ({ email });
+//   if (user){
+//     const auth = await bcrypt.compare(password, user.password);
+//     if (auth){
+//       return user;
+//     }
+//     throw Error('incorrect password');
+//   }
+//   throw Error('incorrect email')
+// };
+
 

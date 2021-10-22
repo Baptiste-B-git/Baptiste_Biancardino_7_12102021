@@ -24,7 +24,7 @@ module.exports.updateUser = async (req, res) => {
     return res.status(400).send ('ID unknown :' + req.params.id)
     // Selection du usermodel
     try{ 
-        // On lui passe l'id du message qu'onn veut éviter 
+        // On lui passe l'id du message qu'on veut éviter 
         await UserModel.findOneAndUpdate(
             {_id: req.params.id},
             { 
