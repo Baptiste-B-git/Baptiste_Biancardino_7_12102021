@@ -1,4 +1,69 @@
+@font-face {
+  font-family: "Ubuntu-L";
+  src: url("../fonts/Ubuntu-L.ttf");
+}
+
 h1 {
-  color: #0e005f;
+  color: white;
+  font-family: "arial";
+}
+
+h2 {
+  font-weight: bold;
+  text-align: center;
+}
+
+body {
+  background-color: #718dc0;
+  font-family: "Ubuntu-L";
+}
+
+.header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 1050px;
+  margin: 0 auto;
+  background-color: #eeb797;
+  padding: 10px;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  list-style: none;
+  padding-top: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.signin {
+  padding-right: 20px;
+}
+
+.signin-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  height: 500px;
+  position: center;
+  background-color: #eeb797;
+  border-radius: 20px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,8 +1,57 @@
-
-$primary-color: #0e005f;
-$secondary-color: #4b6dad;
-
-h1{
-    color:$primary-color
+@font-face {
+    font-family: "Ubuntu-L";
+    src: url("../fonts/Ubuntu-L.ttf");
 }
 
+$primary-color: rgb(238, 183, 151);
+$secondary-color: #718dc0;
+
+h1{
+    color:white;
+    font-family: "arial";
+}
+h2{
+    font-weight: bold;
+    text-align: center;
+}
+
+body{
+    background-color: $secondary-color;
+    font-family: "Ubuntu-L";
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1050px;
+    margin: 0 auto;
+    background-color: $primary-color;
+    padding: 10px;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding-top: 25px;
+}
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.signin{
+    padding-right: 20px;
+}
+
+.signin-container{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 500px;
+    position: center;
+    background-color: $primary-color;
+    border-radius: 20px;
+}
