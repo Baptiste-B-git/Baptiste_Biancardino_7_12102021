@@ -1,6 +1,6 @@
 'use strict';
 
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const {
   Model
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 // });
 
 // // auth.controller.js
-// // Quand on va tenter de se log, récupération de l'email et password et bcrypt compare les deux crypt et valider si OK
+// // Au moment de se log, récupération de l'email et du password puis bcrypt compare les deux crypt et il valide si c'est bon
 // user.Schema.statics.login = async function (email, password){
 //   const user = await this.findOne ({ email });
 //   if (user){
