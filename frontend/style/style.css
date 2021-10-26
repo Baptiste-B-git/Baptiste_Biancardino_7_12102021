@@ -4,19 +4,15 @@
 }
 
 h1 {
-  color: white;
   font-family: "arial";
 }
 
-h2 {
-  font-weight: bold;
-  text-align: center;
-  color: blue;
-}
-
 body {
-  background-color: #718dc0;
   font-family: "Ubuntu-L";
+  margin: 0;
+  padding: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#d1d1d1));
+  background: linear-gradient(white, #d1d1d1);
 }
 
 .header-container {
@@ -26,13 +22,8 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  max-width: 1050px;
   margin: 0 auto;
-  background-color: #eeb797;
-  padding: 10px;
+  border-bottom: 2px solid #ff6913;
 }
 
 nav ul {
@@ -47,14 +38,23 @@ nav ul {
   padding-top: 25px;
 }
 
-nav a {
+nav ul li {
+  padding-right: 20px;
+}
+
+nav ul li a {
+  border: 2px solid #ffe4d4;
+  background-color: #ffe4d4;
+  border-radius: 20px;
+  padding: 10px;
   text-decoration: none;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
-.signin {
-  padding-right: 20px;
+nav ul li a:hover {
+  color: #ff6913;
+  background-color: #ff6913;
 }
 
 .signin-container {
@@ -64,7 +64,12 @@ nav a {
   width: 500px;
   height: 500px;
   position: center;
-  background-color: #eeb797;
+  background-color: #ffe4d4;
   border-radius: 20px;
+}
+
+.signin-container h2 {
+  font-weight: 600;
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */
