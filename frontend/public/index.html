@@ -6,20 +6,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../style/style.css">
     <title>Groupomania</title>
+    
   </head>
   <body>
     <header>
       <div class="header-container">
-        <div id="app">
-          <h1>{{ message }}</h1>
+        <div id="titre">
+          <h1>{{ titre }}</h1>
         </div>
-        <nav class="navbar">
-          <ul class="navigation">
-            <li class="signin">
-              <a class="anchor" href="#blocs">Se connecter</a>
-            </li>
-            <li class="signup">
-              <a class="anchor" href="#marseille_activities">S'inscrire</a>
+        <nav>
+          <ul id="navigation">
+            <li v-for="item in items" :key="item.nav">
+              {{ item.nav }}
             </li>
           </ul>
         </nav>
@@ -27,14 +25,16 @@
     </header>
     <main>
       <div class="signin-container">
-          <h2>Identifez-vous</h2>
-          <form method="post" action="traitement.php">
-            <p>
-                <label for="email">Email</label>
+        <div id="titre2">
+          <h2>{{ titre2 }}</h2>
+        </div>
+          <form class=log method="post" action="traitement.php">
+            <p class=log>
+                <label for="email">Email</label></br>
                 <input type="text" name="pseudo" id="pseudo" placeholder="Ex : david@gmail.com" size="30" maxlength="50" />
                 
                 <br />
-                <label for="pass">Mot de passe</label>
+                <label for="pass">Mot de passe</label></br>
                 <input type="password" name="pass" id="pass" />
             </p>
          </form>
@@ -43,11 +43,27 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script>
         const app = new Vue({
-            el: "#app",
+            el: "#titre",
             data: {
-                message: "Groupomania",
+                titre: "Groupomania",
             }
         });
+        const navigation = new Vue({
+            el: '#navigation',
+            data: {
+              items: [
+                { nav: 'Se connecter' },
+                { nav: 'S\'inscrire' }
+              ]
+            }
+        });
+        const h2 = new Vue ({
+          el:"#titre2",
+          data: {
+            titre2: "Identifiez-vous"
+          }
+        })
+
     </script>
   </body>
 </html>
