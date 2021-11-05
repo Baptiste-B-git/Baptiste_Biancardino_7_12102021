@@ -5,6 +5,8 @@ require('dotenv').config({path: './config/.env'});
 require('./config/db');
 const app = express();
 const db = require('./models');
+const cors = require('cors');
+app.use(cors()) 
 
 
 app.use(bodyParser.json());

@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 const axios = require('axios');
 
 const instance = axios.create({
-  baseURL: 'https://www.wawasensei.dev/api/demo-auth/'
+  baseURL: 'http://localhost:5000/api'
 });
 
 let user = localStorage.getItem('user');
@@ -30,8 +30,7 @@ const store = createStore({
     status: '',
     user: user,
     userInfos: {
-      nom:'',
-      prenom: '',
+      username:'',
       email: '',
       photo: '',
     },
@@ -60,7 +59,7 @@ const store = createStore({
     login: ({commit}, userInfos) => {
       commit('setStatus', 'loading');
       return new Promise((resolve, reject) => {
-        instance.post('/login', userInfos)
+        instance.post('/user/login', userInfos)
         .then(function (response) {
           commit('setStatus', '');
           commit('logUser', response.data);
@@ -76,7 +75,7 @@ const store = createStore({
       commit('setStatus', 'loading');
       return new Promise((resolve, reject) => {
         commit;
-        instance.post('/createAccount', userInfos)
+        instance.post('/user/register', userInfos)
         .then(function (response) {
           commit('setStatus', 'created');
           resolve(response);
