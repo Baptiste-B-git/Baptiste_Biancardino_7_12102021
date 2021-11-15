@@ -1,4 +1,4 @@
-const PostModel = require('../models').post;
+const PostModel = require('../models/post');
 const UserModel = require('../models').user;
 
 
@@ -10,22 +10,26 @@ module.exports.readPost = (req, res) => {
     })
 }
 // Création du commentaire
-module.exports.createPost = async (req, res) => {
-    const newPost = new PostModel({
-        idUSERS: req.body.idUSERS,
-        title: req.body.title,
-        content: req.body.content,
-        attachment: [],
-        likes: []
-    });
+module.exports.createPost = (req, res) => {
+    const idUSERS =  req.body.idUSERS;
 
-    try {
-        const post = await newPost.save();
-        return res.status(201).json(post);
-    } catch (err) {
-        return res.status(400).send(err);
-    }
-}
+    const content = req.body.content;
+    const attachment = [];
+    const likes =  []
+const newPost = new PostModel({
+   idUSERS: idUSERS,
+
+        content: content,
+        attachment: attachment,
+        likes: likes
+  }); 
+
+newPost 
+.save()
+.then(() => res.status(201).json({ message: "post enregistré" }))
+.catch((error) => res.status(400).json({ error }));
+};
+
 
 // PUT mise à jour commentaire
 module.exports.updatePost = (req, res) => {
