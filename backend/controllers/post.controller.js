@@ -8,14 +8,14 @@ module.exports.readPost = (req, res) => {
         if (!err) res.send(docs);
         else console.log('Error to get data : ' + err);
     })
-}
+};
 // Création du commentaire
 module.exports.createPost = (req, res) => {
     const idUSERS =  req.body.idUSERS;
 
     const content = req.body.content;
     const attachment = [];
-    const likes =  []
+    const likes =  [];
 const newPost = new PostModel({
    idUSERS: idUSERS,
 
@@ -49,7 +49,7 @@ module.exports.updatePost = (req, res) => {
             else console.log();
         }
     )
-}
+};
 
 
 // Supprimer un commentaire
@@ -61,16 +61,69 @@ module.exports.deletePost = (req, res) => {
         if (!err) res.send(docs);
         else console.log ("Delete error :" + err);
     });
-}
+};
 
 
 // Like et Unlike
-module.exports.likePost = (req, res) => {
+module.exports.likePost = async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+      return res.status(400).send("ID unknown : " + req.params.id);
+  
+    try {
+      await PostModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          $addToSet: { likes: req.body.id },
+        },
+        { new: true },
+        (err, docs) => {
+          if (err) return res.status(400).send(err);
+        }
+      );
+      await UserModel.findByIdAndUpdate(
+        req.body.id,
+        {
+          $addToSet: { likes: req.params.id },
+        },
+        { new: true },
+        (err, docs) => {
+          if (!err) res.send(docs);
+          else return res.status(400).send(err);
+        }
+      );
+    } catch (err) {
+      return res.status(400).send(err);
+    }
+  };
 
-}
-
-module.exports.unlikePost = (req, res) => {
-
-}
-
+module.exports.unlikePost = async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+      return res.status(400).send("ID unknown : " + req.params.id);
+  
+    try {
+      await PostModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          $pull: { likes: req.body.id },
+        },
+        { new: true },
+        (err, docs) => {
+          if (err) return res.status(400).send(err);
+        }
+      );
+      await UserModel.findByIdAndUpdate(
+        req.body.id,
+        {
+          $pull: { likes: req.params.id },
+        },
+        { new: true },
+        (err, docs) => {
+          if (!err) res.send(docs);
+          else return res.status(400).send(err);
+        }
+      );
+    } catch (err) {
+      return res.status(400).send(err);
+    }
+};
 // CRUD
