@@ -8,27 +8,43 @@ module.exports.readPost = (req, res) => {
         if (!err) res.send(docs);
         else console.log('Error to get data : ' + err);
     })
-};
+}
 // Création du commentaire
 module.exports.createPost = (req, res) => {
-    const idUSERS =  req.body.idUSERS;
+  const idUSERS =  req.body.idUSERS;
 
-    const content = req.body.content;
-    const attachment = [];
-    const likes =  [];
-const newPost = new PostModel({
-   idUSERS: idUSERS,
+  const content = req.body.content;
+  const attachment = [];
+  const likes =  [];
+  const newPost = new PostModel({
+  idUSERS: idUSERS,
 
-        content: content,
-        attachment: attachment,
-        likes: likes
-  }); 
+  content: content,
+  attachment: attachment,
+  likes: likes
+}); 
 
-newPost 
+newPost
 .save()
 .then(() => res.status(201).json({ message: "post enregistré" }))
 .catch((error) => res.status(400).json({ error }));
 };
+
+// module.exports.createPost = async (req, res) => {
+//   const newPost = new postModel({
+//     idUSERS: req.body.idUSERS,
+//     title: req.body.title,
+//     content = req.body.content;
+//     attachment = [];
+//     likes =  [];
+// });
+
+//   try {
+//     const post = await newPost.save();
+//     return res.status(201).json(post);
+//   } catch (err) {
+//     return res.status(400).send(err);
+//   }};
 
 
 // PUT mise à jour commentaire
@@ -41,8 +57,10 @@ module.exports.updatePost = (req, res) => {
     }
 
     PostModel.findByIdAndUpdate(
+      // id de l'article
         req.params.id,
-        { $set: updateRecord },
+        // mise à jour le message du user updaterecord
+        { $set: updateRecord }, 
         { new: true },
         (err, docs) => {
             if (!err) res.send(docs);
