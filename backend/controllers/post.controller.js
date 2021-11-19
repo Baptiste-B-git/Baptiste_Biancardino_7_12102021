@@ -1,5 +1,6 @@
-const PostModel = require('../models/post');
-const UserModel = require('../models').user;
+const PostModel = require('../models').Message;
+const test = require('../models');
+const UserModel = require('../models').User;
 
 
 // CRUD
@@ -49,7 +50,7 @@ newPost
 
 // PUT mise à jour commentaire
 module.exports.updatePost = (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
+    if (req.params.id.isValid(req.params.id))
         return res.status(400).send("ID unkknow : " + req.params.id);
 
     const updatedRecord = {
@@ -80,7 +81,6 @@ module.exports.deletePost = (req, res) => {
         else console.log ("Delete error :" + err);
     });
 };
-
 
 // Like et Unlike
 module.exports.likePost = async (req, res) => {
