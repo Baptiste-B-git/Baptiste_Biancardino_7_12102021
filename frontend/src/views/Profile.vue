@@ -19,16 +19,29 @@
 
   <div class="card">
     <h1 class="card__title">Espace Perso</h1>
-    <p class="card__subtitle">Voilà donc qui je suis...</p>
-    <p>{{user.prenom}} {{user.nom}} {{user.email}}</p>
-    <img :src="user.photo"/>
-    <div class="form-row">
-      <button @click="logout()" class="button">
-        Déconnexion
-      </button>
+    <div  class="card_bloc">
+      <div class="card__profile">
+        <p class="card__subtitle">Photo de profil</p>
+        <p>{{user.prenom}} {{user.nom}} {{user.email}}</p>
+        <img :src="user.photo"/>
+        <div class="form-row"></div>
+        <button class="button">Changer d'image</button>
+        <button class="button">Envoyer</button>
+      </div>
+
+
+      <div class="card__bio">
+        <p class="card__subtitle">Bio</p>
+        <form class="bloc-bio" method="post">
+          <textarea class="bio" cols="40" rows="5" placeholder="Description"></textarea>
+          <input class="button-bio" type="submit" value="Valider modifications"/>
+        
+        
+        </form>
+      </div>
     </div>
   </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -81,7 +94,6 @@ nav.menu-nav ul li.btn {
   color: white;
   box-shadow: 1px 5px 12px black;
 }
-
 
 h2{
   color: black;

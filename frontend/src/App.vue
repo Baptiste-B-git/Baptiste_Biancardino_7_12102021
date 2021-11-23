@@ -41,10 +41,15 @@ img {
 
 .card {
   max-width: 100%;
-  width: 540px;
+  width: 1040px;
   background:white;
   border-radius: 16px;
   padding:32px;
+}
+.card_bloc{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .card__title {
@@ -56,6 +61,41 @@ img {
   text-align: center;
   color:#666;
   font-weight: 500;
+}
+.card__profile{
+  background-color: #fde3d4;
+  border-radius: 20px;
+  width: 50%;
+  margin-right: 5px;
+}
+.card__bio{
+  margin-left: 5px;
+  background-color: #fde3d4;
+  border-radius: 20px;
+  width: 50%;
+
+}
+input[type=search] {
+  border: 2px dotted #eea880;
+  border-radius: 20px;
+
+  -webkit-appearance: none;
+}
+.bio{
+  border: solid 2px #eea880;
+  border-radius: 10px 10px 0px 10px;
+  width: 100%;
+
+}
+.bloc-bio{
+  margin: 15px;
+
+}
+.button-bio{
+  border: solid 2px #eea880;
+  border-radius: 10px 0px 10px 10px;
+  background-color: #f0d6c7;
+  color: #FBAB7E;
 }
 
   .button {
