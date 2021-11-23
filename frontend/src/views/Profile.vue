@@ -1,16 +1,17 @@
 <template>
 <div>
   <nav class="menu-nav">
-        <h2>Groupomania</h2>
+    <h2>Groupomania</h2>
+
     <ul class="bloc-btn">
       <li class="btn">
-        <a href="#">Profil</a>
+        <fa icon="home" title="Accueil"/>
       </li>
       <li class="btn">
-        <a href="#">test</a>
+        <fa icon="user" title="Profil"/>
       </li>
       <li class="btn">
-        <a href="#">test2</a>
+      <fa @click="logout()" icon="power-off" title="Déconnexion" />
       </li>
     </ul>
   </nav>
@@ -59,38 +60,28 @@ export default {
 <style scoped>
 nav.menu-nav ul li.btn {
   display: flex;
-  list-style-type: none;
   height: 50px;
   padding: 3px;
+  margin: 10px;
 }
-nav.menu-nav ul li.btn a{
-  color: white;
-  background-color: rgb(255, 102, 0);
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 12px;
 
-}
-nav.menu-nav ul li.btn:hover a{
-  color: rgb(255, 102, 0);
-  background-color: white;
-  transition: 0.3s all;
-  border: 1px solid rgb(255, 102, 0);
-}
 .menu-nav{
   display: flex;
   position: absolute;
   justify-content: space-between;
+  align-items: center;
   top: 0;
   left: 0;
   right: 0;
   height: 100px;
   background-color : white;
   padding: 5px;
-  padding-left: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   color: white;
   box-shadow: 1px 5px 12px black;
 }
+
 
 h2{
   color: black;
@@ -100,6 +91,18 @@ h2{
 .bloc-btn{
   display: flex;
   flex-direction: row;
+}
+
+
+svg:not(:root).svg-inline--fa {
+  font-size: 2em;
+  color: black;
+}
+svg:not(:root).svg-inline--fa:hover{
+  color: #f58544;
+  background-color: white;
+  transition: 0.3s all;
+  cursor: pointer;
 }
 
 </style>>
