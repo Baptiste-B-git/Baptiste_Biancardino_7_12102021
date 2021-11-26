@@ -67,7 +67,7 @@ img {
   border-radius: 20px;
   width: 50%;
   margin-right: 5px;
-}
+} 
 .card__bio{
   margin-left: 5px;
   background-color: #fde3d4;
