@@ -116,5 +116,4 @@ svg:not(:root).svg-inline--fa:hover{
   transition: 0.3s all;
   cursor: pointer;
 }
-
 </style>>

@@ -41,39 +41,35 @@ img {
 
 .card {
   max-width: 100%;
-  width: 1040px;
+
   background:white;
   border-radius: 16px;
   padding:32px;
-}
-.card_bloc{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
 }
 
 .card__title {
   text-align:center;
   font-weight: 800;
+  margin-bottom: 20px;
 }
 
 .card__subtitle {
   text-align: center;
   color:#666;
   font-weight: 500;
+  padding: 5px;
 }
 .card__profile{
+  text-align: center;
   background-color: #fde3d4;
   border-radius: 20px;
-  width: 50%;
   margin-right: 5px;
 } 
 .card__bio{
   margin-left: 5px;
+  margin-top: 20px;
   background-color: #fde3d4;
   border-radius: 20px;
-  width: 50%;
-
 }
 input[type=search] {
   border: 2px dotted #eea880;
@@ -85,7 +81,7 @@ input[type=search] {
   border: solid 2px #eea880;
   border-radius: 10px 10px 0px 10px;
   width: 100%;
-
+  padding: 5px;
 }
 .bloc-bio{
   margin: 15px;
@@ -96,17 +92,20 @@ input[type=search] {
   border-radius: 10px 0px 10px 10px;
   background-color: #f0d6c7;
   color: #FBAB7E;
+  padding: 10px;
+  font-weight: 800;
 }
 
   .button {
     background: #2196F3;
     color:white;
+    margin-bottom: 10px;
+    margin-right: 10px;
     border-radius: 8px;
     font-weight: 800;
     font-size: 15px;
     border: none;
-    width: 100%;
-    padding: 16px;
+    padding: 10px;
     transition: .4s background-color;
   }
 
