@@ -12,14 +12,12 @@ module.exports.readPost = (req, res) => {
 }
 // Création du post
 module.exports.createPost = (req, res) => {
-  const idUSERS =  req.body.idUSERS;
-
+  const UserId = req.body.UserId;
   const content = req.body.content;
-  const attachment = [];
-  const likes =  [];
+  const attachment = req.body.attachment;
+  const likes =  req.body.likes;
   const newPost = new PostModel({
-  idUSERS: idUSERS,
-
+  UserId : UserId,
   content: content,
   attachment: attachment,
   likes: likes
