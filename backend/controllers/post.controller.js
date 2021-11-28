@@ -15,12 +15,12 @@ module.exports.createPost = (req, res) => {
   const UserId = req.body.UserId;
   const content = req.body.content;
   const attachment = req.body.attachment;
-  const likes =  req.body.likes;
+  // const likes =  req.body.likes;
   const newPost = new PostModel({
   UserId : UserId,
   content: content,
   attachment: attachment,
-  likes: likes
+  // likes: likes
 }); 
 
 newPost
@@ -80,68 +80,68 @@ module.exports.deletePost = (req, res) => {
     });
 };
 
-// Like et Unlike
-module.exports.likePost = async (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
-      return res.status(400).send("ID unknown : " + req.params.id);
+// // Like et Unlike
+// module.exports.likePost = async (req, res) => {
+//     if (!ObjectID.isValid(req.params.id))
+//       return res.status(400).send("ID unknown : " + req.params.id);
   
-    try {
-      await PostModel.findByIdAndUpdate(
-        req.params.id,
-        {
-          $addToSet: { likes: req.body.id },
-        },
-        { new: true },
-        (err, docs) => {
-          if (err) return res.status(400).send(err);
-        }
-      );
-      await UserModel.findByIdAndUpdate(
-        req.body.id,
-        {
-          $addToSet: { likes: req.params.id },
-        },
-        { new: true },
-        (err, docs) => {
-          if (!err) res.send(docs);
-          else return res.status(400).send(err);
-        }
-      );
-    } catch (err) {
-      return res.status(400).send(err);
-    }
-  };
+//     try {
+//       await PostModel.findByIdAndUpdate(
+//         req.params.id,
+//         {
+//           $addToSet: { likes: req.body.id },
+//         },
+//         { new: true },
+//         (err, docs) => {
+//           if (err) return res.status(400).send(err);
+//         }
+//       );
+//       await UserModel.findByIdAndUpdate(
+//         req.body.id,
+//         {
+//           $addToSet: { likes: req.params.id },
+//         },
+//         { new: true },
+//         (err, docs) => {
+//           if (!err) res.send(docs);
+//           else return res.status(400).send(err);
+//         }
+//       );
+//     } catch (err) {
+//       return res.status(400).send(err);
+//     }
+//   };
 
-module.exports.unlikePost = async (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
-      return res.status(400).send("ID unknown : " + req.params.id);
+// module.exports.unlikePost = async (req, res) => {
+//     if (!ObjectID.isValid(req.params.id))
+//       return res.status(400).send("ID unknown : " + req.params.id);
   
-    try {
-      await PostModel.findByIdAndUpdate(
-        req.params.id,
-        {
-          $pull: { likes: req.body.id },
-        },
-        { new: true },
-        (err, docs) => {
-          if (err) return res.status(400).send(err);
-        }
-      );
-      await UserModel.findByIdAndUpdate(
-        req.body.id,
-        {
-          $pull: { likes: req.params.id },
-        },
-        { new: true },
-        (err, docs) => {
-          if (!err) res.send(docs);
-          else return res.status(400).send(err);
-        }
-      );
-    } catch (err) {
-      return res.status(400).send(err);
-    }
-};
+//     try {
+//       await PostModel.findByIdAndUpdate(
+//         req.params.id,
+//         {
+//           $pull: { likes: req.body.id },
+//         },
+//         { new: true },
+//         (err, docs) => {
+//           if (err) return res.status(400).send(err);
+//         }
+//       );
+//       await UserModel.findByIdAndUpdate(
+//         req.body.id,
+//         {
+//           $pull: { likes: req.params.id },
+//         },
+//         { new: true },
+//         (err, docs) => {
+//           if (!err) res.send(docs);
+//           else return res.status(400).send(err);
+//         }
+//       );
+//     } catch (err) {
+//       return res.status(400).send(err);
+//     }
+// };
 
 
 // Comments
