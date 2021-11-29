@@ -118,33 +118,52 @@ exports.deletePost = (req, res) => {
 
 // Commentaires
 module.exports.commentPost = (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unkknow : " + req.params.id);
-
-  try {
-    return PostModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        // On garde les commentaires d'avant pour se rajouter un nouveau commentaire dans la base de données
-        $push: {
-          comments: {
-            commenterId: req.body.commenterId,
-            commenterPseudo: req.body.commenterPseudo,
-            text: req.body.text,
-            timestamp: new Date().getTime(),
-          }
-        }
-      },
-      {new: true},
-      (err, docs) => {
-        if (!err) return res.send(docs);
-        else return res.status(400).send(err)
-      }
-    );
-  } catch (err) {
-    return res.status(400).send(err);
-  }
+  const UserId = req.body.UserId;
+  const content = req.body.content;
+  const messageId = req.body.messageId;
+  const newPost = new CommentModel({
+  UserId : UserId,
+  content: content,
+  attachment: attachment,
+}); 
+newPost
+.save()
+.then(() => res.status(201).json({ message: "Commentaire enregistré" }))
+.catch((error) => res.status(400).json({ error }));
 };
+
+
+
+// module.exports.commentPost = (req, res) => {
+//   if (!ObjectID.isValid(req.params.id))
+//     return res.status(400).send("ID unkknow : " + req.params.id);
+
+//   try {
+//     return PostModel.findByIdAndUpdate(
+//       req.params.id,
+//       {
+//         // On garde les commentaires d'avant pour se rajouter un nouveau commentaire dans la base de données
+//         $push: {
+//           comments: {
+//             commentId: req.body.commentId,
+//             commentPseudo: req.body.commentPseudo,
+//             text: req.body.text,
+//             timestamp: new Date().getTime(),
+//           }
+//         }
+//       },
+//       {new: true},
+//       (err, docs) => {
+//         if (!err) return res.send(docs);
+//         else return res.status(400).send(err)
+//       }
+//     );
+//   } catch (err) {
+//     return res.status(400).send(err);
+//   }
+// };
+
+
 
 // exports.commentPost = (req, res) => {
 //   // Validate request
