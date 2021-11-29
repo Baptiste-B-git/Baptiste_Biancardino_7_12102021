@@ -1,4 +1,5 @@
 const PostModel = require('../models').Message;
+const CommentModel = require('../models').Comment;
 const test = require('../models');
 const UserModel = require('../models').User;
 
@@ -144,6 +145,34 @@ module.exports.commentPost = (req, res) => {
     return res.status(400).send(err);
   }
 };
+
+// exports.commentPost = (req, res) => {
+//   // Validate request
+//   if (!req.body.title) {
+//     res.status(400).send({
+//       message: "Content can not be empty !"
+//     })
+//     return;
+//   }
+
+//   // Create
+//   const comments = {
+//   UserId = req.body.UserId,
+//   messageId = req.body.messageId,
+//   content = req.body.content,
+//   };
+
+//   // Save Tutorial in the database
+//   CommentModel.commentPost(comments)
+//   .then(data => {
+//     res.send(data);
+//   })
+//   .catch(err => {
+//     res.status(500).send({
+//       message:
+//       err.message || "Some error occured while creating the Tutorial."
+//     });
+//   }); 
 
 
 module.exports.editCommentPost = (req, res) => {
