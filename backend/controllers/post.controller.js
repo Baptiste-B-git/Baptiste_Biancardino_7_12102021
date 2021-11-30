@@ -80,11 +80,11 @@ exports.deletePost = (req, res) => {
 module.exports.commentPost = (req, res) => {
   const UserId = req.body.UserId;
   const content = req.body.content;
-  const messageId = req.body.messageId;
+  const MessageId = req.body.MessageId;
   const newPost = new CommentModel({
   UserId : UserId,
   content: content,
-  messageId: messageId,
+  MessageId: MessageId,
 }); 
 newPost
 .save()
