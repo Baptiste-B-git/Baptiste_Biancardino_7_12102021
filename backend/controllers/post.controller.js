@@ -21,15 +21,6 @@ module.exports.createPost = (req, res) => {
   content: content,
   attachment: attachment,
 }); 
-
-// try {
-//   const post = await newPost.save();
-//   return res.status(201).json(post);
-// } catch (err) {
-//   return res.status(400).send(err);
-// }
-// };
-
 newPost
 .save()
 .then(() => res.status(201).json({ message: "Post enregistré" }))
@@ -37,27 +28,6 @@ newPost
 };
 
 // // PUT mise à jour post
-// module.exports.updatePost = (req, res) => {
-//     if (req.params.id.isValid(req.params.id))
-//         return res.status(400).send("ID unkknow : " + req.params.id);
-
-//     const updatedRecord = {
-//         content: req.body.content
-//     }
-
-//     PostModel.findByIdAndUpdate(
-//       // id de l'article
-//         req.params.id,
-//         // mise à jour le message du user updaterecord
-//         { $set: updateRecord }, 
-//         { new: true },
-//         (err, docs) => {
-//             if (!err) res.send(docs);
-//             else console.log();
-//         }
-//     )
-// };
-
 exports.updatePost = (req, res) => {
   const id = req.params.id;
   PostModel.update(req.body, {
@@ -82,16 +52,6 @@ exports.updatePost = (req, res) => {
 }
 
 // Supprimer un post
-// module.exports.deletePost = (req, res) => {
-//     if (!ObjectID.isValid(req.params.id))
-//         return res.status(400).send("ID unkknow : " + req.params.id);
-    
-//     PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
-//         if (!err) res.send(docs);
-//         else console.log ("Delete error :" + err);
-//     });
-// };
-
 exports.deletePost = (req, res) => {
   const id = req.params.id;
 
@@ -124,7 +84,7 @@ module.exports.commentPost = (req, res) => {
   const newPost = new CommentModel({
   UserId : UserId,
   content: content,
-  attachment: attachment,
+  messageId: messageId,
 }); 
 newPost
 .save()
@@ -162,8 +122,6 @@ newPost
 //     return res.status(400).send(err);
 //   }
 // };
-
-
 
 // exports.commentPost = (req, res) => {
 //   // Validate request
