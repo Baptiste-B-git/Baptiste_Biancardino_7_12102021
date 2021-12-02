@@ -5,7 +5,7 @@
 
     <ul class="bloc-btn">
       <li class="btn">
-        <fa icon="home" title="Accueil"/>
+        <a href="Home.vue"><fa icon="home" title="Accueil"/></a>
       </li>
       <li class="btn">
         <fa icon="user" title="Profil"/>
@@ -15,7 +15,6 @@
       </li>
     </ul>
   </nav>
-
 
   <div class="card">
     <h1 class="card__title">Espace Perso</h1>
@@ -35,8 +34,6 @@
         <form class="bloc-bio" method="post">
           <textarea class="bio" cols="40" rows="5" placeholder="Description"></textarea>
           <input class="button-bio" type="submit" value="Valider modifications"/>
-        
-        
         </form>
       </div>
     </div>
