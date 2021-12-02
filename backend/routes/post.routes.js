@@ -2,16 +2,16 @@ const router = require('express').Router();
 const postController = require('../controllers/post.controller');
 
 
+// Posts
 router.get('/', postController.readPost);
 router.post('/', postController.createPost);
 router.put('/:id', postController.updatePost);
 router.delete('/:id', postController.deletePost);
 
-// comments
-// router.post('/comment-post', postController.commentPost);
+// Comments
 router.post('/commentPost', postController.commentPost);
-router.patch('/edit-comment-post/:id', postController.editCommentPost);
-router.delete('/delete-comment-post/:id', postController.deleteCommentPost);
+router.put('/editCommentPost/:id', postController.editCommentPost);
+router.delete('/deleteCommentPost/:id', postController.deleteCommentPost);
 
 
 module.exports = router;
