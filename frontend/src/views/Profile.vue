@@ -5,7 +5,7 @@
 
     <ul class="bloc-btn">
       <li class="btn">
-        <a href="Home.vue"><fa icon="home" title="Accueil"/></a>
+        <a href="Home"><fa icon="home" title="Accueil"/></a>
       </li>
       <li class="btn">
         <fa icon="user" title="Profil"/>
