@@ -1,6 +1,6 @@
 <template>
 <div>
-        <h1>BONJOUR</h1>
+        <h1>Dernières publications</h1>
   <nav class="menu-nav">
 
     <h2>Groupomania</h2>
@@ -17,6 +17,12 @@
       </li>
     </ul>
   </nav>
+  <div class="card">
+    <h3>Exprimez-vous...</h3>
+    <textarea class="bio" cols="80" rows="5" placeholder="Ajouter un texte"></textarea>
+  </div>
+  
+  
 </div>
 </template>
 
@@ -50,7 +56,9 @@ nav.menu-nav ul li.btn {
   color: white;
   box-shadow: 1px 5px 12px black;
 }
-
+h1{
+  text-align: center;
+}
 h2{
   color: black;
   font-weight: 800;
