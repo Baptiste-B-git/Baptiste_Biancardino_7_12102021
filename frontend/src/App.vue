@@ -41,7 +41,7 @@ img {
 
 .card {
   max-width: 100%;
-
+  margin-bottom: 20px;
   background:white;
   border-radius: 16px;
   padding:32px;

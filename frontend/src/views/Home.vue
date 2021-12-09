@@ -1,10 +1,9 @@
 <template>
 <div>
-        <h1>Dernières publications</h1>
+  <div>  <h1>Dernières publications</h1></div>
+
   <nav class="menu-nav">
-
     <h2>Groupomania</h2>
-
     <ul class="bloc-btn">
       <li class="btn">
         <a href="Home.vue"><fa icon="home" title="Accueil"/></a>
@@ -15,22 +14,40 @@
       <li class="btn">
       <fa @click="logout()" icon="power-off" title="Déconnexion" />
       </li>
-    </ul>
+    </ul> 
   </nav>
+
   <div class="card">
     <h3>Exprimez-vous...</h3>
     <textarea class="bio" cols="80" rows="5" placeholder="Ajouter un texte"></textarea>
+    <button class="button">Choisir une image</button>
+    <button class="button">Publier !</button>
   </div>
-  
-  
+
+  <div class="card">
+  <div id="app">
+    {{ home }}
+  </div>
+    <div class="picture-profile"></div>
+  </div>
 </div>
-</template>
+</template> 
 
 <script>
-export default {
-      name: 'Home',
-}
-</script>
+// new Vue({
+//   el: '#app',
+//   data () {
+//     return {
+//       home: null
+//     }
+//   },
+//   mounted () {
+//     axios.get('http://localhost:5000/api/user')
+//       .then(response => (this.home = console.log(response)))
+//   }
+// })
+
+</script> 
 
 <style>
 nav.menu-nav ul li.btn {
@@ -69,7 +86,6 @@ h2{
   flex-direction: row;
 }
 
-
 svg:not(:root).svg-inline--fa {
   font-size: 2em;
   color: black;
@@ -79,5 +95,11 @@ svg:not(:root).svg-inline--fa:hover{
   background-color: white;
   transition: 0.3s all;
   cursor: pointer;
+}
+
+.picture-profile{
+  width: 50px;
+  height: 50px;
+  background-color: black;
 }
 </style>
