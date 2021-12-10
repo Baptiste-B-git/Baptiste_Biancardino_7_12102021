@@ -5,11 +5,17 @@ const UserModel = require('../models').User;
 
 
 // CRUD
-module.exports.readPost = (req, res) => {
-    PostModel.find((err, docs) => {
-        if (!err) res.send(docs);
-        else console.log('Error to get data : ' + err);
-    })
+module.exports.readPost = async (req, res) => {
+
+    try{
+      const posts = await PostModel.findAll();
+      res.status(200).json(posts);
+  
+  }
+  catch(err) {
+
+      return res.status(500).json({ message: err});
+  }
 }
 // Création du post
 module.exports.createPost = (req, res) => {

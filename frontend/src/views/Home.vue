@@ -1,7 +1,7 @@
+
 <template>
 <div>
   <div>  <h1>Dernières publications</h1></div>
-
   <nav class="menu-nav">
     <h2>Groupomania</h2>
     <ul class="bloc-btn">
@@ -22,6 +22,7 @@
     <textarea class="bio" cols="80" rows="5" placeholder="Ajouter un texte"></textarea>
     <button class="button">Choisir une image</button>
     <button class="button">Publier !</button>
+    <div v-for="post in posts" :key="post.id">-{{post.content}}</div>
   </div>
 
   <div class="card">
@@ -34,19 +35,26 @@
 </template> 
 
 <script>
-// new Vue({
-//   el: '#app',
-//   data () {
-//     return {
-//       home: null
-//     }
-//   },
-//   mounted () {
-//     axios.get('http://localhost:5000/api/user')
-//       .then(response => (this.home = console.log(response)))
-//   }
-// })
+import axios from "axios"
+export default {
+  name: 'Profile',
+    data: function () {
+    return {
+      posts : [],
 
+    }
+  },
+  mounted: function () {
+    axios.get('http://localhost:5000/api/post')
+    .then(response => {this.posts = response.data; console.log(this.posts)})
+},
+  methods: {
+    logout: function () {
+      this.$store.commit('logout');
+      this.$router.push('/');
+    }
+  }
+}
 </script> 
 
 <style>
