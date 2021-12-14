@@ -1,135 +1,84 @@
 <template>
-  <router-view></router-view>
+  <div id="app">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a href="/" class="navbar-brand">Groupomania</a>
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <router-link to="/home" class="nav-link">
+            <font-awesome-icon icon="home" /> Accueil
+          </router-link>
+        </li>
+        <li v-if="showAdminBoard" class="nav-item">
+          <router-link to="/admin" class="nav-link">Admin Board</router-link>
+        </li>
+        <li v-if="showModeratorBoard" class="nav-item">
+          <router-link to="/mod" class="nav-link">Moderator Board</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
+        </li>
+      </div>
+
+      <div v-if="!currentUser" class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <router-link to="/register" class="nav-link">
+            <font-awesome-icon icon="user-plus" /> S'inscrire
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/login" class="nav-link">
+            <font-awesome-icon icon="sign-in-alt" /> Se connecter
+          </router-link>
+        </li>
+      </div>
+
+      <div v-if="currentUser" class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <router-link to="/profile" class="nav-link">
+            <font-awesome-icon icon="user" />
+            {{ currentUser.username }}
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" @click.prevent="logOut">
+            <font-awesome-icon icon="sign-out-alt" /> Se déconnecter
+          </a>
+        </li>
+      </div>
+    </nav>
+
+    <div class="container">
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  components: {
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+    showAdminBoard() {
+      if (this.currentUser && this.currentUser['roles']) {
+        return this.currentUser['roles'].includes('ROLE_ADMIN');
+      }
+
+      return false;
+    },
+    showModeratorBoard() {
+      if (this.currentUser && this.currentUser['roles']) {
+        return this.currentUser['roles'].includes('ROLE_MODERATOR');
+      }
+
+      return false;
+    }
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
   }
-}
+};
 </script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;800&display=swap');
-
-* {
-  font-family: 'Poppins', sans-serif;
-  margin:0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-#app {
-  max-width: 100%;
-}
-
-body {
-  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding:32px;
-}
-
-img {
-  max-width: 100%;
-  border-radius: 8px;
-}
-
-.card {
-  max-width: 100%;
-  margin-bottom: 20px;
-  background:white;
-  border-radius: 16px;
-  padding:32px;
-}
-
-.card__title {
-  text-align:center;
-  font-weight: 800;
-  margin-bottom: 20px;
-}
-
-.card__subtitle {
-  text-align: center;
-  color:#666;
-  font-weight: 500;
-  padding: 5px;
-}
-.card__profile{
-  text-align: center;
-  background-color: #fde3d4;
-  border-radius: 20px;
-  margin-right: 5px;
-} 
-.card__bio{
-  margin-left: 5px;
-  margin-top: 20px;
-  background-color: #fde3d4;
-  border-radius: 20px;
-}
-input[type=search] {
-  border: 2px dotted #eea880;
-  border-radius: 20px;
-
-  -webkit-appearance: none;
-}
-.bio{
-  border: solid 2px #eea880;
-  border-radius: 10px 10px 0px 10px;
-  width: 100%;
-  padding: 5px;
-}
-.bloc-bio{
-  margin: 15px;
-
-}
-.button-bio{
-  border: solid 2px #eea880;
-  border-radius: 10px 0px 10px 10px;
-  background-color: #f0d6c7;
-  color: #FBAB7E;
-  padding: 10px;
-  font-weight: 800;
-}
-
-  .button {
-    background: #2196F3;
-    color:white;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    border-radius: 8px;
-    font-weight: 800;
-    font-size: 15px;
-    border: none;
-    padding: 10px;
-    transition: .4s background-color;
-  }
-
-  .card__action {
-    color:#2196F3;
-    text-decoration: underline;
-  }
-
-  .card__action:hover {
-    cursor:pointer;
-  }
-
-  .button:hover {
-    cursor:pointer;
-    background: #1976D2;
-  }
-
-  .button--disabled {
-    background:#cecece;
-    color:#ececec
-  }
-  .button--disabled:hover {
-    cursor:not-allowed;
-    background:#cecece;
-  }
-
-</style>
