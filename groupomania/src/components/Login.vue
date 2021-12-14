@@ -1,6 +1,7 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container">
+      <h1>Connexion</h1>
       <img
         id="profile-img"
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -9,12 +10,13 @@
       <form >
         <div class="form-group">
           <label for="username">Nom d'utilisateur</label>
-          <input name="username" type="text" class="form-control" />
+          <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
         <div class="form-group">
           <label for="password">Mot de passe</label>
-          <input name="password" type="password" class="form-control" />
+          <input name="password" type="password" class="form-control" placeholder="Mot de passe" />
+
           <!-- <ErrorMessage name="password" class="error-feedback" /> -->
         </div>
 
@@ -100,28 +102,29 @@ label {
   display: block;
   margin-top: 10px;
 }
-
+h1{
+  margin-bottom: 10px;
+  margin-top: 0;
+  font-weight: 800;
+}
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
 }
-html {
-   background : purple 
-   }
+input{
+  border: none;
+}
+body {
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
   margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
- form {
-background : blue
+  border-radius: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
 }
 
 .profile-img-card {
@@ -129,9 +132,23 @@ background : blue
   height: 96px;
   margin: 0 auto 10px;
   display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+.btn-block{
+  max-width: 100%;
+  width: 540px;
+  border: none;
+  border-radius: 10px;
+  padding:10px;
+  margin-top: 20px;
+  background: #2196F3;
+}
+.form-control{
+  max-width: 100%;
+  width: 540px;
+  background:#f2f2f2;
+  border-radius: 10px;
+  padding:10px;
 }
 
 .error-feedback {
