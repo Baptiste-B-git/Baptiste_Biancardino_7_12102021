@@ -5,7 +5,7 @@
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/home" class="nav-link">
-            <font-awesome-icon icon="home" /> Accueil
+            <font-awesome-icon icon="home" /> Home
           </router-link>
         </li>
         <li v-if="showAdminBoard" class="nav-item">
@@ -22,12 +22,12 @@
       <div v-if="!currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
-            <font-awesome-icon icon="user-plus" /> S'inscrire
+            <font-awesome-icon icon="user-plus" /> Sign Up
           </router-link>
         </li>
         <li class="nav-item">
           <router-link to="/login" class="nav-link">
-            <font-awesome-icon icon="sign-in-alt" /> Se connecter
+            <font-awesome-icon icon="sign-in-alt" /> Login
           </router-link>
         </li>
       </div>
@@ -41,7 +41,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" @click.prevent="logOut">
-            <font-awesome-icon icon="sign-out-alt" /> Se déconnecter
+            <font-awesome-icon icon="sign-out-alt" /> LogOut
           </a>
         </li>
       </div>
@@ -63,14 +63,12 @@ export default {
       if (this.currentUser && this.currentUser['roles']) {
         return this.currentUser['roles'].includes('ROLE_ADMIN');
       }
-
       return false;
     },
     showModeratorBoard() {
       if (this.currentUser && this.currentUser['roles']) {
         return this.currentUser['roles'].includes('ROLE_MODERATOR');
       }
-
       return false;
     }
   },
