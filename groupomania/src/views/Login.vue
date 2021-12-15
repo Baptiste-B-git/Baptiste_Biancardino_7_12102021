@@ -9,19 +9,20 @@
       />
       <form >
         <div class="form-group">
-          <label for="username">Nom d'utilisateur</label>
+          <label for="username"></label>
           <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
         <div class="form-group">
-          <label for="password">Mot de passe</label>
+          <label for="password"></label>
           <input name="password" type="password" class="form-control" placeholder="Mot de passe" />
 
           <!-- <ErrorMessage name="password" class="error-feedback" /> -->
         </div>
 
         <div class="form-group">
-          <button class="btn btn-primary btn-block">
+          <button class="btn btn-primary btn-block" @click="login">
+            
             <!-- <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
@@ -42,7 +43,7 @@
 
 <script>
 // import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
+// import * as yup from "yup";
 
 export default {
   name: "Login",
@@ -73,26 +74,29 @@ export default {
 //       this.$router.push("/profile");
 //     }
 //   },
-//   methods: {
-//     handleLogin(user) {
-//       this.loading = true;
+  methods: {
+    login() { console.log("ok") }
 
-//       this.$store.dispatch("auth/login", user).then(
-//         () => {
-//           this.$router.push("/profile");
-//         },
-//         (error) => {
-//           this.loading = false;
-//           this.message =
-//             (error.response &&
-//               error.response.data &&
-//               error.response.data.message) ||
-//             error.message ||
-//             error.toString();
-//         }
-//       );
-//     },
-//   },
+
+    // handleLogin(user) {
+    //   this.loading = true;
+
+    //   this.$store.dispatch("auth/login", user).then(
+    //     () => {
+    //       this.$router.push("/profile");
+    //     },
+    //     (error) => {
+    //       this.loading = false;
+    //       this.message =
+    //         (error.response &&
+    //           error.response.data &&
+    //           error.response.data.message) ||
+    //         error.message ||
+    //         error.toString();
+    //     }
+    //   );
+    // },
+  },
 };
 
 </script>
@@ -113,6 +117,7 @@ h1{
 }
 input{
   border: none;
+
 }
 body {
   background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
@@ -136,16 +141,18 @@ body {
 }
 .btn-block{
   max-width: 100%;
-  width: 540px;
+  width: 320px;
   border: none;
   border-radius: 10px;
   padding:10px;
   margin-top: 20px;
-  background: #2196F3;
+      background-color: #007BFF;
+    Color:white;
 }
 .form-control{
   max-width: 100%;
-  width: 540px;
+  width: 300px;
+  margin-top: 10px;
   background:#f2f2f2;
   border-radius: 10px;
   padding:10px;

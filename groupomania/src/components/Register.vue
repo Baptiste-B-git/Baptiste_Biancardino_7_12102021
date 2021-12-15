@@ -1,18 +1,19 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container">
+      <h1>S'inscrire</h1>
       <img
         id="profile-img"
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
       />
-      <form @submit="handleRegister" :validation-schema="schema">
-        <div v-if="!successful">
+      <form>
+        <!-- <div v-if="!successful"> -->
           <div class="form-group">
             <label for="username">Nom d'utilisateur</label>
             <input name="username" type="text" class="form-control" />
             <!-- <ErrorMessage name="username" class="error-feedback" /> -->
-          </div>
+          <!-- </div> -->
           <div class="form-group">
             <label for="email">Email</label>
             <input name="email" type="email" class="form-control" />
@@ -25,24 +26,24 @@
           </div>
 
           <div class="form-group">
-            <button class="btn btn-primary btn-block" :disabled="loading">
-              <span
+            <button class="btn btn-primary btn-block">
+              <!-- <span
                 v-show="loading"
                 class="spinner-border spinner-border-sm"
-              ></span>
-              Sign Up
+              ></span> -->
+              <span>Connexion</span>
             </button>
           </div>
         </div>
       </form>
 
-      <div
+      <!-- <div
         v-if="message"
         class="alert"
         :class="successful ? 'alert-success' : 'alert-danger'"
       >
         {{ message }}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
