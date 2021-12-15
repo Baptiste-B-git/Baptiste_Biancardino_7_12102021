@@ -40,7 +40,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 h3 {
   margin: 40px 0 0;
 }
@@ -54,5 +54,10 @@ li {
 }
 a {
   color: #42b983;
+}
+html{
+
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+
 }
 </style>

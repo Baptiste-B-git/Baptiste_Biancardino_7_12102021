@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-12">
+  <div>
     <div class="card card-container">
       <h1>S'inscrire</h1>
       <img
@@ -7,119 +7,65 @@
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
       />
-      <form>
-        <!-- <div v-if="!successful"> -->
+      <form  v-on:submit.prevent="onSubmit">
           <div class="form-group">
             <label for="username">Nom d'utilisateur</label>
-            <input name="username" type="text" class="form-control" />
-            <!-- <ErrorMessage name="username" class="error-feedback" /> -->
-          <!-- </div> -->
+            <input name="username" type="text" class="form-control" v-model="username" req/>
           <div class="form-group">
             <label for="email">Email</label>
-            <input name="email" type="email" class="form-control" />
-            <!-- <ErrorMessage name="email" class="error-feedback" /> -->
+            <input name="email" type="email" class="form-control" v-model="email"/>
           </div>
           <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input name="password" type="password" class="form-control" />
-            <!-- <ErrorMessage name="password" class="error-feedback" /> -->
+            <input name="password" type="password" class="form-control" v-model="password"/>
           </div>
 
           <div class="form-group">
-            <button class="btn btn-primary btn-block">
-              <!-- <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm"
-              ></span> -->
+            <button class="btn btn-primary btn-block" @click="signup">
+           
               <span>Connexion</span>
             </button>
           </div>
         </div>
       </form>
 
-      <!-- <div
-        v-if="message"
-        class="alert"
-        :class="successful ? 'alert-success' : 'alert-danger'"
-      >
-        {{ message }}
-      </div> -->
+    
     </div>
   </div>
 </template>
 
 <script>
-// import { Form, Field, ErrorMessage } from "vee-validate";
-// import * as yup from "yup";
-
+import authservice from "../services/authservice";
 export default {
-  name: "Register",
-  // components: {
-  //   Form,
-  //   Field,
-  //   ErrorMessage,
-  // },
-  // data() {
-  //   const schema = yup.object().shape({
-  //     username: yup
-  //       .string()
-  //       .required("Nom d'utilisateur est nécessaire !")
-  //       .min(3, "Doit comporter au moins 3 caractères !")
-  //       .max(20, "Doit comporter au maximum 20 caractères !"),
-  //     email: yup
-  //       .string()
-  //       .required("Email requis!")
-  //       .email("Email est invalide!")
-  //       .max(50, "Doit contenir au maximum 50 caractères !"),
-  //     password: yup
-  //       .string()
-  //       .required("Mot de passe requis !")
-  //       .min(6, "Doit comporter au moins 6 caractères !")
-  //       .max(40, "Doit comporter au maximum 20 caractères !"),
-  //   });
+  data() {
+    return {
+      email: this.email,
+      password: this.password,
+      error: this.error,
+      username: this.username,
+    };
+  },
+  methods: {
+    async signup() {
+      try {
+        const response = await authservice.signup({
+          email: this.email,
+          password: this.password,
+          username: this.username,
+          error: this.error,
+        });
 
-  //   return {
-  //     successful: false,
-  //     loading: false,
-  //     message: "",
-  //     schema,
-  //   };
-  // },
-  // computed: {
-  //   loggedIn() {
-  //     return this.$store.state.auth.status.loggedIn;
-  //   },
-  // },
-  // mounted() {
-  //   if (this.loggedIn) {
-  //     this.$router.push("/profile");
-  //   }
-  // },
-  // methods: {
-  //   handleRegister(user) {
-  //     this.message = "";
-  //     this.successful = false;
-  //     this.loading = true;
-
-  //     this.$store.dispatch("auth/register", user).then(
-  //       (data) => {
-  //         this.message = data.message;
-  //         this.successful = true;
-  //         this.loading = false;
-  //       },
-  //       (error) => {
-  //         this.message =
-  //           (error.response &&
-  //             error.response.data &&
-  //             error.response.data.message) ||
-  //           error.message ||
-  //           error.toString();
-  //         this.successful = false;
-  //         this.loading = false;
-  //       }
-  //     );
-  //   },
-  // },
+        const res = response.data.token;
+        //this.$router.push({ name: "Login" });
+        const parsed = JSON.stringify(res);
+        localStorage.setItem("res", parsed);
+        console.log("ok")
+      } catch (error) {
+        this.error = error;
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
 
@@ -128,23 +74,30 @@ label {
   display: block;
   margin-top: 10px;
 }
-
+h1{
+  margin-bottom: 10px;
+  margin-top: 0;
+  font-weight: 800;
+}
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
 }
+input{
+  border: none;
 
+}
+body {
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
   margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+
 }
 
 .profile-img-card {
@@ -152,9 +105,25 @@ label {
   height: 96px;
   margin: 0 auto 10px;
   display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+.btn-block{
+  max-width: 100%;
+  width: 320px;
+  border: none;
+  border-radius: 10px;
+  padding:10px;
+  margin-top: 20px;
+      background-color: #007BFF;
+    Color:white;
+}
+.form-control{
+  max-width: 100%;
+  width: 300px;
+  margin-top: 10px;
+  background:#f2f2f2;
+  border-radius: 10px;
+  padding:10px;
 }
 
 .error-feedback {

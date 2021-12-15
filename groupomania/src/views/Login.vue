@@ -7,21 +7,26 @@
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
       />
-      <form >
+      <form v-on:submit.prevent="onSubmit">
         <div class="form-group">
           <label for="username"></label>
-          <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" />
+          <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" v-model="username" />
+          <!-- <ErrorMessage name="username" class="error-feedback" /> -->
+        </div>
+         <div class="form-group">
+          <label for="email"></label>
+          <input name="email" type="text" class="form-control" placeholder="email" v-model="email" />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
         <div class="form-group">
           <label for="password"></label>
-          <input name="password" type="password" class="form-control" placeholder="Mot de passe" />
+          <input name="password" type="password" class="form-control" placeholder="Mot de passe" v-model="password" />
 
           <!-- <ErrorMessage name="password" class="error-feedback" /> -->
         </div>
 
         <div class="form-group">
-          <button class="btn btn-primary btn-block" @click="login">
+          <button class="btn btn-primary btn-block" @click="handleLogin">
             
             <!-- <span
               v-show="loading"
@@ -41,9 +46,12 @@
   </div>
 </template>
 
+
 <script>
 // import { Form, Field, ErrorMessage } from "vee-validate";
 // import * as yup from "yup";
+import axios from "axios";
+import authservice from "../services/authservice"
 
 export default {
   name: "Login",
@@ -52,18 +60,16 @@ export default {
 //     Field,
 //     ErrorMessage,
 //   },
-//   data() {
-//     const schema = yup.object().shape({
-//       username: yup.string().required("Nom d'utilisateur est requis !"),
-//       password: yup.string().required("Mot de passe est requis !"),
-//     });
+  data() {
 
-//     return {
-//       loading: false,
-//       message: "",
-//       schema,
-//     };
-//   },
+    return {
+     username: this.username,
+      password: this.password,
+      email: this.email,
+      error: this.error,
+    };
+  },
+
 //   computed: {
 //     loggedIn() {
 //       return this.$store.state.auth.status.loggedIn;
@@ -75,30 +81,37 @@ export default {
 //     }
 //   },
   methods: {
-    login() { console.log("ok") }
 
+    async handleLogin() {
+      try {
+        const response = await authservice.login({
+          /*headers: {
+            Authorization: `Bearer ${token}`,
+          },*/
+          email: this.email,
+          username : this.username,
+          password: this.password,
+          error: this.error,
+        });
+        this.$store.dispatch("setToken", response.data.token);
+        this.$store.dispatch("setUser", response.data.user);
 
-    // handleLogin(user) {
-    //   this.loading = true;
+        const token = this.$store.state.token;
+        const user = this.$store.state.user;
 
-    //   this.$store.dispatch("auth/login", user).then(
-    //     () => {
-    //       this.$router.push("/profile");
-    //     },
-    //     (error) => {
-    //       this.loading = false;
-    //       this.message =
-    //         (error.response &&
-    //           error.response.data &&
-    //           error.response.data.message) ||
-    //         error.message ||
-    //         error.toString();
-    //     }
-    //   );
-    // },
+        const res = response.data.token;
+        //this.$router.push({ name: "Home" });
+        const parsed = JSON.stringify(res);
+       localStorage.setItem("res", parsed);
+        console.log(res)
+      } catch (error) {
+        
+        console.log(error);
+      }
+    }
+ 
   },
 };
-
 </script>
 
 <style scoped>
@@ -129,7 +142,7 @@ body {
   margin-top: 50px;
   border-radius: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
-  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+
 }
 
 .profile-img-card {
