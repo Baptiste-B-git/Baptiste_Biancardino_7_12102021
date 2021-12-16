@@ -1,4 +1,5 @@
 <template>
+<!-- Header -->
   <nav class="menu-nav">
     <h1>Groupomania</h1>
     <ul class="bloc-btn">
@@ -15,34 +16,37 @@
 
       <li class="btn">
         <a href="Logout">
-      <!-- <fa @click="logout()" icon="power-off" title="Déconnexion" /> -->
+      <fa @click="logout()" icon="power-off" title="Déconnexion" />
         <fa class="fas fa-power-off fa-2x" title="Déconnexion"></fa></a>
       </li>
     </ul> 
   </nav>
 
   <h2>Dernières publications</h2>
+
+<!-- Bloc post (Exprimez-vous...) -->
   <div class="card">
     <h3>Exprimez-vous...</h3>
-    <textarea class="bio" cols="80" rows="5" placeholder="Ajouter un texte"></textarea><br>
+    <textarea class="post-field" cols="80" rows="5" placeholder="Ajouter un texte"></textarea><br>
     <button class="button">Choisir une image</button>
     <button class="button">Publier !</button>
   </div>
 
+<!-- Bloc post du User -->
   <div class="card">
     <div class="bloc-picture-name">
       <div class="picture-profile"><img src="../assets/profil-6.png" alt="profil-6"></div>
       <div class="user-name">Nom de l'utilisateur</div>
     </div>
     <div class="post-img"><img src="../assets/okinawa.png" alt="coucher de soleil"></div>
-    
     <div class="post-name">Mon dernier voyage à Okinawa !</div>
+
+<!-- Commentaires -->
       <h3>Commentaires</h3>
       <div class="comment-list">
       <div class="picture-profile-comment"><img src="../assets/profil-3.png" alt="profil-3"></div>
 
       </div>
-      
       <textarea class="comment-field" cols="80" rows="2" placeholder="Votre commentaire"></textarea><br>
       <button class="button">Commenter !</button>
   </div>
@@ -56,7 +60,6 @@
 </template>
 
 <script>
-
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 
@@ -76,25 +79,7 @@ body{
   overflow-x: hidden;
 }
 
-.title{
-  color: black;
-  font-size: 3rem;
-  font-weight: 800;
-}
-nav.menu-nav ul li.btn {
-  display: flex;
-  height: 50px;
-  width: 50px;
-  padding: 3px;
-  margin: 10px;
-  color: black;
-
-}
-.fas{
-  margin-top: 10px;
-  width: 100%;
-}
-
+/* Header */
 .menu-nav{
   display: flex;
   position: relative;
@@ -111,23 +96,26 @@ nav.menu-nav ul li.btn {
   color: white;
   box-shadow: 1px 5px 12px black;
 }
+
 h1{
   color: black;
   font-weight: 800;
   font-size: 2.5rem;
 }
-h3{
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.bloc-btn{
+nav.menu-nav ul li.btn {
   display: flex;
-  flex-direction: row;
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+  margin: 10px;
+  color: black;
 }
 
+.fas{
+  margin-top: 10px;
+  width: 100%;
+}
 a {
-
   color: black;
 }
 a:hover{
@@ -137,19 +125,30 @@ a:hover{
   cursor: pointer;
 }
 
-.picture-profile{
-  width: 50px;
-  height: 50px;
-  background: rgb(187, 187, 187);
+/* Bloc post (Exprimez-vous...) */
+.card {
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  width: 700px;
+  margin: 0 auto 25px;
+  border-radius: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
-.picture-profile-comment img{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+h3{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.post-field{
+  width: 100%;
+  border-radius: 5px;
 }
 
+.bloc-btn{
+  display: flex;
+  flex-direction: row;
+}
 .button{
-    max-width: 100%;
+  max-width: 100%;
   min-width: 200px;
   border: none;
   border-radius: 8px;
@@ -159,16 +158,14 @@ a:hover{
   background-color: #007BFF;
   Color:white;
 }
-.bloc-picture-name{
-  display: block;
-  flex-direction: row;
-  margin: 0 10px 10px 0;
+
+/* Bloc post du User */
+.picture-profile{
+  width: 50px;
+  height: 50px;
+  background: rgb(187, 187, 187);
 }
 
-.bio{
-  width: 100%;
-  border-radius: 5px;
-}
 .user-name{
   text-align: left;
 }
@@ -177,7 +174,6 @@ a:hover{
   height: 300px;
   margin: 0 auto;
   border: 1px solid black;
-
   box-sizing: border-box;
   background: rgb(187, 187, 187);
 }
@@ -190,6 +186,13 @@ img{
   margin-top: 10px;
   text-align: left;
 }
+
+/* Commentaires */
+.picture-profile-comment img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
 .comment-field{
   resize : both;
   width:100%;
@@ -197,13 +200,4 @@ img{
   max-height : 200px;
 }
 
-
-.card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  width: 700px;
-  margin: 0 auto 25px;
-  border-radius: 15px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
-}
 </style>
