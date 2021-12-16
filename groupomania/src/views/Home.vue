@@ -1,21 +1,26 @@
 <template>
-<nav class="menu-nav">
+  <nav class="menu-nav">
     <h1>Groupomania</h1>
     <ul class="bloc-btn">
       <li class="btn">
-        <a href="Home.vue"><fa icon="home" title="Accueil"/></a>
+        <a href="Home.vue">
+        <i class="fas fa-home fa-2x" title="Accueil"></i></a>
       </li>
+
       <li class="btn">
-        <fa icon="user" title="Profil"/>
+        <a href="Profile.vue">
+          <i class="fas fa-user-alt fa-2x" title="Profil"></i>
+        </a>
       </li>
+
       <li class="btn">
-      <fa @click="logout()" icon="power-off" title="Déconnexion" />
+        <a href="Logout">
+      <!-- <fa @click="logout()" icon="power-off" title="Déconnexion" /> -->
+        <fa class="fas fa-power-off fa-2x" title="Déconnexion"></fa></a>
       </li>
     </ul> 
   </nav>
-  <div class="home">
 
-  </div>
   <h2>Dernières publications</h2>
   <div class="card">
     <h3>Exprimez-vous...</h3>
@@ -26,12 +31,23 @@
 
   <div class="card">
     <div class="bloc-picture-name">
-      <div class="picture-profile">Photo</div>
-      <p>Nom de l'utilisateur</p>
+      <div class="picture-profile"><img src="../assets/profil-6.png" alt="profil-6"></div>
+      <div class="user-name">Nom de l'utilisateur</div>
     </div>
+    <div class="post-img"><img src="../assets/okinawa.png" alt="coucher de soleil"></div>
+    
+    <div class="post-name">Mon dernier voyage à Okinawa !</div>
+      <h3>Commentaires</h3>
+      <div class="comment-list">
+      <div class="picture-profile-comment"><img src="../assets/profil-3.png" alt="profil-3"></div>
+
+      </div>
+      
+      <textarea class="comment-field" cols="80" rows="2" placeholder="Votre commentaire"></textarea><br>
+      <button class="button">Commenter !</button>
   </div>
 
-    <div class="card">
+  <div class="card">
     <h3>Vos commentaires</h3>
     <textarea class="comment-field" cols="80" rows="1" placeholder="Votre commentaire"></textarea><br>
     <button class="button">Commenter !</button>
@@ -40,6 +56,7 @@
 </template>
 
 <script>
+
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 
@@ -50,8 +67,6 @@ export default {
 </script>
 
 <style>
-
-
 html,
 body{
   padding: 0;
@@ -61,13 +76,23 @@ body{
   overflow-x: hidden;
 }
 
+.title{
+  color: black;
+  font-size: 3rem;
+  font-weight: 800;
+}
 nav.menu-nav ul li.btn {
   display: flex;
   height: 50px;
   width: 50px;
   padding: 3px;
   margin: 10px;
+  color: black;
 
+}
+.fas{
+  margin-top: 10px;
+  width: 100%;
 }
 
 .menu-nav{
@@ -81,8 +106,8 @@ nav.menu-nav ul li.btn {
   height: 100px;
   background-color : white;
   padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
   color: white;
   box-shadow: 1px 5px 12px black;
 }
@@ -92,7 +117,7 @@ h1{
   font-size: 2.5rem;
 }
 h3{
-  margin-top: 0;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -101,12 +126,11 @@ h3{
   flex-direction: row;
 }
 
+a {
 
-.svg-inline--fa {
-  font-size: 2em;
   color: black;
 }
-.svg-inline--fa:hover{
+a:hover{
   color: #f58544;
   background-color: white;
   transition: 0.3s all;
@@ -116,8 +140,14 @@ h3{
 .picture-profile{
   width: 50px;
   height: 50px;
-  background-color: rgb(253, 241, 201);
+  background: rgb(187, 187, 187);
 }
+.picture-profile-comment img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 .button{
     max-width: 100%;
   min-width: 200px;
@@ -130,22 +160,48 @@ h3{
   Color:white;
 }
 .bloc-picture-name{
-flex-direction: row;
-margin: 0 10px 10px 0;
+  display: block;
+  flex-direction: row;
+  margin: 0 10px 10px 0;
 }
 
 .bio{
   width: 100%;
   border-radius: 5px;
 }
-.comment-field{
-  height: ;
+.user-name{
+  text-align: left;
 }
+.post-img{
+  max-width: auto;
+  height: 300px;
+  margin: 0 auto;
+  border: 1px solid black;
+
+  box-sizing: border-box;
+  background: rgb(187, 187, 187);
+}
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.post-name{
+  margin-top: 10px;
+  text-align: left;
+}
+.comment-field{
+  resize : both;
+  width:100%;
+  min-height : 30px;
+  max-height : 200px;
+}
+
 
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
-  width: 600px;
+  width: 700px;
   margin: 0 auto 25px;
   border-radius: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
