@@ -1,71 +1,84 @@
 <template>
+<div>
 <!-- Header -->
-  <nav class="menu-nav">
-    <h1>Groupomania</h1>
-    <ul class="bloc-btn">
-      <li class="btn">
-        <a href="Home.vue">
-        <i class="fas fa-home fa-2x" title="Accueil"></i></a>
-      </li>
-
-      <li class="btn">
-        <a href="Profile.vue">
-          <i class="fas fa-user-alt fa-2x" title="Profil"></i>
-        </a>
-      </li>
-
-      <li class="btn">
-        <a href="Logout">
-      <fa @click="logout()" icon="power-off" title="Déconnexion" />
-        <fa class="fas fa-power-off fa-2x" title="Déconnexion"></fa></a>
-      </li>
-    </ul> 
-  </nav>
+  
+  <Header/>
 
   <h2>Dernières publications</h2>
 
 <!-- Bloc post (Exprimez-vous...) -->
-  <div class="card">
-    <h3>Exprimez-vous...</h3>
-    <textarea class="post-field" cols="80" rows="5" placeholder="Ajouter un texte"></textarea><br>
-    <button class="button">Choisir une image</button>
-    <button class="button">Publier !</button>
-  </div>
+  <Post/>
 
 <!-- Bloc post du User -->
-  <div class="card">
-    <div class="bloc-picture-name">
-      <div class="picture-profile"><img src="../assets/profil-6.png" alt="profil-6"></div>
-      <div class="user-name">Nom de l'utilisateur</div>
-    </div>
-    <div class="post-img"><img src="../assets/okinawa.png" alt="coucher de soleil"></div>
-    <div class="post-name">Mon dernier voyage à Okinawa !</div>
+ 
+ <GetPosts/>
 
-<!-- Commentaires -->
-      <h3>Commentaires</h3>
-      <div class="comment-list">
-      <div class="picture-profile-comment"><img src="../assets/profil-3.png" alt="profil-3"></div>
-
-      </div>
-      <textarea class="comment-field" cols="80" rows="2" placeholder="Votre commentaire"></textarea><br>
-      <button class="button">Commenter !</button>
-  </div>
-
-  <div class="card">
-    <h3>Vos commentaires</h3>
-    <textarea class="comment-field" cols="80" rows="1" placeholder="Votre commentaire"></textarea><br>
-    <button class="button">Commenter !</button>
   </div>
 
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import VueJwtDecode from "vue-jwt-decode";
+import Post from "./Post.vue";
+
+import Header from './Header.vue'
 
 export default {
   name: 'Home',
+  components: {Post,Header},
+  data() {
+    return {
+      ok: false,
+      picture: false,
+      comment: false,
+      email: "",
+      password: "",
+      error: "",
+      posts: this.posts,
+      comments: this.comments,
+      contentComment: "",
+      title: "",
+      content: "",
+      image: "",
+      UserId: this.id,
+      
+      user: {
+        id: "",
+    
+      },
+    };
+  },
+  
+beforeMount() {
+    this.getId();
+   
+  },
+  methods : {
+    async getId() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
 
+      this.id = id
+
+      try {
+        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const user = await res.json();
+
+        //this.username = user.username;
+        //this.id = user.UserId;
+
+       // console.log(this.id)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
+  
 }
 </script>
 
@@ -78,7 +91,6 @@ body{
   width: 100vw;
   overflow-x: hidden;
 }
-
 /* Header */
 .menu-nav{
   display: flex;
@@ -96,7 +108,6 @@ body{
   color: white;
   box-shadow: 1px 5px 12px black;
 }
-
 h1{
   color: black;
   font-weight: 800;
@@ -110,7 +121,6 @@ nav.menu-nav ul li.btn {
   margin: 10px;
   color: black;
 }
-
 .fas{
   margin-top: 10px;
   width: 100%;
@@ -125,68 +135,6 @@ a:hover{
   cursor: pointer;
 }
 
-/* Bloc post (Exprimez-vous...) */
-.card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  width: 700px;
-  margin: 0 auto 25px;
-  border-radius: 15px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
-}
-h3{
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.post-field{
-  width: 100%;
-  border-radius: 5px;
-}
-
-.bloc-btn{
-  display: flex;
-  flex-direction: row;
-}
-.button{
-  max-width: 100%;
-  min-width: 200px;
-  border: none;
-  border-radius: 8px;
-  padding:10px;
-  margin-top: 20px;
-  margin-right: 20px;
-  background-color: #007BFF;
-  Color:white;
-}
-
-/* Bloc post du User */
-.picture-profile{
-  width: 50px;
-  height: 50px;
-  background: rgb(187, 187, 187);
-}
-
-.user-name{
-  text-align: left;
-}
-.post-img{
-  max-width: auto;
-  height: 300px;
-  margin: 0 auto;
-  border: 1px solid black;
-  box-sizing: border-box;
-  background: rgb(187, 187, 187);
-}
-img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.post-name{
-  margin-top: 10px;
-  text-align: left;
-}
-
 /* Commentaires */
 .picture-profile-comment img{
   width: 50px;
@@ -199,5 +147,4 @@ img{
   min-height : 30px;
   max-height : 200px;
 }
-
 </style>

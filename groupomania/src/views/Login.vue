@@ -63,10 +63,10 @@ export default {
   data() {
 
     return {
-     username: this.username,
-      password: this.password,
-      email: this.email,
-      error: this.error,
+      username: "",
+      password: "",
+      email: "",
+      error: "",
     };
   },
 
