@@ -10,8 +10,7 @@ module.exports.readPost = async (req, res) => {
     try{
       const posts = await PostModel.findAll();
       res.status(200).json(posts);
-  
-  }
+  } 
   catch(err) {
 
       return res.status(500).json({ message: err});
@@ -31,6 +30,27 @@ newPost
 .save()
 .then(() => res.status(201).json({ message: "Post enregistré" }))
 .catch((error) => res.status(400).json({ error }));
+};
+
+exports.getOnePost = (req, res, next) => {
+  const id = req.params.id;
+
+  Post.findByPk(id)
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Impossible de retrouver le post ${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Erreur lors de la récupération du post" + id
+      });
+    });
+
 };
 
 // Mise à jour post
