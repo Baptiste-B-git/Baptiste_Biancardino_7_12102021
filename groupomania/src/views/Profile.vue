@@ -1,5 +1,5 @@
 <template>
-
+<div>
 <!-- Header -->
     <nav class="menu-nav">
         <h1>Groupomania</h1>
@@ -63,7 +63,7 @@
         </div>
 
     </div>
-  
+</div>
 </template>
 <script>
 export default {

@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 module.exports.signUp = async (req, res) => {
     console.log(req.body);
-    let {email, username, password, bio, isAdmin} = req.body
+    let {email, username, password, bio, isAdmin, picture} = req.body
       const salt = await bcrypt.genSalt();
 
     try {
@@ -16,7 +16,8 @@ module.exports.signUp = async (req, res) => {
             username,
             password,
             bio,
-            isAdmin
+            isAdmin,
+            picture,
         });
         res.status(201).json({user})
     }
@@ -45,7 +46,7 @@ module.exports.signIn = async (req, res) =>{
           token: jwt.sign(
             { userId: user.id },
             'RANDOM_TOKEN_SECRET',
-            { expiresIn: '24h' }
+            { expiresIn: '31d' }
           )
         });
       })
@@ -53,6 +54,20 @@ module.exports.signIn = async (req, res) =>{
   })
   .catch(error => res.status(500).json({ error }));
 }
+
+exports.updatePicture = (req, res, next) => {
+
+  const userObject = req.file ?
+
+    {
+      ...req.body.user,
+      picture: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body };
+
+  User.update({ ...userObject, id: req.params.id }, { where: { id: req.params.id } })
+    .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
+    .catch(error => res.status(400).json({ error }));
+};
 
 module.exports.logout = (req, res) =>{
 

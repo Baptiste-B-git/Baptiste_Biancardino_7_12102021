@@ -5,11 +5,11 @@ const multer = require ('../middleware/multer-config');
 
 // Posts
 router.post('/', auth, multer, postController.createPost);
-router.get('/', auth, multer, postController.readPost);
-router.get('/:id', auth, multer, postController.getOnePost);
+router.get('/', auth, postController.readPost);
+router.get('/:id', auth, postController.getOnePost);
 router.put('/:id', auth, multer, postController.updatePost);
-router.delete('/:id', auth, multer, postController.deletePost);
-
+router.delete('/:id', auth, postController.deletePost);
+// router.put('/post/picture/:id',auth,multer,postController.updatePicture);
 // Comments
 router.post('/commentPost', auth, postController.commentPost);
 router.put('/editCommentPost/:id', auth, postController.editCommentPost);

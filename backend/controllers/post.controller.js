@@ -1,6 +1,5 @@
 const PostModel = require('../models').Message;
 const CommentModel = require('../models').Comment;
-const test = require('../models');
 const UserModel = require('../models').User;
 
 
@@ -16,20 +15,26 @@ module.exports.readPost = async (req, res) => {
       return res.status(500).json({ message: err});
   }
 }
+
 // Création du post
 module.exports.createPost = (req, res) => {
   const UserId = req.body.UserId;
   const content = req.body.content;
   const attachment = req.body.attachment;
+  console.log(req.body);
+  const image = req.body.image;
   const newPost = new PostModel({
   UserId : UserId,
   content: content,
-  attachment: attachment,
+  image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 }); 
 newPost
 .save()
 .then(() => res.status(201).json({ message: "Post enregistré" }))
-.catch((error) => res.status(400).json({ error }));
+.catch((error) => {
+  console.log(error);
+  res.status(400).json({ error })
+});
 };
 
 exports.getOnePost = (req, res, next) => {
@@ -75,7 +80,7 @@ exports.updatePost = (req, res) => {
         message: "erreur de mise à jour du post avec id=" + id
       });
     });
-}
+} 
 
 // Supprimer un post
 exports.deletePost = (req, res) => {
@@ -222,4 +227,16 @@ exports.deleteCommentPost = (req, res) => {
     });
   };
 
+  exports.updatePicture = (req, res, next) => {
+      
+    const postObject = req.file ?
+      {
+        ...req.body.post,
+        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } : { ...req.body };
+  
+    Post.update({ ...postObject, id: req.params.id }, { where: { id: req.params.id } })
+      .then(() => res.status(200).json({ message: 'Post modifié' }))
+      .catch(error => res.status(400).json({ error }));
+  };
 // CRUD

@@ -22,6 +22,7 @@
 import VueJwtDecode from "vue-jwt-decode";
 import Post from "./Post.vue";
 
+
 import Header from './Header.vue'
 
 export default {
@@ -90,6 +91,7 @@ body{
   margin: 0;
   width: 100vw;
   overflow-x: hidden;
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
 }
 /* Header */
 .menu-nav{

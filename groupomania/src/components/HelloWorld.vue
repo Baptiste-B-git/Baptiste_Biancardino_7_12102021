@@ -56,8 +56,6 @@ a {
   color: #42b983;
 }
 html{
-
   background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-
 }
 </style>

@@ -26,6 +26,7 @@ export default {
       image: this.image,
       UserId: this.id,
       content: this.content,
+      token: ""
     };
   },
   beforeMount() {
@@ -33,53 +34,50 @@ export default {
    
   },
   methods: {
-      async getId() {
+    async getId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
+      this.token=token
+      this.UserId = id
+      // try {
+      //   const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   });
+      //   const user = await res.json();
 
-    this.UserId = id
-      try {
-        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const user = await res.json();
+      //   this.username = user.username;
+      //   this.id = user.UserId;
 
-        this.username = user.username;
-        this.id = user.UserId;
-
-        console.log(this.UserId)
-      } catch (error) {
-        console.log(error);
-      }
+      //   console.log(this.UserId)
+      // } catch (error) {
+      //   console.log(error);
+      // }
     },
     handleFileUpload() {
       this.image = this.$refs.image.files[0];
     },
 
     async post() {
-      const token = JSON.parse(localStorage.getItem("res"));
-      const id = VueJwtDecode.decode(token).userId;
+      // const token = JSON.parse(localStorage.getItem("res"));
+      // const id = VueJwtDecode.decode(token).userId;
 
-      this.UserId = id
+      // this.UserId = id
 
      const formData = new FormData();
-
-      formData.append("attachment", this.image);
+        formData.append("image", this.image);
         formData.append("UserId", this.UserId);
         formData.append("content", this.content);
       try {
         const response = await axios.post(
           "http://localhost:5000/api/post",
-            
+      
             formData,
-          
-          
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${this.token}`,
             },
           }
         );
@@ -87,9 +85,7 @@ export default {
 
         // window.location.reload();
       } catch (error) {
-
         console.log(error.data);
-
       }
     }
   }
