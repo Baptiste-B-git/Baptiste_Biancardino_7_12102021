@@ -25,27 +25,26 @@ export default {
 
 
 data() {
-return {
-   post_id: this.post_id,
-      userId: this.userId,
-      posts : this.posts,
-      user: {
-        username: "",
-        id: "",
-        postUsername: this.postUsername,
-      },
-}
+  return {
+    post_id: this.post_id,
+    userId: this.userId,
+    posts : this.posts,
+    user: {
+      username: "",
+      id: "",
+      postUsername: this.postUsername,
+    },
+  } 
 },
 
   beforeMount(){
-this.getPosts();
-this.getPost()
+    this.getPosts();
+    this.getPost()
   },
   methods:{
     
-   async getPosts() {
+    async getPosts() {
       const token = JSON.parse(localStorage.getItem("res"));
-
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -104,11 +103,9 @@ this.getPost()
       } catch (error) {
         console.log(error);
       }
-    
 
     }
   }
-
 }
 </script>
 

@@ -48,9 +48,116 @@
 </div>
 </template>
 <script>
+import VueJwtDecode from "vue-jwt-decode";
+import axios from "axios";
+import Header from "./Header.vue";
+// import AuthentificationService from "../services/AuthentificationService";
+// import useValidate from "@vuelidate/core";
+// import { required } from "@vuelidate/validators";
+// import { reactive, computed } from "vue";
 export default {
-    name: 'Profile',
-}
+  name: "Profile",
+  components: { Header },
+  data() {
+    return {
+      error: this.error,
+      user: this.user,
+      username: this.username,
+      email: this.email,
+      image: this.image,
+      password: this.password,
+    };
+  },
+  beforeMount() {
+    this.check();
+    this.getId();
+  },
+  methods: {
+    check() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      if (!token) {
+        this.$router.push({ name: "Login" });
+      } else {
+        const id = VueJwtDecode.decode(token).userId;
+        this.id = id;
+      }
+    },
+    async getId() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      try {
+        const res = await fetch(`http://localhost:3000/api/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const user = await res.json();
+        this.user = user;
+        this.username = user.username;
+        this.email = user.email;
+      } catch {
+        error;
+      }
+    },
+    handleFileUpload() {
+      this.image = this.$refs.image.files[0];
+    },
+    async update() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const user_id = VueJwtDecode.decode(token).userId;
+      const formData = new FormData();
+      formData.append("username", this.username);
+      formData.append("email", this.username);
+      try {
+        const response = await axios.put(
+          `http://localhost:3000/api/user/${user_id}`,
+          {
+            username: this.username,
+            email: this.email,
+            error: this.error,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        console.log(response);
+      } catch (error) {
+        this.error = error.response.data.message;
+        console.log(this.error);
+      }
+    },
+    async deleteAccount() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      try {
+        await axios.delete(`http://localhost:3000/api/user/delete/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        window.location.reload();
+        this.$router.push({ name: "Login" });
+        localStorage.clear();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async updatePicture() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const user_id = VueJwtDecode.decode(token).userId;
+      const formData = new FormData();
+      formData.append("image", this.image);
+      try {
+        const response = await axios.put(
+          `http://localhost:3000/api/user/image/${user_id}`,
+          formData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
 </script>
 <style scoped>
 html,
