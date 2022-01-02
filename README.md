@@ -13,6 +13,8 @@ NodeJs - VueJs - MySQL
 
 Installation du Projet :
 
+npm install
+
 Backend : npm start
 
 Frontend : npm run serve
