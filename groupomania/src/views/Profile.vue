@@ -25,11 +25,12 @@
 
 <!-- Profile -->
     <div class="card">
-        <div class="name-user">Dupont Jeanne</div>
+        <h2 class="name-user">Dupont Jeanne</h2>
         <div>
             <div>
                 <p class="subtitle">E-mail</p>
                 <p>dupont.jeanne@gmail.com</p>
+                <!-- <input type="email" v-model="email" :placeholder="this.email" /> -->
                 <p class="subtitle">Description</p>
                 <p>Pas de description</p>
                 <textarea class="account" cols="30" rows="5" placeholder="Votre nouvelle description"></textarea>
@@ -40,7 +41,7 @@
         <div>
             <div>
                 <p class="subtitle-delete">Supprimer mon compte</p>
-                <button class="button-delete">Supprimer</button>
+                <button class="button-delete" @click="deleteAccount">Supprimer</button>
             </div>
         </div>
 

@@ -37,6 +37,25 @@ newPost
 });
 };
 
+module.exports.getCommentPost = (req, res) => {
+  const postId = req.params.id;
+  CommentModel.findAll({where:{messageId:postId}})
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Impossible de retrouver les commentaires du post ${postId}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Erreur lors de la récupération des commentaires du post" + postId
+      });
+    });
+}
+
 exports.getOnePost = (req, res, next) => {
   const id = req.params.id;
 

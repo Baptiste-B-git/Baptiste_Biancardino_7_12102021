@@ -9,7 +9,7 @@
     <div class="post-img"><img :src="message.attachment" alt=""></div>
     <div class="post-name">{{message.content}}</div>
   
-    <Comments/>
+    <Comments :postId="message.id"/>
       </div>
 
   </div>

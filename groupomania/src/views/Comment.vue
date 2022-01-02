@@ -32,6 +32,7 @@ import VueJwtDecode from 'vue-jwt-decode';
 import axios from 'axios';
 export default {
   name: "Comment",
+  props:["postId"],
   data() {
     return {
       ok : false,
@@ -49,7 +50,7 @@ export default {
       titlePost:'',
       id:"",
       isAdmin:"",
-      post_id:this.post_id,
+      // post_id:this.post_id,
       userId : this.userId,
       user: {
         username:"",
@@ -85,7 +86,7 @@ export default {
    async getComments() {
     const token = JSON.parse(localStorage.getItem('res'));
     try {
-      const p = await fetch(`http://localhost:5000/api/post/commentPost`) ;
+      const p = await fetch(`http://localhost:5000/api/post/${this.postId}/commentPost`) ;
       const comments = await p.json();
       this.comments = comments;
       comments.forEach(comment => {

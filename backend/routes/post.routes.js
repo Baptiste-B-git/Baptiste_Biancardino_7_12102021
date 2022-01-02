@@ -11,7 +11,8 @@ router.put('/:id', auth, multer, postController.updatePost);
 router.delete('/:id', auth, postController.deletePost);
 // router.put('/post/picture/:id',auth,multer,postController.updatePicture);
 // Comments
-router.post('/commentPost', auth, postController.commentPost);
+router.post('/:id/commentPost', auth, postController.commentPost);
+router.get('/:id/commentPost', auth, postController.getCommentPost);
 router.put('/editCommentPost/:id', auth, postController.editCommentPost);
 router.delete('/deleteCommentPost/:id', auth, postController.deleteCommentPost);
 
