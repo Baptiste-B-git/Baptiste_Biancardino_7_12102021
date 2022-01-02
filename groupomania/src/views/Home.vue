@@ -22,8 +22,6 @@
 import VueJwtDecode from "vue-jwt-decode";
 import Post from "./Post.vue";
 import GetPosts from "./GetPosts.vue";
-
-
 import Header from './Header.vue';
 
 export default {
