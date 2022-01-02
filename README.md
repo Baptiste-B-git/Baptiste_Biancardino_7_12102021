@@ -1,6 +1,4 @@
-# Baptiste_Biancardino_7_12102021
-
-PROJET 7 - OPENCLASSROOMS - DEVELOPPEUR WEB
+# PROJET 7 - OPENCLASSROOMS - DEVELOPPEUR WEB
 
 Groupomania - Réseau social d'entreprise
 
@@ -14,8 +12,6 @@ Implémenter un stockage de données sécurisé en utilisant SQL
 NodeJs - VueJs - MySQL
 
 Installation du Projet :
-
-npm install
 
 Backend : npm start
 
