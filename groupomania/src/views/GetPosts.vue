@@ -3,13 +3,22 @@
   <div v-for="message in posts" :key="message" class="post-block" :id="message.id">
 
     <div class="bloc-picture-name">
-      <div class="picture-profile"><img src="" alt="profil-6"></div>
-      <div class="user-name"></div>
+      <div class=""></div>
     </div>
-    <div class="post-img"><img :src="message.attachment" alt=""></div>
     <div class="post-name">{{message.content}}</div>
+        <div class="post-name">{{message.id}}</div>
+
+    <div class="post-time"> Le {{datePost(message.createdAt)}}</div>
+
+    <div @click="updatePost(message.id)"> <button> update </button>
+                        <input type="text" class="message" v-model="updateContent" />
+
+    </div>
+        <div @click="deletePost(message.id)"><button> delete </button> </div>
+
+
+
   
-    <Comments :postId="message.id"/>
       </div>
 
   </div>
@@ -29,8 +38,9 @@ data() {
     post_id: this.post_id,
     userId: this.userId,
     posts : this.posts,
+    updateContent: this.updateContent,
     user: {
-      username: "",
+      username: this.username,
       id: "",
       postUsername: this.postUsername,
     },
@@ -39,38 +49,20 @@ data() {
 
   beforeMount(){
     this.getPosts();
-    this.getPost()
+    this.getPost();
+    this.getIdPostUser();
+
   },
   methods:{
-    
-    async getPosts() {
-      const token = JSON.parse(localStorage.getItem("res"));
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      try {
-        const response = await fetch(`http://localhost:5000/api/post/`, {
-          headers,
-        });
 
-        const posts = await response.json();
-        console.log(posts)
-        this.posts = posts;
+    getOnePost(postId){
+        this.post_id = postId
 
-        posts.forEach((post) => {
-          this.content = post.content;
-          this.post_id = post.id;
-       // this.username = post.User.username;
+        console.log(postId)
 
-          console.log(this.post_id)
-        });
-      } catch (error) {
-        console.log(error);
-      }
     },
-   async getPost(){
-
-       const token = JSON.parse(localStorage.getItem("res"));
+    async getIdPostUser() {
+      const token = JSON.parse(localStorage.getItem("res"));
 
       const id = VueJwtDecode.decode(token).userId;
 
@@ -83,8 +75,6 @@ data() {
         const users = await res.json();
 
         this.users = users;
-
-        console.log(users.username)
 
       } catch (error) {
         console.log(error);
@@ -103,6 +93,117 @@ data() {
       } catch (error) {
         console.log(error);
       }
+    
+  },
+       datePost(date) {
+      const event = new Date(date);
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      };
+      return event.toLocaleDateString("fr-Fr", options);
+    },
+    
+    async getPosts() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      try {
+        const response = await fetch(`http://localhost:5000/api/post/`, {
+          headers,
+        });
+
+        const posts = await response.json();
+        console.log(posts)
+        this.posts = posts;
+
+        posts.forEach((post) => {
+          this.content = post.content;
+          this.postId = post.id;
+              //      this.username = post.User.username;
+
+          
+
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async updatePost(postId) {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const UserId = VueJwtDecode.decode(token).userId;
+
+      const formData = new FormData();
+
+      formData.append("content", this.updateContent);
+
+      try {
+        await axios.put(`http://localhost:5000/api/post/${postId}`, formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    deletePost(postId) {
+      const token = JSON.parse(localStorage.getItem("res"));
+
+      axios
+        .delete("http://localhost:5000/api/post/" + postId, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+         
+          window.location.reload();
+          console.log(postId)
+        })
+        .catch((error) => {
+          window.alert(error);
+        });
+    },
+   async getPost(){
+
+       const token = JSON.parse(localStorage.getItem("res"));
+
+      const id = VueJwtDecode.decode(token).userId;
+
+      try {
+        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const users = await res.json();
+
+        this.users = users;
+
+
+      } catch (error) {
+        console.log(error);
+      }
+
+      
+      try {
+        const res = await fetch(`http://localhost:5000/api/post/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const post = await res.json();
+
+
+      console.log(post)
+      } catch (error) {
+        console.log(error);
+      }
 
     }
   }
@@ -111,11 +212,7 @@ data() {
 
 <style>
 /* Bloc post du User */
-.picture-profile{
-  width: 50px;
-  height: 50px;
-  background: rgb(187, 187, 187);
-}
+
 .user-name{
   text-align: left;
 }
