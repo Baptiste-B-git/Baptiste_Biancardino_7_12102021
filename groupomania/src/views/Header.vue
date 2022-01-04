@@ -14,18 +14,33 @@
       </li>
 
       <li class="btn">
-        <a href="Logout">
-      <fa @click="logout()" icon="power-off" title="Déconnexion" />
-        <fa class="fas fa-power-off fa-2x" title="Déconnexion"></fa></a>
+    <div @click="logout"><h3>Logout</h3></div>
+      
       </li>
     </ul> 
   </nav>
 </template>
 
 <script>
-export default {
+import VueJwtDecode from "vue-jwt-decode";
 
-}
+export default {
+  name: "Header",
+
+ 
+
+  methods: {
+  
+
+    logout() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
+      localStorage.clear();   
+        this.$router.push({ name: "Login" });
+
+    },
+  },
+};
 </script>
 
 <style>
@@ -73,5 +88,7 @@ a:hover{
   cursor: pointer;
 }
 
-
+h3:hover {
+  cursor:pointer
+}
 </style>
