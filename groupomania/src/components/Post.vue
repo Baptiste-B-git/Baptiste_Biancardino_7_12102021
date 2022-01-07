@@ -19,6 +19,7 @@ import axios from "axios";
 export default {
   name: "Post",
 
+  emits: ['postAdded'],
   data() {
     return {
       error: this.error,
@@ -62,7 +63,6 @@ export default {
     async post() {
       // const token = JSON.parse(localStorage.getItem("res"));
       // const id = VueJwtDecode.decode(token).userId;
-
       // this.UserId = id
 
      const formData = new FormData();
@@ -82,7 +82,8 @@ export default {
           }
         );
         console.log(this.image);
-
+        this.$emit('postAdded');
+      
         // window.location.reload();
       } catch (error) {
         console.log(error.data);

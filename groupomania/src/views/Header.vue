@@ -1,4 +1,5 @@
 <template>
+<!-- COMPOSANTS -->
   <nav class="menu-nav">
     <h1>Groupomania</h1>
     <ul class="bloc-btn">

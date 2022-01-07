@@ -1,12 +1,17 @@
 <template>
+<!-- COMPOSANTS -->
+<!-- Bloc post (Exprimez-vous...) -->
+  <Post v-on:postAdded="getPosts()"/>
+
   <div class="card">
       <div v-for="message in posts" :key="message" class="post-block" :id="message.id">
         <div class="bloc-picture-name">
         <div class=""></div>
       </div>
+      <div class="post-time"> Le {{datePost(message.createdAt)}}</div>
       <div class="post-name">{{message.content}}</div>
       <div class="post-name">{{message.User.username}}</div>
-      <div class="post-time"> Le {{datePost(message.createdAt)}}</div>
+
       <div class="bloc-update-delete" v-if="id == message.User.id"> 
         <button   @click="show"> Modifier  la publication</button>
         <div v-show="ok"><input type="text" class="message" v-model="updateContent" />
@@ -17,14 +22,16 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import VueJwtDecode from "vue-jwt-decode";
+import Post from "../components/Post.vue";
 import axios from "axios";
 import Comments from "./Comment.vue";
 export default {
-    components: {Comments},
+    components: {Comments, Post},
 data() {
   return {
     post_id: this.post_id,
@@ -44,7 +51,7 @@ data() {
 },
   beforeMount(){
     this.getPosts();
-    this.getPost();
+    // this.getPost();
     this.getIdPostUser();
     this.checkId();
   },
@@ -175,33 +182,33 @@ data() {
           window.alert(error);
         });
     },
-   async getPost(){
-       const token = JSON.parse(localStorage.getItem("res"));
-      const id = VueJwtDecode.decode(token).userId;
-      try {
-        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const users = await res.json();
-        this.users = users;
-      } catch (error) {
-        console.log(error);
-      }
+  //  async getPost(){
+  //      const token = JSON.parse(localStorage.getItem("res"));
+  //     const id = VueJwtDecode.decode(token).userId;
+  //     try {
+  //       const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       const users = await res.json();
+  //       this.users = users;
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
       
-      try {
-        const res = await fetch(`http://localhost:5000/api/post/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const post = await res.json();
-      console.log(post)
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  //     try {
+  //       const res = await fetch(`http://localhost:5000/api/post/`, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       const post = await res.json();
+  //     console.log(post)
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
   }
 }
 </script>

@@ -118,9 +118,10 @@ export default {
         const user = this.$store.state.user;
 
         const res = response.data.token;
-        //this.$router.push({ name: "Home" });
+        this.$router.push({ path: "home" });
         const parsed = JSON.stringify(res);
         localStorage.setItem("res", parsed);
+
         console.log(res);
       } catch (error) {
         console.log(error);

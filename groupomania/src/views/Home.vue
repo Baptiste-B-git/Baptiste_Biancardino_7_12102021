@@ -6,8 +6,7 @@
 
   <h2>Dernières publications</h2>
 
-<!-- Bloc post (Exprimez-vous...) -->
-  <Post/>
+
 
 <!-- Bloc post du User -->
  
@@ -20,13 +19,13 @@
 <script>
 // @ is an alias to /src
 import VueJwtDecode from "vue-jwt-decode";
-import Post from "./Post.vue";
+
 import GetPosts from "./GetPosts.vue";
 import Header from './Header.vue';
 
 export default {
   name: 'Home',
-  components: {Post,Header,GetPosts},
+  components: {Header,GetPosts},
   data() {
     return {
       ok: false,
