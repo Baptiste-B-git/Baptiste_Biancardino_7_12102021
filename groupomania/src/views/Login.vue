@@ -10,30 +10,49 @@
       <form v-on:submit.prevent="onSubmit">
         <div class="form-group">
           <label for="username"></label>
-          <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" v-model="username" />
+          <input
+            name="username"
+            type="text"
+            class="form-control"
+            placeholder="Nom d'utilisateur"
+            v-model="username"
+          />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
-         <div class="form-group">
+        <div class="form-group">
           <label for="email"></label>
-          <input name="email" type="text" class="form-control" placeholder="email" v-model="email" />
+          <input
+            name="email"
+            type="text"
+            class="form-control"
+            placeholder="email"
+            v-model="email"
+          />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
         <div class="form-group">
           <label for="password"></label>
-          <input name="password" type="password" class="form-control" placeholder="Mot de passe" v-model="password" />
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            placeholder="Mot de passe"
+            v-model="password"
+          />
 
           <!-- <ErrorMessage name="password" class="error-feedback" /> -->
         </div>
 
         <div class="form-group">
           <button class="btn btn-primary btn-block" @click="handleLogin">
-            
-            <!-- <span
-              v-show="loading"
-              class="spinner-border spinner-border-sm"
-            ></span> -->
             <span>Connexion</span>
           </button>
+
+          <a href="Register.vue">
+            <button class="btn btn-primary btn-block">
+              <span>Créer un compte</span>
+            </button>
+          </a>
         </div>
 
         <!-- <div class="form-group">
@@ -51,17 +70,16 @@
 // import { Form, Field, ErrorMessage } from "vee-validate";
 // import * as yup from "yup";
 import axios from "axios";
-import authservice from "../services/authservice"
+import authservice from "../services/authservice";
 
 export default {
   name: "Login",
-//   components: {
-//     Form,
-//     Field,
-//     ErrorMessage,
-//   },
+  //   components: {
+  //     Form,
+  //     Field,
+  //     ErrorMessage,
+  //   },
   data() {
-
     return {
       username: "",
       password: "",
@@ -70,18 +88,18 @@ export default {
     };
   },
 
-//   computed: {
-//     loggedIn() {
-//       return this.$store.state.auth.status.loggedIn;
-//     },
-//   },
-//   created() {
-//     if (this.loggedIn) {
-//       this.$router.push("/profile");
-//     }
-//   },
-  methods: {
+  //   computed: {
+  //     loggedIn() {
+  //       return this.$store.state.auth.status.loggedIn;
+  //     },
+  //   },
+  //   created() {
+  //     if (this.loggedIn) {
+  //       this.$router.push("/profile");
+  //     }
+  //   },
 
+  methods: {
     async handleLogin() {
       try {
         const response = await authservice.login({
@@ -89,7 +107,7 @@ export default {
             Authorization: `Bearer ${token}`,
           },*/
           email: this.email,
-          username : this.username,
+          username: this.username,
           password: this.password,
           error: this.error,
         });
@@ -102,14 +120,12 @@ export default {
         const res = response.data.token;
         //this.$router.push({ name: "Home" });
         const parsed = JSON.stringify(res);
-       localStorage.setItem("res", parsed);
-        console.log(res)
+        localStorage.setItem("res", parsed);
+        console.log(res);
       } catch (error) {
-        
         console.log(error);
       }
-    }
- 
+    },
   },
 };
 </script>
@@ -119,7 +135,7 @@ label {
   display: block;
   margin-top: 10px;
 }
-h1{
+h1 {
   margin-bottom: 10px;
   margin-top: 0;
   font-weight: 800;
@@ -128,12 +144,11 @@ h1{
   max-width: 350px !important;
   padding: 40px 40px;
 }
-input{
+input {
   border: none;
-
 }
 body {
-  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
 }
 .card {
   background-color: #f7f7f7;
@@ -142,7 +157,6 @@ body {
   margin-top: 50px;
   border-radius: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
-
 }
 
 .profile-img-card {
@@ -152,23 +166,23 @@ body {
   display: block;
   border-radius: 50%;
 }
-.btn-block{
+.btn-block {
   max-width: 100%;
   width: 320px;
   border: none;
   border-radius: 10px;
-  padding:10px;
+  padding: 10px;
   margin-top: 20px;
-      background-color: #007BFF;
-    Color:white;
+  background-color: #007bff;
+  color: white;
 }
-.form-control{
+.form-control {
   max-width: 100%;
   width: 300px;
   margin-top: 10px;
-  background:#f2f2f2;
+  background: #f2f2f2;
   border-radius: 10px;
-  padding:10px;
+  padding: 10px;
 }
 
 .error-feedback {

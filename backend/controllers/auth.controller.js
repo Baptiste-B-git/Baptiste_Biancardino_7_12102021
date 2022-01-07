@@ -40,6 +40,7 @@ module.exports.signIn = async (req, res) =>{
         console.log(3);
         if (!valid) {
           return res.status(401).json({ error: 'Mot de passe incorrect !' });
+          // eror 404
         }
         res.status(200).json({
           userId: user.id,
