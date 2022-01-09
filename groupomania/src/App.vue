@@ -1,6 +1,7 @@
 <template>
 <div>
-      <router-link to="/"></router-link> 
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu&subset=cyrillic,latin' rel='stylesheet' type='text/css' />
+  <router-link to="/"></router-link> 
  <router-view/> 
 </div>
 </template>
@@ -19,7 +20,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

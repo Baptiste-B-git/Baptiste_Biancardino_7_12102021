@@ -4,10 +4,6 @@
   
   <Header/>
 
-  <h2>Dernières publications</h2>
-
-
-
 <!-- Bloc post du User -->
  
  <GetPosts/>

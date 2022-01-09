@@ -3,12 +3,12 @@
 <!-- Bloc post (Exprimez-vous...) -->
   <Post v-on:postAdded="getPosts()"/>
 
-  <div class="card">
+  <h2>Publications récentes</h2>
       <div v-for="message in posts" :key="message" class="post-block" :id="message.id">
         <div class="bloc-picture-name">
         <div class=""></div>
       </div>
-      <div class="post-time"> Le {{datePost(message.createdAt)}}</div>
+      <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
       <div class="post-name">{{message.content}}</div>
       <div class="post-name">{{message.User.username}}</div>
 
@@ -17,11 +17,12 @@
         <div v-show="ok"><input type="text" class="message" v-model="updateContent" />
           <button @click="updatePost(message.id)">Modifier</button>
         </div>
-        <div class="button-delete" @click="deletePost(message.User.id)"><button  v-if="id == message.User.id || isAdmin == 1" @click="deletePost(message.id)"> Supprimer </button>
+        <div class="button-delete" @click="deletePost(message.User.id)">
+          <button  v-if="id == message.User.id || isAdmin == 1" @click="deletePost(message.id)"> Supprimer </button>
         </div>
       </div>
     </div>
-  </div>
+
 
 </template>
 
@@ -245,13 +246,20 @@ img{
   margin-top: 10px;
   text-align: center;
 }
-
+input:focus{
+    outline: none !important;
+    border-color: #dd924c;
+    box-shadow: 0 0 10px #f3b43e;
+}
 .post-block {
-  margin-bottom: 25px;
-  border-bottom: 1px solid black;
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  width: 700px;
+  margin: 0 auto 25px;
+  border-radius: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
 .button-delete{
-  margin-bottom: 20px;
   text-align: center;
 }
 </style>

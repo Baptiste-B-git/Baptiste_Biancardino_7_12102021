@@ -1,7 +1,8 @@
 <template>
-    <div class="card">
+  <div class="card">
     <h3>Exprimez-vous...</h3>
-    <textarea class="post-field" cols="80" rows="5" placeholder="Ajouter un texte" v-model="content"></textarea><br>
+    <textarea class="post-field"  placeholder="Quoi de neuf ?" v-model="content"></textarea><br>
+
     <input
             type="file"
             name="image"
@@ -10,7 +11,6 @@
             class="custom-file-input" v-on:change="handleFileUpload()">
     <button class="button" @click="post">Publier !</button>
   </div>
-
 </template>
 
 <script>
@@ -100,6 +100,7 @@ export default {
   padding: 20px 25px 30px;
   width: 700px;
   margin: 0 auto 25px;
+  margin-top: 40px;
   border-radius: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
@@ -109,8 +110,16 @@ h3{
 }
 .post-field{
   width: 100%;
-  border-radius: 5px;
+  border-radius: 20px;
+  padding: 12px 0 0 12px;
 }
+
+textarea:focus{
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #719ECE;
+}
+
 .bloc-btn{
   display: flex;
   flex-direction: row;

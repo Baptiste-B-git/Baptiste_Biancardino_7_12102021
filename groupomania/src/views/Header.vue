@@ -62,11 +62,7 @@ export default {
   color: white;
   box-shadow: 1px 5px 12px black;
 }
-h1{
-  color: black;
-  font-weight: 800;
-  font-size: 2.5rem;
-}
+
 nav.menu-nav ul li.btn {
   display: flex;
   height: 50px;
