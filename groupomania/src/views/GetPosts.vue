@@ -6,14 +6,13 @@
   <h2>Publications récentes</h2>
       <div v-for="message in posts" :key="message" class="post-block" :id="message.id">
         <div class="bloc-picture-name">
-        <div class=""></div>
+        <div class="bloc-test"></div>
       </div>
-      <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
-      <div class="post-name">{{message.content}}</div>
       <div class="post-name">{{message.User.username}}</div>
-
+      <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
+      <div class="post-text">{{message.content}}</div>
       <div class="bloc-update-delete" v-if="id == message.User.id"> 
-        <button   @click="show"> Modifier  la publication</button>
+        <i class="fas fa-edit" @click="show"></i>
         <div v-show="ok"><input type="text" class="message" v-model="updateContent" />
           <button @click="updatePost(message.id)">Modifier</button>
         </div>
@@ -216,10 +215,13 @@ data() {
 
 <style>
 /* Bloc post du User */
+.fa-edit{
+  cursor: pointer;
+}
 .message{
   border: 1px solid rgb(104, 104, 104);
   background:#f2f2f2;
-  border-radius: 10px;
+  border-radius: 15px;
   height: 30px;
 
 }
@@ -240,11 +242,22 @@ img{
   object-fit: cover;
 }
 .post-time{
-  font-weight: 600;
+  font-style: italic;
+  text-align: left;
+  margin-top: 5px;
+  border-bottom: 0.5px solid;
+  padding-bottom: 10px;
+  opacity: 0.5;
 }
 .post-name{
   margin-top: 10px;
-  text-align: center;
+  text-align: left;
+  font-weight: 600;
+  color: #272979;
+}
+.post-text{
+  margin-top: 20px;
+  text-align: left;
 }
 input:focus{
     outline: none !important;
@@ -258,6 +271,9 @@ input:focus{
   margin: 0 auto 25px;
   border-radius: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
+}
+.bloc-update-delete{
+  justify-content: space-between;
 }
 .button-delete{
   text-align: center;
