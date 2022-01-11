@@ -126,7 +126,6 @@ a {
 }
 a:hover{
   color: #f58544;
-  background-color: white;
   transition: 0.3s all;
   cursor: pointer;
 }

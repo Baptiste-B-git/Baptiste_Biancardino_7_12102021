@@ -10,13 +10,13 @@
       <form v-on:submit.prevent="onSubmit">
         <div class="form-group">
           <label for="username"></label>
-          <input
+          <!-- <input
             name="username"
             type="text"
             class="form-control"
             placeholder="Nom d'utilisateur"
             v-model="username"
-          />
+          /> -->
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
         <div class="form-group">
@@ -25,7 +25,7 @@
             name="email"
             type="text"
             class="form-control"
-            placeholder="email"
+            placeholder="Email"
             v-model="email"
           />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
@@ -46,12 +46,10 @@
         <div class="form-group">
           <button class="btn btn-primary btn-block" @click="handleLogin">
             <span>Connexion</span>
-          </button>
+          </button><br>
 
-          <a href="Register.vue">
-            <button class="btn btn-primary btn-block">
-              <span>Créer un compte</span>
-            </button>
+          <a href="#/register">
+            <span>Pas encore de compte ?</span>
           </a>
         </div>
 
@@ -139,7 +137,6 @@ label {
 h1 {
   margin-bottom: 10px;
   margin-top: 0;
-  font-weight: 800;
 }
 .card-container.card {
   max-width: 350px !important;
@@ -169,18 +166,19 @@ body {
 }
 .btn-block {
   max-width: 100%;
-  width: 320px;
+  min-width: 200px;
   border: none;
   border-radius: 10px;
   padding: 10px;
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #007bff;
   color: white;
 }
 .form-control {
   max-width: 100%;
   width: 300px;
-  margin-top: 10px;
+  margin-top: 12px;
   background: #f2f2f2;
   border-radius: 10px;
   padding: 10px;
@@ -188,5 +186,8 @@ body {
 
 .error-feedback {
   color: red;
+}
+a{
+  text-decoration: none;
 }
 </style>

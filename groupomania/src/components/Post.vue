@@ -135,6 +135,11 @@ textarea:focus{
   background-color: #007BFF;
   Color:white;
 }
+button:hover{
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #719ECE;
+}
 /* Bloc post du User */
 .picture-profile{
   width: 50px;

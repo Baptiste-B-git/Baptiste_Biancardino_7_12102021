@@ -16,8 +16,9 @@
         <div v-show="ok"><input type="text" class="message" v-model="updateContent" />
           <button @click="updatePost(message.id)">Modifier</button>
         </div>
+        <i class="fas fa-trash-alt"></i>
         <div class="button-delete" @click="deletePost(message.User.id)">
-          <button  v-if="id == message.User.id || isAdmin == 1" @click="deletePost(message.id)"> Supprimer </button>
+          <button v-if="id == message.User.id || isAdmin == 1" @click="deletePost(message.id)"> Supprimer </button>
         </div>
       </div>
     </div>
@@ -215,9 +216,7 @@ data() {
 
 <style>
 /* Bloc post du User */
-.fa-edit{
-  cursor: pointer;
-}
+
 .message{
   border: 1px solid rgb(104, 104, 104);
   background:#f2f2f2;
@@ -261,8 +260,8 @@ img{
 }
 input:focus{
     outline: none !important;
-    border-color: #dd924c;
-    box-shadow: 0 0 10px #f3b43e;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #719ECE;
 }
 .post-block {
   background-color: #f7f7f7;
@@ -273,9 +272,13 @@ input:focus{
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
 .bloc-update-delete{
-  justify-content: space-between;
+
+  text-align: left;
 }
-.button-delete{
-  text-align: center;
+
+.fa-edit:hover{
+  color: #f58544;
+  transition: 0.3s all;
+  cursor: pointer;
 }
 </style>

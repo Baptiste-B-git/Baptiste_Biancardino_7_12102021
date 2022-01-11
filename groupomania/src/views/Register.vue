@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card card-container">
-      <h1>S'inscrire</h1>
+      <h1>Inscription</h1>
       <img
         id="profile-img"
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -9,24 +9,31 @@
       />
       <form  v-on:submit.prevent="onSubmit">
           <div class="form-group">
-            <label for="username">Nom d'utilisateur</label>
-            <input name="username" type="text" class="form-control" v-model="username" req/>
+            <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" v-model="username" req/>
+        <div class="form-group">
+
+          <input
+            name="email"
+            type="text"
+            class="form-control"
+            placeholder="Email"
+            v-model="email"
+          />
+          <!-- <ErrorMessage name="username" class="error-feedback" /> -->
+        </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <input name="email" type="email" class="form-control" v-model="email"/>
-          </div>
-          <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input name="password" type="password" class="form-control" v-model="password"/>
+            <input name="password" type="password" class="form-control" placeholder="Mot de passe" v-model="password"/>
           </div>
 
           <div class="form-group">
             <button class="btn btn-primary btn-block" @click="signup">
-           
-              <span>Connexion</span>
+              <span>Inscription</span>
             </button>
           </div>
         </div>
+          <a href="#/login">
+            <span>Vous avez déjà un compte ?</span>
+          </a>
       </form>
 
     
@@ -109,18 +116,20 @@ body {
 }
 .btn-block{
   max-width: 100%;
-  width: 320px;
+  min-width: 200px;
   border: none;
   border-radius: 10px;
   padding:10px;
-  margin-top: 20px;
-      background-color: #007BFF;
-    Color:white;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  background-color: #007BFF;
+  Color:white;
 }
 .form-control{
   max-width: 100%;
   width: 300px;
-  margin-top: 10px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   background:#f2f2f2;
   border-radius: 10px;
   padding:10px;
@@ -128,5 +137,8 @@ body {
 
 .error-feedback {
   color: red;
+}
+a{
+  text-decoration: none;
 }
 </style>
