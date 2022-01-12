@@ -4,19 +4,20 @@
     <h1>Groupomania</h1>
     <ul class="bloc-btn">
       <li class="btn">
-        <a href="Home.vue">
+        <a href="#/home">
         <i class="fas fa-home fa-2x" title="Accueil"></i></a>
       </li>
 
       <li class="btn">
-        <a href="Profile.vue">
+        <a href="#/profile">
           <i class="fas fa-user-alt fa-2x" title="Profil"></i>
         </a>
       </li>
 
       <li class="btn">
-    <div @click="logout"><h3>Logout</h3></div>
-      
+        <a href="#/login">
+          <i class="fas fa-sign-out-alt" title="Déconnexion" @click="logout"></i>
+        </a>
       </li>
     </ul> 
   </nav>
@@ -27,24 +28,18 @@ import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   name: "Header",
-
- 
-
   methods: {
-  
-
     logout() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
       localStorage.clear();   
         this.$router.push({ name: "Login" });
-
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 /* Header */
 .menu-nav{
   display: flex;
@@ -62,7 +57,16 @@ export default {
   color: white;
   box-shadow: 1px 5px 12px black;
 }
+.li.btn{
+    display: flex;
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+  margin: 10px;
+  color: black;
+    margin-top: 10px;
 
+}
 nav.menu-nav ul li.btn {
   display: flex;
   height: 50px;

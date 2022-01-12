@@ -121,9 +121,7 @@ nav.menu-nav ul li.btn {
   margin-top: 10px;
   width: 100%;
 }
-a {
-  color: black;
-}
+
 a:hover{
   color: #f58544;
   transition: 0.3s all;

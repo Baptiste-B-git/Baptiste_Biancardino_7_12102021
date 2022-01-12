@@ -25,7 +25,7 @@
             name="email"
             type="text"
             class="form-control"
-            placeholder="Email"
+            placeholder="Adresse mail"
             v-model="email"
           />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
@@ -47,10 +47,11 @@
           <button class="btn btn-primary btn-block" @click="handleLogin">
             <span>Connexion</span>
           </button><br>
-
-          <a href="#/register">
-            <span>Pas encore de compte ?</span>
+          <p>
+          Tu n'as pas encore de compte ? <a href="#/register">
+            <span>Créer un compte</span>
           </a>
+          </p>
         </div>
 
         <!-- <div class="form-group">
@@ -129,7 +130,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 label {
   display: block;
   margin-top: 10px;
@@ -171,23 +172,23 @@ body {
   border-radius: 10px;
   padding: 10px;
   margin-top: 20px;
-  margin-bottom: 20px;
   background-color: #007bff;
   color: white;
+  font-weight: bold;
 }
 .form-control {
   max-width: 100%;
   width: 300px;
   margin-top: 12px;
-  background: #f2f2f2;
+  background: #eeeeee;
   border-radius: 10px;
   padding: 10px;
 }
-
-.error-feedback {
-  color: red;
+p{
+  font-size: 14px;
+  font-weight: 500;
 }
 a{
-  text-decoration: none;
+  color: #007bff;
 }
 </style>

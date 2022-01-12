@@ -16,7 +16,7 @@
             name="email"
             type="text"
             class="form-control"
-            placeholder="Email"
+            placeholder="Adresse mail"
             v-model="email"
           />
           <!-- <ErrorMessage name="username" class="error-feedback" /> -->
@@ -31,9 +31,12 @@
             </button>
           </div>
         </div>
+        <p>
+          Vous avez déjà un compte ?
           <a href="#/login">
-            <span>Vous avez déjà un compte ?</span>
+            <span>Se connecter</span>
           </a>
+        </p>
       </form>
 
     
@@ -76,69 +79,6 @@ export default {
 };
 </script>
 
-<style scoped>
-label {
-  display: block;
-  margin-top: 10px;
-}
-h1{
-  margin-bottom: 10px;
-  margin-top: 0;
-  font-weight: 800;
-}
-.card-container.card {
-  max-width: 350px !important;
-  padding: 40px 40px;
-}
-input{
-  border: none;
-
-}
-body {
-  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-}
-.card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 50px;
-  border-radius: 15px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
-
-}
-
-.profile-img-card {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  border-radius: 50%;
-}
-.btn-block{
-  max-width: 100%;
-  min-width: 200px;
-  border: none;
-  border-radius: 10px;
-  padding:10px;
-  margin-top: 12px;
-  margin-bottom: 20px;
-  background-color: #007BFF;
-  Color:white;
-}
-.form-control{
-  max-width: 100%;
-  width: 300px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  background:#f2f2f2;
-  border-radius: 10px;
-  padding:10px;
-}
-
-.error-feedback {
-  color: red;
-}
-a{
-  text-decoration: none;
-}
+<style>
+/* Style dans le fichier Login.vue */
 </style>
