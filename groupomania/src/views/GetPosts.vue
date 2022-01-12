@@ -6,20 +6,22 @@
   <h2>Publications récentes</h2>
       <div v-for="message in posts" :key="message" class="post-block" :id="message.id">
         <div class="bloc-picture-name">
-        <div class="bloc-test"></div>
       </div>
       <div class="post-name">{{message.User.username}}</div>
       <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
       <div class="post-text">{{message.content}}</div>
       <div class="bloc-update-delete" v-if="id == message.User.id"> 
-        <i class="fas fa-edit" @click="show"></i>
-        <div v-show="ok"><input type="text" class="message" v-model="updateContent" />
+
+        <button @click="show">Modifier</button>
+        <div v-show="ok">
+          <input type="text" class="message" v-model="updateContent" />
           <button @click="updatePost(message.id)">Modifier</button>
         </div>
-        <i class="fas fa-trash-alt"></i>
+
         <div class="button-delete" @click="deletePost(message.User.id)">
           <button v-if="id == message.User.id || isAdmin == 1" @click="deletePost(message.id)"> Supprimer </button>
         </div>
+
       </div>
     </div>
 
@@ -272,7 +274,8 @@ input:focus{
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
 .bloc-update-delete{
-
+    display: flex;
+    flex-direction: row;
   text-align: left;
 }
 

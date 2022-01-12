@@ -20,9 +20,6 @@ export default {
 </script>
 
 <style>
-@font-face {
-  font-family: "Ubuntu";
-}
 #app {
   font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

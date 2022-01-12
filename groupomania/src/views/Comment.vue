@@ -113,16 +113,5 @@ export default {
 </script>
 
 <style>
-button {
-  max-width: 100%;
-  border: none;
-  border-radius: 8px;
-  padding:10px;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  cursor: pointer;
-  background-color: #007BFF;
-  Color:white;
-}
+
 </style>

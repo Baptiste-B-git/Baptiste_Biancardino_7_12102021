@@ -127,7 +127,18 @@ a:hover{
   transition: 0.3s all;
   cursor: pointer;
 }
+button {
+  max-width: 100%;
+  border: none;
+  border-radius: 8px;
+  padding:10px;
+  margin-top: 20px;
 
+  margin-right: 20px;
+  cursor: pointer;
+  background-color: #007BFF;
+  Color:white;
+}
 /* Commentaires */
 .picture-profile-comment img{
   width: 50px;
