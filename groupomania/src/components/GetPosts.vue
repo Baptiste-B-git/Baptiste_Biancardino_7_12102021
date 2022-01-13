@@ -30,9 +30,9 @@
 
 <script>
 import VueJwtDecode from "vue-jwt-decode";
-import Post from "../components/Post.vue";
+import Post from "./Post.vue";
 import axios from "axios";
-import Comments from "./Comment.vue";
+import Comments from "../views/Comment.vue";
 export default {
     components: {Comments, Post},
 data() {
@@ -218,7 +218,6 @@ data() {
 
 <style>
 /* Bloc post du User */
-
 .message{
   border: 1px solid rgb(104, 104, 104);
   background:#f2f2f2;
@@ -254,7 +253,7 @@ img{
   margin-top: 10px;
   text-align: left;
   font-weight: 600;
-  color: #272979;
+  font-size: 1.2em;
 }
 .post-text{
   margin-top: 20px;

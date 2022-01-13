@@ -16,8 +16,8 @@
 // @ is an alias to /src
 import VueJwtDecode from "vue-jwt-decode";
 
-import GetPosts from "./GetPosts.vue";
-import Header from './Header.vue';
+import GetPosts from "../components/GetPosts.vue";
+import Header from '../components/Header.vue';
 
 export default {
   name: 'Home',

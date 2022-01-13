@@ -2,6 +2,7 @@
 <!-- COMPOSANTS -->
   <nav class="menu-nav">
     <h1>Groupomania</h1>
+
     <ul class="bloc-btn">
       <li class="btn">
         <a href="#/home">
@@ -16,7 +17,7 @@
 
       <li class="btn">
         <a href="#/login">
-          <i class="fas fa-sign-out-alt" title="Déconnexion" @click="logout"></i>
+          <i class="fas fa-sign-out-alt fa-2x" title="Déconnexion" @click="logout"></i>
         </a>
       </li>
     </ul> 
@@ -41,6 +42,11 @@ export default {
 
 <style scoped>
 /* Header */
+.logo {
+	width: 250px;
+	height: 150px;
+}
+
 .menu-nav{
   display: flex;
   position: relative;
@@ -57,16 +63,7 @@ export default {
   color: white;
   box-shadow: 1px 5px 12px black;
 }
-.li.btn{
-    display: flex;
-  height: 50px;
-  width: 50px;
-  padding: 5px;
-  margin: 10px;
-  color: black;
-    margin-top: 10px;
 
-}
 nav.menu-nav ul li.btn {
   display: flex;
   height: 50px;

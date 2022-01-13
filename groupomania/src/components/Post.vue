@@ -105,8 +105,7 @@ export default {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
 h3{
-  margin-top: 20px;
-  margin-bottom: 20px;
+margin-top: 0px;
 }
 .post-field{
   width: 100%;

@@ -31,7 +31,7 @@
 <script>
 import VueJwtDecode from "vue-jwt-decode";
 import axios from "axios";
-import Header from "./Header.vue";
+import Header from "../components/Header.vue";
 // import AuthentificationService from "../services/AuthentificationService";
 // import useValidate from "@vuelidate/core";
 // import { required } from "@vuelidate/validators";

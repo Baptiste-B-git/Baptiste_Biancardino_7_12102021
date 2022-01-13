@@ -48,7 +48,7 @@
             <span>Connexion</span>
           </button><br>
           <p>
-          Tu n'as pas encore de compte ? <a href="#/register">
+          Vous n'avez pas de compte ? <a href="#/register">
             <span>Créer un compte</span>
           </a>
           </p>
