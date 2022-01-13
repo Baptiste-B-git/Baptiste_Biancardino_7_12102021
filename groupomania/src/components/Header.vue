@@ -1,7 +1,6 @@
 <template>
 <!-- COMPOSANTS -->
   <nav class="menu-nav">
-    <h1>Groupomania</h1>
 <p><img class="logo" src="../assets/logo2.png" alt="Logo Groupomania" /></p>
     <ul class="bloc-btn">
       <li class="btn">
