@@ -156,14 +156,15 @@ data() {
       const formData = new FormData();
       formData.append("content", this.updateContent);
       try {
-       const response =  await axios.put("http://localhost:5000/api/post/"+ postId, {
-         content:this.updateContent
-       },
-          {headers: { Authorization: `Bearer ${token}` },
-        }
-        
+       const response =  await axios.put(
+         "http://localhost:5000/api/post/"+ postId,
+          formData,
+          {headers: { Authorization: `Bearer ${token}` }}
        )
-        console.log(this.updateContent);
+          // console.log(this.updateContent);
+          this.getPosts();
+          this.updateContent = "";
+          this.ok = false;
       } catch (error) {
         console.log(error)
       }
