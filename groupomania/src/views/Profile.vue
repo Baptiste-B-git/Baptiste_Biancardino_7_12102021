@@ -32,10 +32,6 @@
 import VueJwtDecode from "vue-jwt-decode";
 import axios from "axios";
 import Header from "../components/Header.vue";
-// import AuthentificationService from "../services/AuthentificationService";
-// import useValidate from "@vuelidate/core";
-// import { required } from "@vuelidate/validators";
-// import { reactive, computed } from "vue";
 export default {
   name: "Profile",
   components: { Header },
@@ -149,8 +145,6 @@ body{
   width: 100vw;
   overflow-x: hidden;
 }
-
-/* Profile */
 .card{
     margin-top: 50px;
 }

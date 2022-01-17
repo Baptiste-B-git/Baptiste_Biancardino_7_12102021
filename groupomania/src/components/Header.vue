@@ -1,5 +1,4 @@
 <template>
-<!-- COMPOSANTS -->
   <nav class="menu-nav">
 <p><img class="logo" src="../assets/logo2.png" alt="Logo Groupomania" /></p>
     <ul class="bloc-btn">
@@ -40,7 +39,6 @@ export default {
 </script>
 
 <style scoped>
-/* Header */
 .logo {
 	width: 250px;
 	height: 150px;

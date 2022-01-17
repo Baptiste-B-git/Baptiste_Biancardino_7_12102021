@@ -40,31 +40,12 @@ export default {
       const id = VueJwtDecode.decode(token).userId;
       this.token=token
       this.UserId = id
-      // try {
-      //   const res = await fetch(`http://localhost:5000/api/user/${id}`, {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   });
-      //   const user = await res.json();
-
-      //   this.username = user.username;
-      //   this.id = user.UserId;
-
-      //   console.log(this.UserId)
-      // } catch (error) {
-      //   console.log(error);
-      // }
     },
     handleFileUpload() {
       this.image = this.$refs.image.files[0];
     },
 
     async post() {
-      // const token = JSON.parse(localStorage.getItem("res"));
-      // const id = VueJwtDecode.decode(token).userId;
-      // this.UserId = id
-
      const formData = new FormData();
         formData.append("image", this.image);
         formData.append("UserId", this.UserId);
@@ -84,7 +65,6 @@ export default {
         console.log(this.image);
         this.$emit('postAdded');
       
-        // window.location.reload();
       } catch (error) {
         console.log(error.data);
       }
@@ -94,7 +74,6 @@ export default {
 </script>
 
 <style>
-/* Bloc post (Exprimez-vous...) */
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
@@ -139,7 +118,6 @@ button:hover{
     border-color: #719ECE;
     box-shadow: 0 0 10px #719ECE;
 }
-/* Bloc post du User */
 .picture-profile{
   width: 50px;
   height: 50px;

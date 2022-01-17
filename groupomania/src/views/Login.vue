@@ -10,14 +10,6 @@
       <form v-on:submit.prevent="onSubmit">
         <div class="form-group">
           <label for="username"></label>
-          <!-- <input
-            name="username"
-            type="text"
-            class="form-control"
-            placeholder="Nom d'utilisateur"
-            v-model="username"
-          /> -->
-          <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
         <div class="form-group">
           <label for="email"></label>
@@ -28,7 +20,6 @@
             placeholder="Adresse mail"
             v-model="email"
           />
-          <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
         <div class="form-group">
           <label for="password"></label>
@@ -39,8 +30,6 @@
             placeholder="Mot de passe"
             v-model="password"
           />
-
-          <!-- <ErrorMessage name="password" class="error-feedback" /> -->
         </div>
 
         <div class="form-group">
@@ -53,12 +42,6 @@
           </a>
           </p>
         </div>
-
-        <!-- <div class="form-group">
-          <div v-if="message" class="alert alert-danger" role="alert">
-            {{ message }}
-          </div>
-        </div> -->
       </form>
     </div>
   </div>
@@ -66,18 +49,11 @@
 
 
 <script>
-// import { Form, Field, ErrorMessage } from "vee-validate";
-// import * as yup from "yup";
 import axios from "axios";
 import authservice from "../services/authservice";
 
 export default {
   name: "Login",
-  //   components: {
-  //     Form,
-  //     Field,
-  //     ErrorMessage,
-  //   },
   data() {
     return {
       username: "",
@@ -87,24 +63,10 @@ export default {
     };
   },
 
-  //   computed: {
-  //     loggedIn() {
-  //       return this.$store.state.auth.status.loggedIn;
-  //     },
-  //   },
-  //   created() {
-  //     if (this.loggedIn) {
-  //       this.$router.push("/profile");
-  //     }
-  //   },
-
   methods: {
     async handleLogin() {
       try {
         const response = await authservice.login({
-          /*headers: {
-            Authorization: `Bearer ${token}`,
-          },*/
           email: this.email,
           username: this.username,
           password: this.password,

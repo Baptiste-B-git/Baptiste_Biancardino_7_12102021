@@ -1,6 +1,4 @@
 <template>
-<!-- COMPOSANTS -->
-<!-- Bloc post (Exprimez-vous...) -->
   <Post v-on:postAdded="getPosts()"/>
 
   <h2>Publications récentes</h2>
@@ -54,7 +52,6 @@ data() {
 },
   beforeMount(){
     this.getPosts();
-    // this.getPost();
     this.getIdPostUser();
     this.checkId();
   },
@@ -161,7 +158,6 @@ data() {
           formData,
           {headers: { Authorization: `Bearer ${token}` }}
        )
-          // console.log(this.updateContent);
           this.getPosts();
           this.updateContent = "";
           this.ok = false;
@@ -186,39 +182,11 @@ data() {
           window.alert(error);
         });
     },
-  //  async getPost(){
-  //      const token = JSON.parse(localStorage.getItem("res"));
-  //     const id = VueJwtDecode.decode(token).userId;
-  //     try {
-  //       const res = await fetch(`http://localhost:5000/api/user/${id}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       const users = await res.json();
-  //       this.users = users;
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-      
-  //     try {
-  //       const res = await fetch(`http://localhost:5000/api/post/`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       const post = await res.json();
-  //     console.log(post)
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
   }
 }
 </script>
 
 <style>
-/* Bloc post du User */
 .message{
   border: 1px solid rgb(104, 104, 104);
   background:#f2f2f2;

@@ -64,10 +64,6 @@ beforeMount() {
         });
         const user = await res.json();
 
-        //this.username = user.username;
-        //this.id = user.UserId;
-
-       // console.log(this.id)
       } catch (error) {
         console.log(error);
       }

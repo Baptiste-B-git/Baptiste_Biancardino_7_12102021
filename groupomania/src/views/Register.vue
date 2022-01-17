@@ -19,7 +19,6 @@
             placeholder="Adresse mail"
             v-model="email"
           />
-          <!-- <ErrorMessage name="username" class="error-feedback" /> -->
         </div>
           <div class="form-group">
             <input name="password" type="password" class="form-control" placeholder="Mot de passe" v-model="password"/>
@@ -66,7 +65,6 @@ export default {
         });
 
         const res = response.data.token;
-        //this.$router.push({ name: "Login" });
         const parsed = JSON.stringify(res);
         localStorage.setItem("res", parsed);
         console.log("ok")
