@@ -113,5 +113,15 @@ export default {
 </script>
 
 <style>
-
+.picture-profile-comment img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.comment-field{
+  resize : both;
+  width:100%;
+  min-height : 30px;
+  max-height : 200px;
+}
 </style>

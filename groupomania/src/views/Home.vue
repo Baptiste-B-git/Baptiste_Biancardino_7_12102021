@@ -83,68 +83,15 @@ body{
   overflow-x: hidden;
   background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
 }
-/* Header */
-.menu-nav{
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background-color : white;
-  padding: 5px;
-  padding-left: 30px;
-  padding-right: 30px;
-  color: white;
-  box-shadow: 1px 5px 12px black;
-}
-h1{
-  color: black;
-  font-weight: 800;
-  font-size: 2.5rem;
-}
-nav.menu-nav ul li.btn {
-  display: flex;
-  height: 50px;
-  width: 50px;
-  padding: 5px;
-  margin: 10px;
-  color: black;
-}
-.fas{
-  margin-top: 10px;
-  width: 100%;
-}
-
-a:hover{
-  color: #f58544;
-  transition: 0.3s all;
-  cursor: pointer;
-}
 button {
   max-width: 100%;
   border: none;
   border-radius: 8px;
   padding:10px;
   margin-top: 20px;
-
   margin-right: 20px;
   cursor: pointer;
   background-color: #007BFF;
   Color:white;
-}
-/* Commentaires */
-.picture-profile-comment img{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-.comment-field{
-  resize : both;
-  width:100%;
-  min-height : 30px;
-  max-height : 200px;
 }
 </style>

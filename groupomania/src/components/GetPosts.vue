@@ -13,13 +13,12 @@
         <button @click="show">Modifier</button>
         <div v-show="ok">
           <input type="text" class="message" v-model="updateContent" />
-          <button @click="updatePost(message.id)">Modifier</button>
+          <button class="button-update" @click="updatePost(message.id)"><i class="fas fa-edit"></i></button>
         </div>
 
         <div class="button-delete" @click="deletePost(message.User.id)">
           <button v-if="id == message.User.id || isAdmin == 1" @click="deletePost(message.id)"> Supprimer </button>
         </div>
-
       </div>
     </div>
 
@@ -216,7 +215,7 @@ img{
   margin-top: 5px;
   border-bottom: 0.5px solid;
   padding-bottom: 10px;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 .post-name{
   margin-top: 10px;
@@ -236,7 +235,8 @@ input:focus{
 .post-block {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
-  width: 700px;
+  width: auto;
+  max-width: 700px;
   margin: 0 auto 25px;
   border-radius: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
@@ -245,6 +245,9 @@ input:focus{
     display: flex;
     flex-direction: row;
   text-align: left;
+}
+.button-update{
+  margin-left: 5px;
 }
 
 .fa-edit:hover{

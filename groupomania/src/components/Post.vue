@@ -41,8 +41,10 @@ export default {
       this.token=token
       this.UserId = id
     },
+    // Ajout d'une image dans le post
     handleFileUpload() {
       this.image = this.$refs.image.files[0];
+      console.log(this.$refs.image.files);
     },
 
     async post() {
@@ -77,7 +79,8 @@ export default {
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
-  width: 700px;
+  width: auto;
+  max-width: 700px;
   margin: 0 auto 25px;
   margin-top: 40px;
   border-radius: 15px;
