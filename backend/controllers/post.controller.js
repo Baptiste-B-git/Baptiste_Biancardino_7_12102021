@@ -28,7 +28,9 @@ module.exports.createPost = (req, res) => {
   const UserId = req.body.UserId;
   const content = req.body.content;
   console.log(req.body);
+  console.log(req.file);
   const newPost = new PostModel({
+  image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
   UserId : UserId,
   content: content,
 }); 

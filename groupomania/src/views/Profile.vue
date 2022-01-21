@@ -100,6 +100,8 @@ export default {
         console.log(this.error);
       }
     },
+
+  // Supprimer un compte
     async deleteAccount() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
@@ -109,7 +111,6 @@ export default {
             Authorization: `Bearer ${token}`,
           },
         });
-        window.location.reload();
         this.$router.push({ name: "Login" });
         localStorage.clear();
       } catch (error) {

@@ -28,6 +28,12 @@ module.exports.userInfo = async (req, res) => {
 // DELETE user
 module.exports.deleteUser = async (req, res) => {
     try{
+        // await postModel.destroy({
+        //     where:{
+        //         UserId
+        //     }
+        // });
+
         const user = await UserModel.findByPk(req.params.id);
         if (!user) return res.status(404).json({ message: 'Utilisateur inexistant !'});
         await user.destroy();

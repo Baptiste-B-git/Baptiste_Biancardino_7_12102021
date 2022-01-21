@@ -1,4 +1,5 @@
 <template>
+<div>
   <Post v-on:postAdded="getPosts()"/>
 
   <h2>Publications récentes</h2>
@@ -8,7 +9,9 @@
       <div class="post-name">{{message.User.username}}</div>
       <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
       <div class="post-text">{{message.content}}</div>
+      <div class="post-image" v-if="message.image"><img :src="message.image"></div>
       <div class="bloc-update-delete" v-if="id == message.User.id"> 
+
 
         <button @click="show">Modifier</button>
         <div v-show="ok">
@@ -22,7 +25,7 @@
       </div>
     </div>
 
-
+</div>
 </template>
 
 <script>

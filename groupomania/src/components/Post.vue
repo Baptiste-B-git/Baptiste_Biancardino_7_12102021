@@ -24,9 +24,9 @@ export default {
     return {
       error: this.error,
       text: "",
-      image: this.image,
+      image: "",
       UserId: this.id,
-      content: this.content,
+      content: "",
       token: ""
     };
   },
@@ -48,6 +48,11 @@ export default {
     },
 
     async post() {
+      if(this.content==""){
+        alert("Veuillez renseigner un post");
+        return;
+
+      }
      const formData = new FormData();
         formData.append("image", this.image);
         formData.append("UserId", this.UserId);
