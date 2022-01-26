@@ -62,7 +62,7 @@ module.exports.deleteUser = async (req, res) => {
 //     }
 // }
 
-// // Gadiri
+// // Test suppression de compte G
 // exports.deleteUser = (req, res, next) => {
 //     User.findOne({ where: { id: req.params.id } })
 //       .then(user => {
