@@ -10,7 +10,7 @@
       <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
       <div class="post-text">{{message.content}}</div>
       <div class="post-image" v-if="message.image"><img :src="message.image"></div>
-      <div class="bloc-update-delete" v-if="id == message.User.id"> 
+      <div class="bloc-update-delete" v-if="id == message.User.id">
 
 
         <button @click="show">Modifier</button>
@@ -211,6 +211,8 @@ img{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 20px;
+  margin-top: 20px;
 }
 .post-time{
   font-style: italic;
@@ -230,6 +232,7 @@ img{
   margin-top: 20px;
   text-align: left;
 }
+
 input:focus{
     outline: none !important;
     border-color: #719ECE;
