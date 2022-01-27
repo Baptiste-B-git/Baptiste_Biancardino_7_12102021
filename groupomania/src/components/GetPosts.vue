@@ -1,7 +1,6 @@
 <template>
 <div>
   <Post v-on:postAdded="getPosts()"/>
-
   <h2>Publications récentes</h2>
       <div v-for="message in posts" :key="message" class="post-block" :id="message.id">
         <div class="bloc-picture-name">
@@ -189,13 +188,23 @@ data() {
 </script>
 
 <style>
+@media (max-width: 500px)
+{
+  .bloc-update-delete{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+
+  }
+}
 .message{
   border: 1px solid rgb(104, 104, 104);
   background:#f2f2f2;
   border-radius: 15px;
   height: 30px;
-
+  margin-top: 20px;
 }
+
 .user-name{
   text-align: left;
 }
@@ -234,9 +243,9 @@ img{
 }
 
 input:focus{
-    outline: none !important;
-    border-color: #719ECE;
-    box-shadow: 0 0 10px #719ECE;
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
 }
 .post-block {
   background-color: #f7f7f7;
@@ -248,16 +257,16 @@ input:focus{
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
 .bloc-update-delete{
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
   text-align: left;
 }
 .button-update{
   margin-left: 5px;
 }
 
+
 .fa-edit:hover{
-  color: #f58544;
   transition: 0.3s all;
   cursor: pointer;
 }

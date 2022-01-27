@@ -39,9 +39,15 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 540px)
+{
+
+
+}
+
 .logo {
 	width: 250px;
-	height: 150px;
+	height: 80px;
 }
 
 .menu-nav{
@@ -55,7 +61,7 @@ export default {
   height: 100px;
   background-color : white;
   padding: 5px;
-  padding-left: 30px;
+  padding-left: 50px;
   padding-right: 30px;
   color: white;
   box-shadow: 1px 5px 12px black;

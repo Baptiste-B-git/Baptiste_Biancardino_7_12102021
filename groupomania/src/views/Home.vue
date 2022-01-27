@@ -93,5 +93,6 @@ button {
   cursor: pointer;
   background-color: #007BFF;
   Color:white;
+  height: 35px;
 }
 </style>
