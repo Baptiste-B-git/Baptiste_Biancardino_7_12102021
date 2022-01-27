@@ -65,6 +65,15 @@ export default {
 
   methods: {
     async handleLogin() {
+      if(this.email==""){ // Message d'erreur renseigner un champ
+        alert("Veuillez renseigner un Email");
+        return;
+      }
+      if(this.password==""){ // Message d'erreur renseigner un champ
+        alert("Veuillez renseigner un mot de passe");
+        return;
+      }
+
       try {
         const response = await authservice.login({
           email: this.email,

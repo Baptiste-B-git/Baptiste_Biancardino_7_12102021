@@ -56,6 +56,18 @@ export default {
   },
   methods: {
     async signup() {
+      if(this.username==""){ // Message d'erreur renseigner un champ
+        alert("Veuillez renseigner un Nom d'utilisateur");
+        return;
+      }
+      if(this.email==""){ // Message d'erreur renseigner un champ
+        alert("Veuillez renseigner une adresse Email");
+        return;
+      }
+      if(this.password==""){ // Message d'erreur renseigner un champ
+        alert("Veuillez renseigner un mot de passe");
+        return;
+      }
       try {
         const response = await authservice.signup({
           email: this.email,
