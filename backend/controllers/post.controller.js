@@ -27,13 +27,16 @@ module.exports.readPost = async (req, res) => {
 module.exports.createPost = (req, res) => {
   const UserId = req.body.UserId;
   const content = req.body.content;
+  let data = {
+    UserId : UserId,
+    content: content,
+  };
+  if (req.file){
+    data.image= `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  }
   console.log(req.body);
   console.log(req.file);
-  const newPost = new PostModel({
-  image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-  UserId : UserId,
-  content: content,
-}); 
+  const newPost = new PostModel(data); 
 newPost
 .save()
 .then(() => res.status(201).json({ message: "Post enregistré" }))

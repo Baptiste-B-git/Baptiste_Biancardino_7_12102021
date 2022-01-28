@@ -9,7 +9,7 @@
       <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
       <div class="post-text">{{message.content}}</div>
       <div class="post-image" v-if="message.image"><img :src="message.image"></div>
-      <div class="bloc-update-delete" v-if="id == message.User.id">
+      <div class="bloc-update-delete" v-if="id == message.User.id || isAdmin">
 
 
         <button @click="show">Modifier</button>
@@ -17,9 +17,8 @@
           <input type="text" class="message" v-model="updateContent" />
           <button class="button-update" @click="updatePost(message.id)"><i class="fas fa-edit"></i></button>
         </div>
-
         <div class="button-delete" @click="deletePost(message.User.id)">
-          <button v-if="id == message.User.id || isAdmin == 1" @click="deletePost(message.id)"> Supprimer </button>
+          <button v-if="id == message.User.id || isAdmin" @click="deletePost(message.id)"> Supprimer </button>
         </div>
       </div>
     </div>
@@ -75,6 +74,8 @@ data() {
           },
         });
         const user = await res.json();
+        this.isAdmin = user.isAdmin
+        console.log(this.isAdmin)
 
 
        console.log(id)
