@@ -39,12 +39,6 @@ export default {
 </script>
 
 <style scoped>
-@media (max-width: 540px)
-{
-
-
-}
-
 .logo {
 	width: 250px;
 	height: 80px;

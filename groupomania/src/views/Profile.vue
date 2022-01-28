@@ -5,22 +5,13 @@
 
 <!-- Profile -->
     <div class="card">
-        <h2 class="name-user">Dupont Jeanne</h2>
+        <h2 class="name-user">Dupont Jeanne{{ user.username}}</h2>
         <div>
             <div>
                 <p class="subtitle">E-mail</p>
-                <p>dupont.jeanne@gmail.com</p>
-                <!-- <input type="email" v-model="email" :placeholder="this.email" /> -->
-                
+                <p>dupont.jeanne@gmail.com{{ email }}</p>
             </div>
         </div>
-
-        <!-- <div>
-            <div>
-                <p class="subtitle-delete">Supprimer mon compte</p>
-                <button class="button-delete" @click="deleteAccount">Supprimer</button>
-            </div>
-        </div> -->
         <button class="delete" @click="deleteAccount">
           Supprimer mon compte
         </button>
@@ -42,7 +33,10 @@ export default {
       email: this.email,
       image: this.image,
       password: this.password,
+      user: [],
+      
     };
+    
   },
   beforeMount() {
     this.check();
@@ -61,6 +55,7 @@ export default {
     async getId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
+      console.log(res)
       try {
         const res = await fetch(`http://localhost:3000/api/user/${id}`, {
           headers: {
@@ -70,36 +65,13 @@ export default {
         const user = await res.json();
         this.user = user;
         this.username = user.username;
+        console.log(user);
         this.email = user.email;
-      } catch {
-        error;
-      }
-    },
-    handleFileUpload() {
-      this.image = this.$refs.image.files[0];
-    },
-    async update() {
-      const token = JSON.parse(localStorage.getItem("res"));
-      const user_id = VueJwtDecode.decode(token).userId;
-      const formData = new FormData();
-      formData.append("username", this.username);
-      formData.append("email", this.username);
-      try {
-        const response = await axios.put(
-          `http://localhost:3000/api/user/${user_id}`,
-          {
-            username: this.username,
-            email: this.email,
-            error: this.error,
-          },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        console.log(response);
       } catch (error) {
-        this.error = error.response.data.message;
-        console.log(this.error);
+        console.error(error);
       }
     },
+    
 
   // Supprimer un compte
     async deleteAccount() {
@@ -130,7 +102,7 @@ export default {
         );
         console.log(response);
       } catch (error) {
-        console.log(error);
+  
       }
     },
   },
