@@ -1,14 +1,21 @@
 <template>
   <div class="card">
     <h3>Exprimez-vous...</h3>
-    <textarea class="post-field"  placeholder="Quoi de neuf ?" v-model="content"></textarea><br>
+    <textarea
+      class="post-field"
+      placeholder="Quoi de neuf ?"
+      v-model="content"
+    ></textarea
+    ><br />
 
     <input
-            type="file"
-            name="image"
-            id="image"
-            ref="image"
-            class="custom-file-input" v-on:change="handleFileUpload()">
+      type="file"
+      name="image"
+      id="image"
+      ref="image"
+      class="custom-file-input"
+      v-on:change="handleFileUpload()"
+    />
     <button class="button" @click="post">Publier !</button>
   </div>
 </template>
@@ -19,7 +26,7 @@ import axios from "axios";
 export default {
   name: "Post",
 
-  emits: ['postAdded'],
+  emits: ["postAdded"],
   data() {
     return {
       error: this.error,
@@ -27,19 +34,18 @@ export default {
       image: "",
       UserId: this.id,
       content: "",
-      token: ""
+      token: "",
     };
   },
   beforeMount() {
     this.getId();
-   
   },
   methods: {
     async getId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
-      this.token=token
-      this.UserId = id
+      this.token = token;
+      this.UserId = id;
     },
     // Ajout d'une image dans le post
     handleFileUpload() {
@@ -48,20 +54,19 @@ export default {
     },
 
     async post() {
-      if(this.content==""){
+      if (this.content == "") {
         alert("Veuillez renseigner un post");
         return;
-
       }
-     const formData = new FormData();
-        formData.append("image", this.image);
-        formData.append("UserId", this.UserId);
-        formData.append("content", this.content);
+      const formData = new FormData();
+      formData.append("image", this.image);
+      formData.append("UserId", this.UserId);
+      formData.append("content", this.content);
       try {
         const response = await axios.post(
           "http://localhost:5000/api/post",
-      
-            formData,
+
+          formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -70,14 +75,13 @@ export default {
           }
         );
         console.log(this.image);
-        this.$emit('postAdded');
-      
+        this.$emit("postAdded");
       } catch (error) {
         console.log(error.data);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
@@ -91,50 +95,50 @@ export default {
   border-radius: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
-h3{
-margin-top: 0px;
+h3 {
+  margin-top: 0px;
 }
-.post-field{
+.post-field {
   width: 100%;
   border-radius: 20px;
   padding: 12px 0 0 12px;
 }
 
-textarea:focus{
-    outline: none !important;
-    border-color: #719ECE;
-    box-shadow: 0 0 10px #719ECE;
+textarea:focus {
+  outline: none !important;
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
 }
 
-.bloc-btn{
+.bloc-btn {
   display: flex;
   flex-direction: row;
 }
-.button{
+.button {
   max-width: 100%;
   min-width: 200px;
   border: none;
   border-radius: 8px;
-  padding:10px;
+  padding: 10px;
   margin-top: 20px;
   margin-right: 20px;
-  background-color: #007BFF;
-  Color:white;
+  background-color: #007bff;
+  color: white;
 }
-button:hover{
-    outline: none !important;
-    border-color: #719ECE;
-    box-shadow: 0 0 10px #719ECE;
+button:hover {
+  outline: none !important;
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
 }
-.picture-profile{
+.picture-profile {
   width: 50px;
   height: 50px;
   background: rgb(187, 187, 187);
 }
-.user-name{
+.user-name {
   text-align: left;
 }
-.post-img{
+.post-img {
   max-width: auto;
   height: 300px;
   margin: 0 auto;
@@ -142,12 +146,12 @@ button:hover{
   box-sizing: border-box;
   background: rgb(187, 187, 187);
 }
-img{
+img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.post-name{
+.post-name {
   margin-top: 10px;
   text-align: left;
 }

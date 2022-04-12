@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 module.exports.signUp = async (req, res) => {
     console.log(req.body);
-    let {email, username, password, bio, isAdmin, picture} = req.body
+    let {email, username, password, isAdmin, picture} = req.body
       const salt = await bcrypt.genSalt();
 
     try {
@@ -15,7 +15,6 @@ module.exports.signUp = async (req, res) => {
             email,
             username,
             password,
-            bio,
             isAdmin,
             picture,
         });
