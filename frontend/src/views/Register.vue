@@ -41,11 +41,11 @@
             placeholder="Mot de passe"
             v-model="password"
           />
-          <small></small>
         </div>
 
         <!-- Vers Connexion -->
         <div class="form-group">
+          <div v-if="error" class="error">{{ error }}</div>
           <button class="btn btn-primary btn-block" @click="signup">
             <span>Inscription</span>
           </button>
@@ -67,9 +67,9 @@ export default {
   data() {
     return {
       email: "",
+      username: "",
       password: "",
-      error: this.error,
-      userName: "",
+      error: false,
     };
   },
   methods: {
@@ -78,13 +78,13 @@ export default {
         const response = await authservice.signup({
           email: this.email,
           password: this.password,
-          userName: this.userName,
-          error: this.error,
+          username: this.username,
         });
         const res = response.data.token;
         // this.$router.push({ name: "Login" }); // Push vers Login.vue
         const parsed = JSON.stringify(res);
         localStorage.setItem("res", parsed);
+        this.error="erreur de création"
         console.log("ok");
       } catch (error) {
         this.error = error;
