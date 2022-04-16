@@ -5,13 +5,22 @@
       <router-link to="/profil">Profil</router-link> |
       <router-link to="/register">S'inscrire</router-link> |
       <router-link to="/login">Se connecter</router-link> |
-      <button class="btn-logout">Déconnexion</button>
+      <button class="btn-logout" @click="logout">Déconnexion</button>
     </nav>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Header",
+  methods: {
+    logout() {
+      localStorage.clear();   
+        this.$router.push({ name: "Login" });
+        console.log("déco test");
+    },
+  },
+};
 </script>
 
 <style scoped>

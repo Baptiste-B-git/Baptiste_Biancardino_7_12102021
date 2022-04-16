@@ -12,24 +12,28 @@
         <div class="form-group">
           <input
             name="username"
-            type="text"
+            type="pseudo"
             class="form-control"
             placeholder="Nom d'utilisateur"
+            maxlength="15"
+            autofocus
+            required
             v-model="username"
-            req
           />
-          <small></small>
+          <!-- <div v-if="error" style="color: red" class="error">{{ error }}</div> -->
         </div>
+
         <!-- Email -->
         <div class="form-group">
           <input
             name="email"
-            type="text"
+            type="email"
             class="form-control"
             placeholder="Adresse mail"
+            maxlength="25"
+            required
             v-model="email"
           />
-          <small></small>
         </div>
 
         <!-- Password -->
@@ -39,14 +43,19 @@
             type="password"
             class="form-control"
             placeholder="Mot de passe"
+            maxlength="25"
+            required
             v-model="password"
           />
         </div>
 
         <!-- Vers Connexion -->
         <div class="form-group">
-          <div v-if="error" class="error">{{ error }}</div>
-          <button class="btn btn-primary btn-block" @click="signup">
+          <!-- <div v-if="error" class="error">{{ error }}</div> -->
+          <button
+            class="btn btn-primary btn-block" href="Login"
+            @click="signup"
+          >
             <span>Inscription</span>
           </button>
         </div>
@@ -74,6 +83,10 @@ export default {
   },
   methods: {
     async signup() {
+      if(this.username=="" || this.email=="" || this.password==""){ // Message d'erreur renseigner un champ
+        return false;
+      }
+
       try {
         const response = await authservice.signup({
           email: this.email,
@@ -81,10 +94,10 @@ export default {
           username: this.username,
         });
         const res = response.data.token;
-        // this.$router.push({ name: "Login" }); // Push vers Login.vue
         const parsed = JSON.stringify(res);
         localStorage.setItem("res", parsed);
-        this.error="erreur de création"
+        // this.$router.push({ name: "Login" }); // Push vers Login
+        // this.error="erreur de création"
         console.log("ok");
       } catch (error) {
         this.error = error;
@@ -96,4 +109,15 @@ export default {
 </script>
 
 <style>
+/* input:invalid {
+  box-shadow: 0 0 5px 1px red;
+} */
+/* 
+input:valid {
+  border: 1px solid black;
+} */
+/* :required
+{
+  box-shadow: 0 0 5px 1px red;
+} */
 </style>

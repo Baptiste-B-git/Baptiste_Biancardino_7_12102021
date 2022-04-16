@@ -16,9 +16,12 @@
           <label for="email"></label>
           <input
             name="email"
-            type="text"
+            type="email"
             class="form-control"
             placeholder="Adresse mail"
+            maxlength="25"
+            autofocus
+            required
             v-model="email"
           />
         </div>
@@ -30,14 +33,16 @@
             type="password"
             class="form-control"
             placeholder="Mot de passe"
+            maxlength="25"
+            required
             v-model="password"
+
           />
         </div>
 
         <div class="form-group">
-          <button class="btn-block" @click="handleLogin">Connexion</button>
+          <button class="btn-block" @click="login">Connexion</button>
           <br />
-          <!-- <button :disabled="isDisabled">Test disabled</button> -->
           <p>
             Vous n'avez pas de compte ?
             <a class="link-to" href="/register">Créer un compte</a>
@@ -49,6 +54,7 @@
 </template>
 
 <script>
+import authservice from "../services/authservice";
 export default {
   name: "Login",
   data() {
@@ -58,11 +64,36 @@ export default {
       error: "",
     };
   },
-  computed: {
-    isDisabled: function () {
-      return !this.email || !this.password;
+  methods: {
+    async login() {
+      if(this.email=="" || this.password==""){ // Message d'erreur renseigner un champ
+        return false;
+      }
+
+      try {
+        const response = await authservice.login({
+          email: this.email,
+          password: this.password,
+          error: this.error,
+        });
+        const res = response.data.token;
+        const parsed = JSON.stringify(res);
+        localStorage.setItem("res", parsed);
+        this.$router.push({ name: "Home" }); // Push vers Home
+      } catch (error) {
+        this.error = error;
+        console.log(error);
+      }
     },
   },
+
+
+
+  // computed: {
+  //   isDisabled: function () {
+  //     return !this.email || !this.password;
+  //   },
+  // },
 
 };
 </script>
@@ -130,5 +161,10 @@ button:hover {
   border-color: #719ece;
   box-shadow: 0 0 10px #719ece;
   cursor:pointer
+}
+input:focus{
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
 }
 </style>
