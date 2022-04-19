@@ -2,17 +2,20 @@
   <div class="home">
     <Header />
     <h1>Page d'accueil</h1>
+
+    <GetPosts />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
+import GetPosts from "@/components/GetPosts.vue";
 
 export default {
   name: "Home",
   components: {
-    Header,
+    Header, GetPosts
   },
 };
 </script>
