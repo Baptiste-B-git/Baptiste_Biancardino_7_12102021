@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <Header />
-    <h1>Page d'accueil</h1>
 
     <GetPosts />
   </div>

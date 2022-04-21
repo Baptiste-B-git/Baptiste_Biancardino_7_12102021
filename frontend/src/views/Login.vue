@@ -86,15 +86,11 @@ export default {
       }
     },
   },
-
-
-
   // computed: {
   //   isDisabled: function () {
   //     return !this.email || !this.password;
   //   },
   // },
-
 };
 </script>
 
@@ -111,9 +107,9 @@ input {
 }
 .card {
   background-color: #f7f7f7;
-  padding: 20px 25px 30px;
+  padding: 25px;
   margin-top: 50px;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   margin: 0 auto 25px;
 }
@@ -131,7 +127,7 @@ input {
   border-radius: 10px;
   padding: 10px;
   margin-top: 20px;
-  background-color: #007bff;
+  background-color: #00acee;
   color: white;
   font-weight: bold;
 }

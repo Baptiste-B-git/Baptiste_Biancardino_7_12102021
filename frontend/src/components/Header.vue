@@ -16,8 +16,8 @@ export default {
   methods: {
     logout() {
       localStorage.clear();   
-        this.$router.push({ name: "Login" });
-        console.log("déco test");
+      this.$router.push({ name: "Login" });
+      console.log("Deconnexion");
     },
   },
 };
@@ -44,8 +44,17 @@ a {
 }
 a:hover {
   color: white;
-font-size: 20px;
-    text-shadow: 4px 4px 5px rgb(131, 131, 131);
+  font-size: 20px;
+  text-shadow: 4px 4px 5px #00acee;
+}
+.router-link-active {
+  color: white;
+  background-color: rgba(88, 88, 88, 0.685);
+  font-size: 20px;
+  box-shadow: 0px 2px 4px #00acee;
+  padding: 5px 8px 5px 8px;
+  border: #00acee 1px solid;
+  border-radius: 20px;
 }
 .btn-logout {
   border-radius: 20px;
@@ -59,6 +68,5 @@ font-size: 20px;
   outline: none !important;
   border-color: rgb(165, 165, 165);
   border: white 0.1px solid;
-  box-shadow: 0 0 5px rgb(141, 141, 141);
 }
 </style>

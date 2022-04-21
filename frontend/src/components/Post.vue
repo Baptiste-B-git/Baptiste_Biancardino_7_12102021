@@ -1,29 +1,33 @@
 <template>
-  <div class="card">
-    <h3>Exprimez-vous...</h3>
-    <textarea
-      class="post-field"
-      placeholder="Quoi de neuf ?"
-      v-model="content"
-    ></textarea
-    ><br />
+  <div>
+    <h2 class="subtitle">Exprimez-vous...</h2>
+    <div class="card">
+      <textarea
+        class="post-field"
+        placeholder="Quoi de neuf ?"
+        v-model="content"
+      ></textarea
+      ><br />
 
-    <input
-      type="file"
-      name="image"
-      id="image"
-      ref="image"
-      class="custom-file-input"
-      v-on:change="handleFileUpload()"
-    />
-    <button class="button" @click="post">Publier !</button>
+      <input
+        type="file"
+        name="image"
+        id="image"
+        ref="image"
+        class="custom-file-input"
+        v-on:change="handleFileUpload()"
+      />
+      <button class="button" @click="post">Publier !</button>
+    </div>
   </div>
 </template>
 
 <script>
+import VueJwtDecode from "vue-jwt-decode";
+// import axios from "axios";
+
 export default {
   name: "Post",
-
   emits: ["postAdded"],
   data() {
     return {
@@ -35,26 +39,49 @@ export default {
       error: this.error,
     };
   },
+
+  beforeMount() {
+    this.getId();
+  },
+
+  methods: {
+    async getId() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      this.token = token;
+      this.UserId = id;
+    },
+
+    handleFileUpload() {
+      this.image = this.$refs.image.files[0];
+      console.log(this.$refs.image.files);
+    },
+
+    async post() {
+      if (this.content == "") {
+        alert("Veuillez renseigner un post");
+        return;
+      }
+      // append() ajoute une nouvelle valeur dans l'objet FormData
+      const formData = new FormData();
+      formData.append("image", this.image);
+      formData.append("UserId", this.UserId);
+      formData.append("content", this.content);
+    },
+  },
 };
 </script>
 
 <style>
-.card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  width: auto;
-  max-width: 700px;
-  margin: 0 auto 25px;
-  margin-top: 40px;
-  border-radius: 15px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
-}
-h3 {
-  margin-top: 0px;
+.subtitle {
+  color: white;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .post-field {
   width: 100%;
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 12px 0 0 12px;
 }
 
@@ -69,21 +96,22 @@ textarea:focus {
   flex-direction: row;
 }
 .button {
-  max-width: 100%;
-  min-width: 200px;
+  min-width: 100px;
   border: none;
   border-radius: 8px;
   padding: 10px;
   margin-top: 20px;
   margin-right: 20px;
-  background-color: #007bff;
+  background-color: #00acee;
   color: white;
 }
+
 button:hover {
   outline: none !important;
   border-color: #719ece;
   box-shadow: 0 0 10px #719ece;
 }
+
 .picture-profile {
   width: 50px;
   height: 50px;
