@@ -24,7 +24,7 @@
 
 <script>
 import VueJwtDecode from "vue-jwt-decode";
-// import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "Post",
@@ -45,30 +45,51 @@ export default {
   },
 
   methods: {
+    handleFileUpload() {
+      this.image = this.$refs.image.files[0];
+      console.log(this.$refs.image.files);
+    },
+
     async getId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
       this.token = token;
       this.UserId = id;
     },
-
-    handleFileUpload() {
-      this.image = this.$refs.image.files[0];
-      console.log(this.$refs.image.files);
-    },
-
     async post() {
       if (this.content == "") {
         alert("Veuillez renseigner un post");
         return;
       }
+      const token = JSON.parse(localStorage.getItem("res"));
+
       // append() ajoute une nouvelle valeur dans l'objet FormData
       const formData = new FormData();
+
       formData.append("image", this.image);
       formData.append("UserId", this.UserId);
       formData.append("content", this.content);
+
+        try {
+        const response = await axios.post(
+          "http://localhost:5000/api/post",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response);
+        this.$emit("postAdded");
+      } catch (error) {
+        console.log(error);
+      }
     },
-  },
+    },
+    
+  
 };
 </script>
 

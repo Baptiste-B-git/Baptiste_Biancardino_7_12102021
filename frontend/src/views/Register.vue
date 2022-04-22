@@ -53,7 +53,7 @@
         <div class="form-group">
           <!-- <div v-if="error" class="error">{{ error }}</div> -->
           <button
-            class="btn btn-primary btn-block" href="Login"
+            class="btn btn-primary btn-block" href="/login"
             @click="signup"
           >
             <span>Inscription</span>
@@ -96,7 +96,7 @@ export default {
         const res = response.data.token;
         const parsed = JSON.stringify(res);
         localStorage.setItem("res", parsed);
-        // this.$router.push({ name: "Login" }); // Push vers Login
+        this.$router.push({ name: "Login" }); // Push vers Login
         // this.error="erreur de création"
         console.log("ok");
       } catch (error) {
