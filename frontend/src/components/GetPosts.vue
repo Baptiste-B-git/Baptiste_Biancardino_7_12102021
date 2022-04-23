@@ -3,27 +3,48 @@
     <div class="container">
       <Post v-on:postAdded="getPosts()" />
       <h2 class="subtitle">Publications récentes</h2>
-      <div v-for="message in posts" :key="message" class="post-block" :id="message.id">
+      <div
+        v-for="message in posts"
+        :key="message"
+        class="post-block"
+        :id="message.id"
+      >
         <div class="bloc-picture-name"></div>
-        <div class="post-name">{{message.User.username}}</div>
-        <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
-        <div class="post-text" >{{message.content}}</div>
-        <div class="post-image" v-if="message.image"><img :src="message.image"></div>
-      
+
+        <div class="post-name">{{ message.User.username }}</div>
+        <div class="post-time">Posté le {{ datePost(message.createdAt) }}</div>
+        <div class="post-text">{{ message.content }}</div>
+        <div class="post-image" v-if="message.image">
+          <img :src="message.image" />
+        </div>
+
         <div class="bloc-update-delete" v-if="id == message.User.id || isAdmin">
-          <button @click="show">Modifier</button>
-          <div v-show="ok">
+          <button @click="modify">Modifier</button>
+          <div v-show="showModify">
             <input type="text" class="message" v-model="updateContent" />
-            <button class="button-update" @click="updatePost(message.id)"><i class="fas fa-edit"></i></button>
+            <button class="button-update" @click="updatePost(message.id)">
+              <i class="fas fa-edit"></i>
+            </button> 
           </div>
 
           <div class="button-delete" @click="deletePost(message.User.id)">
-            <button v-if="id == message.User.id || isAdmin" @click="deletePost(message.id)"> Supprimer </button>
+            <button
+              v-if="id == message.User.id || isAdmin"
+              @click="deletePost(message.id)"
+            >
+              Supprimer
+            </button>
           </div>
         </div>
-
-        <Comment v-on:commentAdded="getPosts()" />
-
+        <!-- <div class="button-comment">
+          <a href="/comment"><button>Commenter</button></a>
+        </div> -->
+        <div>
+          <button @click="commentary">Voir commentaires</button>
+          <div v-show="showComments">
+            <Comment v-on:commentAdded="getPosts()" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -33,8 +54,7 @@
 import Post from "./Post.vue";
 import Comment from "./Comment.vue";
 import VueJwtDecode from "vue-jwt-decode";
-// import axios from "axios";
-
+import axios from "axios";
 
 export default {
   components: { Post, Comment },
@@ -43,7 +63,8 @@ export default {
       post_id: this.post_id,
       userId: this.userId,
       posts: this.posts,
-      ok: false,
+      showModify: false,
+      showComments: false,
       updateContent: this.updateContent,
       isAdmin: "",
       id: "",
@@ -54,21 +75,25 @@ export default {
       },
     };
   },
-    beforeMount(){
+  beforeMount() {
     this.getPosts();
     this.getIdPostUser();
     this.checkId();
   },
 
-  methods:{
-    show() {
-      this.ok = !this.ok;
-      console.log("ok")
+  methods: {
+    modify() {
+      this.showModify = !this.showModify;
+      console.log("ok");
+    },
+    commentary() {
+      this.showComments = !this.showComments;
+      console.log("ok");
     },
     async checkId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
-      this.id = id
+      this.id = id;
       try {
         const res = await fetch(`http://localhost:5000/api/user/${id}`, {
           headers: {
@@ -76,16 +101,16 @@ export default {
           },
         });
         const user = await res.json();
-        this.isAdmin = user.isAdmin
-        console.log(this.isAdmin)
-        console.log(id)
+        this.isAdmin = user.isAdmin;
+        console.log(this.isAdmin);
+        console.log(id);
       } catch (error) {
         console.log(error);
       }
     },
-    getOnePost(postId){
-      this.post_id = postId
-      console.log(postId)
+    getOnePost(postId) {
+      this.post_id = postId;
+      console.log(postId);
     },
 
     async getIdPostUser() {
@@ -126,7 +151,7 @@ export default {
           headers,
         });
         const posts = await response.json();
-        console.log(posts)
+        console.log(posts);
         this.posts = posts;
         posts.forEach((post) => {
           this.content = post.content;
@@ -138,17 +163,48 @@ export default {
       }
     },
 
-// Update Post
-
-// Delete Post
-
-
-  }
+    // Update Post
+    async updatePost(postId) {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      this.id = id;
+      const formData = new FormData();
+      formData.append("content", this.updateContent);
+      try {
+        await axios.put(`http://localhost:5000/api/post/${postId}`, formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+          this.getPosts();
+          this.updateContent = "";
+          this.ok = false;
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    
+    // Delete Post
+    deletePost(postId) {
+      const token = JSON.parse(localStorage.getItem("res"));
+      axios
+        .delete("http://localhost:5000/api/post/" + postId, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(() => {
+          window.location.reload();
+          console.log(postId)
+        })
+        .catch((error) => {
+          window.alert(error);
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
-.container{
+.container {
   background-color: #333;
   padding: 15px 20px 5px;
   width: auto;
@@ -157,26 +213,26 @@ export default {
   border-radius: 8px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
-@media (max-width: 500px)
-{
-  .bloc-update-delete{
-  display: flex;
-  flex-direction: row;
-  text-align: left;
+@media (max-width: 500px) {
+  .bloc-update-delete {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
   }
 }
-.message{
+.message {
   border: 1px solid rgb(104, 104, 104);
-  background:#f2f2f2;
+  background: #f2f2f2;
   border-radius: 15px;
   height: 30px;
   margin-top: 20px;
+  padding-left: 10px;
 }
 
-.user-name{
+.user-name {
   text-align: left;
 }
-.post-img{
+.post-img {
   max-width: auto;
   height: 300px;
   margin: 0 auto;
@@ -184,74 +240,70 @@ export default {
   box-sizing: border-box;
   background: rgb(187, 187, 187);
 }
-img{
+img {
   width: 100%;
-  height: 100%;
+  height: 400px;
   object-fit: cover;
   border-radius: 20px;
   margin-top: 20px;
 }
-.post-time{
+.post-time {
   font-style: italic;
   font-size: 13px;
   text-align: left;
   margin-top: 5px;
   opacity: 0.5;
 }
-.post-name{
+.post-name {
   text-align: left;
   font-weight: 600;
   font-size: 1.4em;
 }
-.post-text{
+.post-text {
   margin-top: 20px;
   text-align: left;
   font-family: Helvetica;
-  font-weight: bold;
 }
 
-input:focus{
+input:focus {
   outline: none !important;
-  border-color: #719ECE;
-  box-shadow: 0 0 10px #719ECE;
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
 }
 .post-block {
   background-color: #f7f7f7;
-  padding: 20px 25px 30px;
+  padding: 15px 15px 15px;
   width: auto;
   max-width: 700px;
   margin: 0 auto 25px;
   border-radius: 8px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
-.bloc-update-delete{
+.bloc-update-delete {
   display: flex;
   flex-direction: row;
   text-align: left;
   margin-bottom: 20px;
 }
-.button-update{
-  margin-left: 5px;
-}
+
 button {
   border: none;
   border-radius: 8px;
   padding: 10px;
   margin-top: 20px;
-  margin-right: 20px;
+  margin-right: 10px;
   background-color: #00acee;
   color: white;
-  min-width: 100px;
 }
-
 button:hover {
   outline: none !important;
   border-color: #719ece;
   box-shadow: 0 0 10px #719ece;
 }
-
-.fa-edit:hover{
-  transition: 0.3s all;
-  cursor: pointer;
+.button-update {
+  margin-left: 5px;
+}
+.fa-edit{
+  color: white;
 }
 </style>

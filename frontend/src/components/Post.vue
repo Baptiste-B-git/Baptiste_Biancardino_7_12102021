@@ -154,8 +154,4 @@ img {
   height: 100%;
   object-fit: cover;
 }
-.post-name {
-  margin-top: 10px;
-  text-align: left;
-}
 </style>
