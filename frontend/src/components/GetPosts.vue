@@ -8,17 +8,17 @@
         <div class="post-name">{{message.User.username}}</div>
         <div class="post-time"> Posté le {{datePost(message.createdAt)}}</div>
         <div class="post-text" >{{message.content}}</div>
-        <div class="post-image"></div>
+        <div class="post-image" v-if="message.image"><img :src="message.image"></div>
       
-        <div class="bloc-update-delete">
-          <button>Modifier</button>
+        <div class="bloc-update-delete" v-if="id == message.User.id || isAdmin">
+          <button @click="show">Modifier</button>
           <div v-show="ok">
             <input type="text" class="message" v-model="updateContent" />
-            <button class="button-update"><i class="fas fa-edit"></i></button>
+            <button class="button-update" @click="updatePost(message.id)"><i class="fas fa-edit"></i></button>
           </div>
 
-          <div class="button-delete">
-            <button> Supprimer </button>
+          <div class="button-delete" @click="deletePost(message.User.id)">
+            <button v-if="id == message.User.id || isAdmin" @click="deletePost(message.id)"> Supprimer </button>
           </div>
         </div>
 
@@ -33,6 +33,8 @@
 import Post from "./Post.vue";
 import Comment from "./Comment.vue";
 import VueJwtDecode from "vue-jwt-decode";
+// import axios from "axios";
+
 
 export default {
   components: { Post, Comment },
@@ -139,6 +141,7 @@ export default {
 // Update Post
 
 // Delete Post
+
 
   }
 };
