@@ -2,14 +2,14 @@
   <div class="profile">
     <Header />
     <div class="card">
-      <h2 class="name-user">Dupont Jeanne</h2>
+      <h2 class="name-user">{{ user.username }}</h2>
       <div>
         <div>
           <p class="subtitle-email">E-mail</p>
-          <p>dupont.jeanne@gmail.com</p>
+          <p>{{user.email}}</p>
         </div>
       </div>
-      <button class="btn-delete">
+      <button class="btn-delete" @click="deleteAccount">
         Supprimer mon compte
       </button>
     </div>
@@ -18,12 +18,72 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import VueJwtDecode from "vue-jwt-decode";
+import axios from "axios";
 
 export default {
   name: "Profile",
   components: {
     Header,
   },
+  data(){
+    return{
+      error: this.error,
+      user: this.user,
+      username: this.username,
+      email: this.email,
+    }
+  },
+    beforeMount() {
+    this.check();
+    this.getId();
+  },
+  methods:{
+    check() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      if (!token) {
+        this.$router.push({ name: "Login" });
+      } else {
+        const id = VueJwtDecode.decode(token).userId;
+        this.id = id;
+      }
+    },
+
+    async getId() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      this.id = id;
+      try {
+        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const user = await res.json();
+        this.user = user;
+        this.username = user.username;
+        this.email = user.email;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async deleteAccount() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      try {
+        await axios.delete(`http://localhost:5000/api/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        this.$router.push({ name: "Login" });
+        localStorage.clear();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
 };
 </script>
 
