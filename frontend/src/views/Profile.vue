@@ -2,11 +2,11 @@
   <div class="profile">
     <Header />
     <div class="card">
-      <h2 class="name-user">{{ user.username }}</h2>
+      <h1>Infos</h1>
       <div>
         <div>
-          <p class="subtitle-email">E-mail</p>
-          <p>{{user.email}}</p>
+          <h2 class="name-user"> {{ user.username }}</h2>
+          <p class="email">{{user.email}}</p>
         </div>
       </div>
       <button class="btn-delete" @click="deleteAccount">
@@ -88,22 +88,22 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  padding-bottom: 10px;
+  border-bottom: solid 1px black;
+}
 .card {
   margin-top: 50px;
   text-align: center;
   max-width: 300px;
 }
-
 .name-user {
   font-weight: 800;
-  font-size: 2rem;
-  padding-bottom: 10px;
-  border-bottom: solid 1px black;
+  font-size: 1.5rem;
 }
-.subtitle-email {
+.email {
   text-align: center;
   margin-bottom: 5px;
-  font-weight: 800;
   font-size: 1.2em;
 }
 .btn-delete {

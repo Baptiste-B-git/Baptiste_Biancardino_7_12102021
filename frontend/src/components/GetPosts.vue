@@ -36,15 +36,13 @@
             </button>
           </div>
         </div>
-        <!-- <div class="button-comment">
-          <a href="/comment"><button>Commenter</button></a>
-        </div> -->
-        <div>
-          <button @click="commentary">Voir commentaires</button>
-          <div v-show="showComments">
             <Comment v-on:commentAdded="getPosts()" />
+
+        <!-- <div>
+          <button @click="commentary">Voir commentaires</button>
+          <div v-show="showComments"> 
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -57,14 +55,14 @@ import VueJwtDecode from "vue-jwt-decode";
 import axios from "axios";
 
 export default {
-  components: { Post, Comment },
+  components: { Post, Comment }, 
   data() {
     return {
       post_id: this.post_id,
       userId: this.userId,
       posts: this.posts,
       showModify: false,
-      showComments: false,
+      // showComments: false,
       updateContent: this.updateContent,
       isAdmin: "",
       id: "",
@@ -86,10 +84,10 @@ export default {
       this.showModify = !this.showModify;
       console.log("ok");
     },
-    commentary() {
-      this.showComments = !this.showComments;
-      console.log("ok");
-    },
+    // commentary() {
+    //   this.showComments = !this.showComments;
+    //   console.log("ok");
+    // },
     async checkId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
@@ -163,7 +161,7 @@ export default {
       }
     },
 
-    // Update Post
+    // Modifier un Post
     async updatePost(postId) {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
@@ -182,14 +180,13 @@ export default {
       }
     },
     
-    // Delete Post
+    // Supprimer Post
     deletePost(postId) {
       const token = JSON.parse(localStorage.getItem("res"));
-      axios
-        .delete("http://localhost:5000/api/post/" + postId, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      axios.delete("http://localhost:5000/api/post/" + postId, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         })
         .then(() => {
           window.location.reload();

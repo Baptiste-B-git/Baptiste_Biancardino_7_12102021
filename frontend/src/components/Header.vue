@@ -1,19 +1,49 @@
 <template>
   <div>
     <nav class="menu-nav">
+      <img class="logo" src="../assets/logo.png" alt="Logo Groupomania" />
       <router-link to="/">Accueil</router-link> |
       <router-link to="/profil">Profil</router-link> |
       <router-link to="/register">S'inscrire</router-link> |
       <router-link to="/login">Se connecter</router-link> |
+      <h2 class="name-user">Bonjour {{ username }}</h2>
       <button class="btn-logout" @click="logout">Déconnexion</button>
     </nav>
   </div>
 </template>
 
 <script>
+import VueJwtDecode from "vue-jwt-decode";
 export default {
   name: "Header",
-  methods: {
+  data(){
+    return{
+      error: this.error,
+      user: this.user,
+      username: this.username,
+    }
+  },
+    beforeMount() {
+    this.getId();
+  },
+  methods:{
+    async getId() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      try {
+        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const user = await res.json();
+        this.user = user;
+        this.username = user.username;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     logout() {
       localStorage.clear();   
       this.$router.push({ name: "Login" });
@@ -24,6 +54,10 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+	width: 250px;
+	height: 80px;
+}
 .menu-nav {
   display: flex;
   position: relative;
@@ -38,6 +72,12 @@ export default {
   box-shadow: 1px 5px 12px black;
   margin-bottom: 20px;
 }
+.profile-img-card{
+  width: 25px;
+  height: 25px;
+  /* margin: 0 auto 10px; */
+  border-radius: 50%;
+}
 a {
   color: white;
   text-decoration: none;
@@ -45,13 +85,13 @@ a {
 a:hover {
   color: white;
   font-size: 20px;
-  text-shadow: 4px 4px 5px #00acee;
+  /* text-shadow: 4px 4px 5px #00acee; */
 }
 .router-link-active {
   color: white;
   background-color: rgba(88, 88, 88, 0.685);
   font-size: 20px;
-  box-shadow: 0px 2px 4px #00acee;
+  /* box-shadow: 0px 2px 4px #00acee; */
   padding: 5px 8px 5px 8px;
   border: #00acee 1px solid;
   border-radius: 20px;
