@@ -54,9 +54,22 @@ export default {
 </script>
 
 <style scoped>
+@media (min-width: 768px) and (max-width: 979px) {
+  nav{
+    display: block;
+    
+  color: white;
+  }
+  .btn-logout{
+  background-color: #fff;
+  }
+}
+
 .logo {
 	width: 250px;
 	height: 80px;
+  align-items: center;
+
 }
 .menu-nav {
   display: flex;

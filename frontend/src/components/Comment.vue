@@ -4,11 +4,13 @@
       <div>
         <button @click="commentary">Commentaires</button>
         <div v-show="showComments">
-          <div v-for="(comment) in comments" :key="comment" :userName ="comment.User.userName" class="comment-name">UserName</div>
-          <div class="comment-time">Il y a 8 jours</div>
-          <div class="comment-text" >Ceci est un commentaire.</div>
+          <div v-for="comment in comments" :key="comment.id" class="comment-name">
+            <div> {{comment.User.username}}</div>
+            <div class="comment-time">Il y a 8 jours</div>
+            <div class="comment-text" >{{ comment.content }}</div>
+          </div>
           <div class="input-and-button">
-            <input type="text" class="comment-field" placeholder="Ecrire un commentaire" required >
+            <input v-model="contentComment" type="text" class="comment-field" placeholder="Ecrire un commentaire" required >
             <div class="button-comment">
               <button @click="createComment(content.id)">Commenter</button>
             </div>
@@ -27,22 +29,17 @@ export default {
   name: "Comment",
     components: {
   },
+  props:["comments"],
   emits: ["commentAdded"],
   data() {
     return {
       showComments: false,
       ok : false,
       error:'',
-      email:'',
-      password:'',
-      title:"",
-      titlePost:'',
-      image:"",
       content:"",
-      contentPost:'',
       id:"",
       isAdmin:"",
-      comments : this.comments,
+      contentComment: "",
       posts:this.posts,
       post_id:this.post_id,
       userId : this.userId,
@@ -55,9 +52,6 @@ export default {
     };
   },
   
-  beforeMount(){
-    this.getComments();
-  },
   methods : {
     commentary() {
     this.showComments = !this.showComments;
@@ -75,6 +69,10 @@ export default {
       formData.append("post_id",post_id);
       const response = await axios.post('http://localhost:5000/api/comment', formData,
       {
+        userId: this.userId,
+        post_id: this.post_id,
+        error: this.error,
+        content: this.contentComment,
         headers: {
         Authorization: `Bearer ${token}`
         }
@@ -85,23 +83,6 @@ export default {
       console.log(err);
     }},
 
-   async getComments() {
-    const token = JSON.parse(localStorage.getItem('res'));
-    const id = VueJwtDecode.decode(token).userId;
-    this.id = id;
-    try {
-      const p = await fetch(`http://localhost:5000/api/comment/`);
-      const comments = await p.json();
-      this.comments = comments;
-      comments.forEach(comment => {
-        this.content = comment.content;
-        this.commentUserName =  comment.User.UserName;
-      });
-    } catch(error) {
-      console.log(error)
-    }
-  },
-   
   datePost(date) {
     const event = new Date(date);
     const options = {

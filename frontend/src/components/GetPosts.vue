@@ -36,7 +36,7 @@
             </button>
           </div>
         </div>
-            <Comment v-on:commentAdded="getPosts()" />
+            <Comment v-on:commentAdded="getPosts()" :comments="message.Comments" />
 
         <!-- <div>
           <button @click="commentary">Voir commentaires</button>
@@ -210,13 +210,6 @@ export default {
   border-radius: 8px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
-@media (max-width: 500px) {
-  .bloc-update-delete {
-    display: flex;
-    flex-direction: row;
-    text-align: left;
-  }
-}
 .message {
   border: 1px solid rgb(104, 104, 104);
   background: #f2f2f2;
@@ -225,7 +218,6 @@ export default {
   margin-top: 20px;
   padding-left: 10px;
 }
-
 .user-name {
   text-align: left;
 }

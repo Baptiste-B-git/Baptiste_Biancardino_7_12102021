@@ -3,21 +3,25 @@ const db = require('../models/index')
 const CommentModel = require('../models').Comment;
 const UserModel = require('../models').User;
 
-
-
 // CRUD
 module.exports.readPost = async (req, res) => {
   PostModel.findAll({
     order: [['createdAt', 'DESC']],
-
-    include:
-
-    {
-      model: db.User,
-      attributes: ["username","id"],
-
-    }
-
+    include:[
+      {
+        model: db.User,
+        attributes: ["username","id"],
+      },
+      {
+        model: db.Comment,
+        include: [
+          {
+            model: db.User,
+            attributes: ["username","id"],
+          },
+        ]
+      }
+    ]
   })
     .then((post) => res.status(200).json(post))
     .catch((error) => res.status(404).json({ error }));
