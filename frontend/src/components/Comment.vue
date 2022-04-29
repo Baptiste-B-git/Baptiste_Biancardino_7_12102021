@@ -6,8 +6,16 @@
         <div v-show="showComments">
           <div v-for="comment in comments" :key="comment.id" class="comment-name">
             <div> {{comment.User.username}}</div>
-            <div class="comment-time">Il y a 8 jours</div>
-            <div class="comment-text" >{{ comment.content }}</div>
+
+            
+            <div class="comment-time">Commenté le {{ dateComment(comment.createdAt) }}</div>
+            <div class="comment-text" ><div class="comment-text2">{{ comment.content }} </div>
+              <button class="button-comment-delete" @click="updatePost(message.id)">
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </div>
+
+
           </div>
           <div class="input-and-button">
             <input v-model="contentComment" type="text" class="comment-field" placeholder="Ecrire un commentaire" required >
@@ -83,11 +91,11 @@ export default {
       console.log(err);
     }},
 
-  datePost(date) {
+  dateComment(date) {
     const event = new Date(date);
     const options = {
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
       hour: "numeric",
       minute: "numeric",
@@ -99,6 +107,9 @@ export default {
 </script>
 
 <style scoped>
+.fa-trash-alt{
+  color: white;
+}
 .input-and-button{
   display: flex;
 }
@@ -110,7 +121,11 @@ button {
   margin-right: 20px;
   background-color: #00acee;
   color: white;
-  min-width: 100px;
+}
+.button-comment-delete {
+  border: none;
+  border-radius: 8px;
+  margin-top: 0;
 }
 
 .comment-time{
@@ -124,13 +139,19 @@ button {
   text-align: left;
   font-weight: 600;
   font-size: 1em;
+  margin-top: 10px;
 }
 .comment-text{
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
   text-align: left;
   font-family: Helvetica;
-    border-bottom: 0.5px solid;
+  border-bottom: 0.5px solid;
   padding-bottom: 10px;
+}
+.comment-text2{
+  padding-top: 10px;
 }
 .comment-field {
   margin-top: 20px;
