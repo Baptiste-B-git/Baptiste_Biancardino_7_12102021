@@ -12,7 +12,7 @@
         <div class="bloc-picture-name"></div>
 
         <div class="post-name">{{ message.User.username }}</div>
-        <div class="post-time">Posté le {{ datePost(message.createdAt) }}</div>
+        <div class="post-date">Posté le {{ datePost(message.createdAt) }}</div>
         <div class="post-text">{{ message.content }}</div>
         <div class="post-image" v-if="message.image">
           <img :src="message.image" />
@@ -22,12 +22,12 @@
           <button @click="modify">Modifier</button>
           <div v-show="showModify">
             <input type="text" class="message" v-model="updateContent" />
-            <button class="button-update" @click="updatePost(message.id)">
+            <button class="button-update-post" @click="updatePost(message.id)">
               <i class="fas fa-edit"></i>
             </button> 
           </div>
 
-          <div class="button-delete" @click="deletePost(message.User.id)">
+          <div class="button-delete-post" @click="deletePost(message.User.id)">
             <button
               v-if="id == message.User.id || isAdmin"
               @click="deletePost(message.id)"
@@ -36,13 +36,7 @@
             </button>
           </div>
         </div>
-            <Comment v-on:commentAdded="getPosts()" :comments="message.Comments" />
-
-        <!-- <div>
-          <button @click="commentary">Voir commentaires</button>
-          <div v-show="showComments"> 
-          </div>
-        </div> -->
+            <Comment v-on:commentAdded="getPosts()" :comments="message.Comments" :postId="message.id"/>
       </div>
     </div>
   </div>
@@ -58,18 +52,17 @@ export default {
   components: { Post, Comment }, 
   data() {
     return {
-      post_id: this.post_id,
-      userId: this.userId,
-      posts: this.posts,
+      post_id: null,
+      userId: null,
+      posts: null,
       showModify: false,
-      // showComments: false,
-      updateContent: this.updateContent,
+      updateContent: null,
       isAdmin: "",
       id: "",
       user: {
-        username: this.username,
+        username: null,
         id: "",
-        postUsername: this.postUsername,
+        postUsername: null,
       },
     };
   },
@@ -84,10 +77,6 @@ export default {
       this.showModify = !this.showModify;
       console.log("ok");
     },
-    // commentary() {
-    //   this.showComments = !this.showComments;
-    //   console.log("ok");
-    // },
     async checkId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
@@ -201,6 +190,21 @@ export default {
 </script>
 
 <style scoped>
+/* @media (min-width: 768px) and (max-width: 979px) {
+  .bloc-update-delete {
+    display: none;
+    text-align: left;
+  }
+} */
+@media (max-width: 720px) {
+  .bloc-update-delete {
+    justify-content: center;
+    display: block;
+  }
+  img{
+    height: auto;
+  }
+}
 .container {
   background-color: #333;
   padding: 15px 20px 5px;
@@ -236,7 +240,7 @@ img {
   border-radius: 20px;
   margin-top: 20px;
 }
-.post-time {
+.post-date {
   font-style: italic;
   font-size: 13px;
   text-align: left;
@@ -246,7 +250,7 @@ img {
 .post-name {
   text-align: left;
   font-weight: 600;
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
 .post-text {
   margin-top: 20px;
@@ -272,7 +276,6 @@ input:focus {
   display: flex;
   flex-direction: row;
   text-align: left;
-  margin-bottom: 20px;
 }
 
 button {
@@ -289,7 +292,7 @@ button:hover {
   border-color: #719ece;
   box-shadow: 0 0 10px #719ece;
 }
-.button-update {
+.button-update-post {
   margin-left: 5px;
 }
 .fa-edit{

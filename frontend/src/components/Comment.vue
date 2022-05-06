@@ -2,25 +2,25 @@
   <div>
     <div class="bloc-comment">
       <div>
-        <button @click="commentary">Commentaires</button>
+        <button class="button-show-comment" @click="commentary">{{ showComments == 0 ? 'Afficher les commentaires' : 'Cacher les commentaires' }}</button>
         <div v-show="showComments">
-          <div v-for="comment in comments" :key="comment.id" class="comment-name">
-            <div> {{comment.User.username}}</div>
-
+          <div v-for="comment in comments" :key="comment.id">
+            <div class="comment-name"> {{comment.User.username}}</div>
             
-            <div class="comment-time">Commenté le {{ dateComment(comment.createdAt) }}</div>
-            <div class="comment-text" ><div class="comment-text2">{{ comment.content }} </div>
-              <button class="button-comment-delete" @click="updatePost(message.id)">
-                <i class="far fa-trash-alt"></i>
-              </button>
+            <div class="comment-date">Commenté le {{ dateComment(comment.createdAt) }}</div>
+
+            <div class="comment-text-and-delete">
+              <div class="comment-text">{{ comment.content }} </div>
+              <div class="button-delete-comment" @click="deleteComment(comment.User.id)">
+                <button><i class="far fa-trash-alt"></i></button>
+              </div>
             </div>
-
-
           </div>
+
           <div class="input-and-button">
-            <input v-model="contentComment" type="text" class="comment-field" placeholder="Ecrire un commentaire" required >
+            <input v-model="content" type="text" class="comment-field" placeholder="Ecrire un commentaire" required >
             <div class="button-comment">
-              <button @click="createComment(content.id)">Commenter</button>
+              <button class="button-input-comment" @click="createComment()">Commenter</button>
             </div>
           </div>
         </div>
@@ -37,70 +37,108 @@ export default {
   name: "Comment",
     components: {
   },
-  props:["comments"],
+  props:["comments", "postId"],
   emits: ["commentAdded"],
   data() {
     return {
       showComments: false,
-      ok : false,
-      error:'',
-      content:"",
       id:"",
-      isAdmin:"",
-      contentComment: "",
-      posts:this.posts,
-      post_id:this.post_id,
       userId : this.userId,
+      content:"",
+      isAdmin:"",
+      error: this.error,
       user: {
         userName:"",
         id:"",
-        postUserName : this.postUserName,
-        commentUserName : this.commentUsername
+        commentUserName: this.commentUserName
       }
     };
   },
+
+  beforeMount(){
+    this.getComments();
+  },
   
   methods : {
+    // Cacher, afficher les commentaires
     commentary() {
     this.showComments = !this.showComments;
-    console.log("ok");
     },
 
-   async createComment(postId) {
-    const token = JSON.parse(localStorage.getItem('res'));
-    const userId = VueJwtDecode.decode(token).userId;
-    const post_id =  postId
-    const formData = new FormData();
-    try {
-      formData.append("content", this.content);
-      formData.append("userId",userId);
-      formData.append("post_id",post_id);
-      const response = await axios.post('http://localhost:5000/api/comment', formData,
-      {
-        userId: this.userId,
-        post_id: this.post_id,
-        error: this.error,
-        content: this.contentComment,
-        headers: {
-        Authorization: `Bearer ${token}`
-        }
-      })
-         // window.location.reload();
-      console.log(response)
-    } catch (err) {
-      console.log(err);
-    }},
+    async getId() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      const id = VueJwtDecode.decode(token).userId;
+      this.token = token;
+      this.UserId = id;
+    },
 
-  dateComment(date) {
-    const event = new Date(date);
-    const options = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    };
-    return event.toLocaleDateString("fr-Fr", options);
+    async createComment() {
+      const token = JSON.parse(localStorage.getItem('res'));
+      // l'ensemble de valeurs à envoyer à l'aide de l'api requete http
+    const data = {
+      content: this.content
+    }
+      try {
+        const response = await axios.post('http://localhost:5000/api/post/'+ this.postId +'/commentPost', data,
+        {
+          headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+          }
+        })
+      window.location.reload();
+        console.log(response)
+      } catch (error) {
+        console.log(error);
+      }},
+
+    async getComments() {
+      const token = JSON.parse(localStorage.getItem('res'));
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      try {
+        const response = await fetch(`http://localhost:5000/api/post/commentPost`, {
+          headers,
+        });
+        const comments = await response.json();
+        // this.comments = comments;
+        comments.forEach(comment => {
+          this.content = comment.content;
+          this.commentUserName =  comment.User.userName;
+        });
+      }
+      catch(error) {
+        console.log(error)
+      }    
+    },
+
+    deleteComment() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      axios.delete("http://localhost:5000/api/comment/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(() => {
+          // window.location.reload();
+        })
+        .catch((error) => {
+          window.alert(error);
+        });
+    },
+
+  // Date du commentaire
+    dateComment(date) {
+      const event = new Date(date);
+      const options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      };
+      return event.toLocaleDateString("fr-Fr", options);
     },
   },
 };
@@ -117,18 +155,21 @@ button {
   border: none;
   border-radius: 8px;
   padding: 10px;
-  margin-top: 20px;
-  margin-right: 20px;
   background-color: #00acee;
   color: white;
 }
-.button-comment-delete {
+.button-delete-comment {
   border: none;
   border-radius: 8px;
   margin-top: 0;
 }
-
-.comment-time{
+.button-show-comment{
+  margin-top: 15px;
+}
+.button-input-comment{
+  margin-top: 15px;
+}
+.comment-date{
   font-style: italic;
   font-size: 13px;
   text-align: left;
@@ -137,21 +178,21 @@ button {
 }
 .comment-name{
   text-align: left;
-  font-weight: 600;
-  font-size: 1em;
+  font-size: 1.1em;
   margin-top: 10px;
 }
-.comment-text{
+.comment-text-and-delete{
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 10px;
   text-align: left;
   font-family: Helvetica;
   border-bottom: 0.5px solid;
   padding-bottom: 10px;
 }
-.comment-text2{
+.comment-text{
   padding-top: 10px;
+  font-weight: 100;
 }
 .comment-field {
   margin-top: 20px;

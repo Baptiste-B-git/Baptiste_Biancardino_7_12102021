@@ -31,7 +31,6 @@ export default {
   emits: ["postAdded"],
   data() {
     return {
-      text: "",
       image: "",
       UserId: this.id,
       content: "",
@@ -87,9 +86,7 @@ export default {
         console.log(error);
       }
     },
-    },
-    
-  
+  },
 };
 </script>
 

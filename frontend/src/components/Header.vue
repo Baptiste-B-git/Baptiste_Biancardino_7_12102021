@@ -2,12 +2,21 @@
   <div>
     <nav class="menu-nav">
       <img class="logo" src="../assets/logo.png" alt="Logo Groupomania" />
-      <router-link to="/">Accueil</router-link> |
-      <router-link to="/profil">Profil</router-link> |
-      <router-link to="/register">S'inscrire</router-link> |
-      <router-link to="/login">Se connecter</router-link> |
-      <h2 class="name-user">Bonjour {{ username }}</h2>
-      <button class="btn-logout" @click="logout">Déconnexion</button>
+      <router-link to="/" title="Accueil">Accueil</router-link> |
+      <!-- <router-link to="/register">S'inscrire</router-link> |
+      <router-link to="/login">Se connecter</router-link> | -->
+      
+
+        <!-- <h2 class="name-user">Bonjour {{ username }}</h2> -->
+
+      <router-link to="/profil">
+        <!-- <li class="btn-user-test"><a href="#/profile">
+          <i class="fas fa-user-alt" title="Profil"></i>
+          </a>
+        </li> -->Profil
+      </router-link>|
+      <h2 class="name-user">Bonjour {{ username }}</h2> 
+      <button class="btn-logout" title="Déconnexion" @click="logout">Déconnexion</button>
     </nav>
   </div>
 </template>
@@ -54,22 +63,11 @@ export default {
 </script>
 
 <style scoped>
-@media (min-width: 768px) and (max-width: 979px) {
-  nav{
-    display: block;
-    
-  color: white;
-  }
-  .btn-logout{
-  background-color: #fff;
-  }
-}
 
 .logo {
 	width: 250px;
 	height: 80px;
   align-items: center;
-
 }
 .menu-nav {
   display: flex;
@@ -85,6 +83,18 @@ export default {
   box-shadow: 1px 5px 12px black;
   margin-bottom: 20px;
 }
+
+@media (max-width: 500px) {
+  .menu-nav{
+  display: block;
+  color: white;
+  height: 500px;
+}
+  .btn-logout{
+  background-color: #fff;
+  }
+}
+
 .profile-img-card{
   width: 25px;
   height: 25px;
@@ -104,11 +114,14 @@ a:hover {
   color: white;
   background-color: rgba(88, 88, 88, 0.685);
   font-size: 20px;
-  /* box-shadow: 0px 2px 4px #00acee; */
   padding: 5px 8px 5px 8px;
   border: #00acee 1px solid;
   border-radius: 20px;
 }
+li {
+  list-style: none;
+}
+
 .btn-logout {
   border-radius: 20px;
   padding: 8px;
@@ -121,5 +134,27 @@ a:hover {
   outline: none !important;
   border-color: rgb(165, 165, 165);
   border: white 0.1px solid;
+  box-shadow: none;
+}
+.btn-user{
+  border-radius: 50px;
+  padding: 12px;
+  margin-right: 12px;
+  background-color: rgba(88, 88, 88, 0.685);
+  color: white;
+  border: none;
+  box-shadow: none;
+  height: 40px;
+  margin-top: 15px;
+}
+.btn-user:hover {
+  outline: none !important;
+  border-color: rgb(165, 165, 165);
+  border: white 0.1px solid;
+}
+.bloc-name-user{
+  display: flex;
+  position: relative;
+  justify-content: space-between;
 }
 </style>

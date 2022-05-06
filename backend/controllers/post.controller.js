@@ -4,7 +4,31 @@ const CommentModel = require('../models').Comment;
 const UserModel = require('../models').User;
 
 // CRUD
-module.exports.readPost = async (req, res) => {
+// Création du post
+module.exports.createPost = (req, res) => {
+  const UserId = req.userId;
+  const content = req.body.content;
+  let data = {
+    UserId : UserId,
+    content: content,
+  };
+  if (req.file){
+    data.image= `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  }
+  console.log(req.body);
+  console.log(req.file);
+  const newPost = new PostModel(data); 
+newPost
+.save()
+.then(() => res.status(201).json({ message: "Post enregistré" }))
+.catch((error) => {
+  console.log(error);
+  res.status(400).json({ error })
+});
+};
+
+// Tous les posts
+module.exports.getAllPosts = async (req, res) => {
   PostModel.findAll({
     order: [['createdAt', 'DESC']],
     include:[
@@ -27,51 +51,8 @@ module.exports.readPost = async (req, res) => {
     .catch((error) => res.status(404).json({ error }));
 }
 
-// Création du post
-module.exports.createPost = (req, res) => {
-  const UserId = req.body.UserId;
-  const content = req.body.content;
-  let data = {
-    UserId : UserId,
-    content: content,
-  };
-  if (req.file){
-    data.image= `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-  }
-  console.log(req.body);
-  console.log(req.file);
-  const newPost = new PostModel(data); 
-newPost
-.save()
-.then(() => res.status(201).json({ message: "Post enregistré" }))
-.catch((error) => {
-  console.log(error);
-  res.status(400).json({ error })
-});
-};
-
-module.exports.getCommentPost = (req, res) => {
-  const postId = req.params.id;
-  CommentModel.findAll({where:{messageId:postId}})
-    .then(data => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `Impossible de retrouver les commentaires du post ${postId}.`
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Erreur lors de la récupération des commentaires du post" + postId
-      });
-    });
-}
-
 exports.getOnePost = (req, res, next) => {
   const id = req.params.id;
-
   Post.findByPk(id)
     .then(data => {
       if (data) {
@@ -87,10 +68,9 @@ exports.getOnePost = (req, res, next) => {
         message: "Erreur lors de la récupération du post" + id
       });
     });
-
 };
 
-// Mise à jour post
+// Mise à jour du post
 exports.updatePost = (req, res) => {
   const id = req.params.id;
   PostModel.update(req.body, {
@@ -139,15 +119,47 @@ exports.deletePost = (req, res) => {
     });
   };
 
-// Ecrire un Commentaire
+  exports.updatePicture = (req, res, next) => {
+    const postObject = req.file ?
+      {
+        ...req.body.post,
+        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } : { ...req.body };
+  
+    Post.update({ ...postObject, id: req.params.id }, { where: { id: req.params.id } })
+      .then(() => res.status(200).json({ message: 'Post modifié' }))
+      .catch(error => res.status(400).json({ error }));
+  };
+
+// -------------- Commentaires -------------------
+module.exports.getCommentPost = (req, res) => {
+  const postId = req.params.id;
+  CommentModel.findAll({where:{messageId:postId}})
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Impossible de retrouver les commentaires du post ${postId}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Erreur lors de la récupération des commentaires du post" + postId
+      });
+    });
+}
+
 module.exports.commentPost = (req, res) => {
-  const UserId = req.body.UserId;
+  const UserId = req.userId;
   const content = req.body.content;
-  const MessageId = req.body.MessageId;
+  const messageId = req.params.id;
+  console.log(content);
   const newPost = new CommentModel({
   UserId : UserId,
   content: content,
-  MessageId: MessageId,
+  messageId: messageId,
 }); 
 newPost
 .save()
@@ -178,7 +190,7 @@ exports.editCommentPost = (req, res) => {
     });
 }
 
-exports.deleteCommentPost = (req, res) => {
+exports.deleteComment = (req, res) => {
   const id = req.params.id;
 
   PostModel.destroy({
@@ -200,18 +212,5 @@ exports.deleteCommentPost = (req, res) => {
         message: "Impossible de supprimer le commentaire avec id=" + id
       });
     });
-  };
-
-  exports.updatePicture = (req, res, next) => {
-      
-    const postObject = req.file ?
-      {
-        ...req.body.post,
-        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      } : { ...req.body };
-  
-    Post.update({ ...postObject, id: req.params.id }, { where: { id: req.params.id } })
-      .then(() => res.status(200).json({ message: 'Post modifié' }))
-      .catch(error => res.status(400).json({ error }));
   };
 // CRUD
