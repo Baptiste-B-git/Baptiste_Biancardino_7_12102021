@@ -145,6 +145,7 @@ p {
   font-weight: 500;
   font-family: Helvetica
 }
+
 .link-to{
     color: black;
       text-decoration: none;
@@ -162,5 +163,13 @@ input:focus{
   outline: none !important;
   border-color: #719ECE;
   box-shadow: 0 0 10px #719ECE;
+}
+@media (max-width: 500px) {
+  p {
+    font-size: 12px;
+  }
+  .form-control{
+    width: 250px;
+  }
 }
 </style>

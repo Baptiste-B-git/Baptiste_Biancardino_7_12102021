@@ -11,7 +11,7 @@
 
             <div class="comment-text-and-delete">
               <div class="comment-text">{{ comment.content }} </div>
-              <div class="button-delete-comment" @click="deleteComment(comment.User.id)">
+              <div class="button-delete-comment" @click="deleteComment(comment.id)">
                 <button><i class="far fa-trash-alt"></i></button>
               </div>
             </div>
@@ -113,15 +113,15 @@ export default {
       }    
     },
 
-    deleteComment() {
+    deleteComment(commentId) {
       const token = JSON.parse(localStorage.getItem("res"));
-      axios.delete("http://localhost:5000/api/comment/", {
+      axios.delete('http://localhost:5000/api/post/deleteComment/' + commentId, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
         .then(() => {
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((error) => {
           window.alert(error);

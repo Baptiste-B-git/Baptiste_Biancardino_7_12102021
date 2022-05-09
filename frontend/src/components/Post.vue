@@ -46,7 +46,6 @@ export default {
   methods: {
     handleFileUpload() {
       this.image = this.$refs.image.files[0];
-      console.log(this.$refs.image.files);
     },
 
     async getId() {

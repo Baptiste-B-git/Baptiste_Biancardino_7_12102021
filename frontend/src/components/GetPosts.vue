@@ -240,6 +240,11 @@ img {
   border-radius: 20px;
   margin-top: 20px;
 }
+@media (max-width: 500px) {
+  img{
+    height: 200px;
+  }
+}
 .post-date {
   font-style: italic;
   font-size: 13px;

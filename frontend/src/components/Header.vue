@@ -2,6 +2,7 @@
   <div>
     <nav class="menu-nav">
       <img class="logo" src="../assets/logo.png" alt="Logo Groupomania" />
+      <h2 class="name-user">Bonjour {{ username }}</h2> |
       <router-link to="/" title="Accueil">Accueil</router-link> |
       <!-- <router-link to="/register">S'inscrire</router-link> |
       <router-link to="/login">Se connecter</router-link> | -->
@@ -15,7 +16,6 @@
           </a>
         </li> -->Profil
       </router-link>|
-      <h2 class="name-user">Bonjour {{ username }}</h2> 
       <button class="btn-logout" title="Déconnexion" @click="logout">Déconnexion</button>
     </nav>
   </div>
@@ -84,17 +84,6 @@ export default {
   margin-bottom: 20px;
 }
 
-@media (max-width: 500px) {
-  .menu-nav{
-  display: block;
-  color: white;
-  height: 500px;
-}
-  .btn-logout{
-  background-color: #fff;
-  }
-}
-
 .profile-img-card{
   width: 25px;
   height: 25px;
@@ -156,5 +145,22 @@ li {
   display: flex;
   position: relative;
   justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+  .menu-nav{
+  display: block;
+  color: white;
+  height: 220px;
+}
+  h2{
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 350px){
+  .btn-logout{
+    margin-top: 20px;
+  }
 }
 </style>

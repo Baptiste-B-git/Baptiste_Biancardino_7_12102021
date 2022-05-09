@@ -193,7 +193,7 @@ exports.editCommentPost = (req, res) => {
 exports.deleteComment = (req, res) => {
   const id = req.params.id;
 
-  PostModel.destroy({
+  CommentModel.destroy({
     where: {id: id}
   })
     .then (num => {

@@ -2,12 +2,10 @@
   <div class="profile">
     <Header />
     <div class="card">
-      <h1>Infos</h1>
+      <h1>Profil</h1>
       <div>
-        <div>
-          <h2 class="name-user"> {{ user.username }}</h2>
-          <p class="email">{{user.email}}</p>
-        </div>
+        <h2 class="name-user"> {{ user.username }}</h2>
+        <p class="email">{{user.email}}</p>
       </div>
       <button class="btn-delete" @click="deleteAccount">
         Supprimer mon compte
