@@ -13,7 +13,6 @@ router.delete('/:id', auth, postController.deletePost);
 // Comments
 router.post('/:id/commentPost', auth, postController.commentPost);
 router.get('/:id/commentPost', auth, postController.getCommentPost);
-router.put('/editCommentPost/:id', auth, postController.editCommentPost);
 router.delete('/deleteComment/:id', auth, postController.deleteComment);
 
 module.exports = router;

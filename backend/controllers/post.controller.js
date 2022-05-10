@@ -167,32 +167,8 @@ newPost
 .catch((error) => res.status(400).json({ error }));
 };
 
-exports.editCommentPost = (req, res) => {
-  const id = req.params.id;
-  CommentModel.update(req.body, {
-    where: {id: id}
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Le commentaire a été mis à jour avec succès."
-        });
-      } else {
-        res.send({
-          message: "Impossible de mettre à jour le commentaire avec id=${id}."
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "erreur de mise à jour du commentaire avec id=" + id
-      });
-    });
-}
-
 exports.deleteComment = (req, res) => {
   const id = req.params.id;
-
   CommentModel.destroy({
     where: {id: id}
   })

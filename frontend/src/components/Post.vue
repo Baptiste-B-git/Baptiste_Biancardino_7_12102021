@@ -32,10 +32,10 @@ export default {
   data() {
     return {
       image: "",
-      UserId: this.id,
+      UserId: null,
       content: "",
       token: "",
-      error: this.error,
+      error: null,
     };
   },
 
@@ -81,6 +81,7 @@ export default {
         );
         console.log(response);
         this.$emit("postAdded");
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }

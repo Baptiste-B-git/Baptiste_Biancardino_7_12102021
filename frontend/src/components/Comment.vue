@@ -11,7 +11,8 @@
 
             <div class="comment-text-and-delete">
               <div class="comment-text">{{ comment.content }} </div>
-              <div class="button-delete-comment" @click="deleteComment(comment.id)">
+              <div class="button-delete-comment" @click="deleteComment(comment.id)" >
+                
                 <button><i class="far fa-trash-alt"></i></button>
               </div>
             </div>
@@ -35,22 +36,20 @@ import axios from "axios";
 
 export default {
   name: "Comment",
-    components: {
-  },
-  props:["comments", "postId"],
+  props:["comments", "postId",],
   emits: ["commentAdded"],
   data() {
     return {
       showComments: false,
       id:"",
-      userId : this.userId,
+      userId : null,
       content:"",
       isAdmin:"",
-      error: this.error,
+      error: null,
       user: {
         userName:"",
         id:"",
-        commentUserName: this.commentUserName
+        commentUserName: null
       }
     };
   },
@@ -58,9 +57,9 @@ export default {
   beforeMount(){
     this.getComments();
   },
-  
+
   methods : {
-    // Cacher, afficher les commentaires
+    // Afficher les commentaires
     commentary() {
     this.showComments = !this.showComments;
     },
@@ -102,7 +101,11 @@ export default {
           headers,
         });
         const comments = await response.json();
-        // this.comments = comments;
+
+        // TEST
+        this.isAdmin = comments.isAdmin;
+        // TEST
+
         comments.forEach(comment => {
           this.content = comment.content;
           this.commentUserName =  comment.User.userName;
@@ -121,7 +124,7 @@ export default {
         },
       })
         .then(() => {
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((error) => {
           window.alert(error);

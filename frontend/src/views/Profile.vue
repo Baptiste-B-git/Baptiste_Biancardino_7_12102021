@@ -26,10 +26,10 @@ export default {
   },
   data(){
     return{
-      error: this.error,
-      user: this.user,
-      username: this.username,
-      email: this.email,
+      error: null,
+      user: null,
+      username: null,
+      email: null,
     }
   },
     beforeMount() {

@@ -1,16 +1,13 @@
 const UserModel = require('../models').User;
 const postModel = require('../models').Message;
 
-
 // Afficher tous les users
 module.exports.getAllUsers = async (req, res) => {
     try{
         const users = await UserModel.findAll();
         res.status(200).json(users);
-    
     }
     catch (err) {
-
         return res.status(500).json({ message: err});
     }
 }

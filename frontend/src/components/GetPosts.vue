@@ -73,10 +73,12 @@ export default {
   },
 
   methods: {
+    // Afficher les commentaires
     modify() {
       this.showModify = !this.showModify;
       console.log("ok");
     },
+    
     async checkId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
@@ -90,7 +92,6 @@ export default {
         const user = await res.json();
         this.isAdmin = user.isAdmin;
         console.log(this.isAdmin);
-        console.log(id);
       } catch (error) {
         console.log(error);
       }
@@ -169,7 +170,7 @@ export default {
       }
     },
     
-    // Supprimer Post
+    // Supprimer un Post
     deletePost(postId) {
       const token = JSON.parse(localStorage.getItem("res"));
       axios.delete("http://localhost:5000/api/post/" + postId, {
@@ -179,7 +180,6 @@ export default {
         })
         .then(() => {
           window.location.reload();
-          console.log(postId)
         })
         .catch((error) => {
           window.alert(error);
@@ -190,12 +190,6 @@ export default {
 </script>
 
 <style scoped>
-/* @media (min-width: 768px) and (max-width: 979px) {
-  .bloc-update-delete {
-    display: none;
-    text-align: left;
-  }
-} */
 @media (max-width: 720px) {
   .bloc-update-delete {
     justify-content: center;

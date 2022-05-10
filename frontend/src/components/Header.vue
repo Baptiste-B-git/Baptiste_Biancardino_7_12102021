@@ -27,9 +27,9 @@ export default {
   name: "Header",
   data(){
     return{
-      error: this.error,
-      user: this.user,
-      username: this.username,
+      error: null,
+      user: null,
+      username: null,
     }
   },
     beforeMount() {
