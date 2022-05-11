@@ -15,6 +15,7 @@
         <div class="form-group">
           <label for="email"></label>
 
+          <div v-if="error" style="color: red" class="error" :key='error'>{{ error }}</div>
           <input
             name="email"
             type="email"
@@ -25,7 +26,6 @@
             required
             v-model="email"
           />
-          <div v-if="error" style="color: red" class="error">{{ error }}</div>
         </div>
 
         <div class="form-group">
@@ -83,11 +83,10 @@ export default {
         localStorage.setItem("res", parsed);
         this.$router.push({ name: "Home" }); // Push vers Home
 
-        this.error="Email ou mot de passe incorrect"
         // this.error.push('Name required.');
 
       } catch (error) {
-        this.error = error;
+        this.error = "Email ou mot de passe incorrect";
         console.log(error);
       }
     },

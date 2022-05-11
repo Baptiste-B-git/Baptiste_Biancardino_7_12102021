@@ -97,7 +97,6 @@ exports.updatePost = (req, res) => {
 // Supprimer un post
 exports.deletePost = (req, res) => {
   const id = req.params.id;
-
   PostModel.destroy({
     where: {id: id}
   })
@@ -167,6 +166,7 @@ newPost
 .catch((error) => res.status(400).json({ error }));
 };
 
+// Supprimer un commentaire
 exports.deleteComment = (req, res) => {
   const id = req.params.id;
   CommentModel.destroy({

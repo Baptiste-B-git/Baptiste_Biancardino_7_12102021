@@ -81,7 +81,7 @@ export default {
         );
         console.log(response);
         this.$emit("postAdded");
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
         console.log(error);
       }
