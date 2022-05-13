@@ -44,12 +44,11 @@
 
         <div class="form-group">
           <button class="btn-block" @click="login">Connexion</button>
-          <br />
+        </div>
           <p>
             Vous n'avez pas de compte ?
             <a class="link-to" href="/register">Créer un compte</a>
           </p>
-        </div>
       </form>
     </div>
   </div>
@@ -71,7 +70,6 @@ export default {
       if(this.email=="" || this.password==""){ // Message d'erreur renseigner un champ
         return false;
       }
-
       try {
         const response = await authservice.login({
           email: this.email,

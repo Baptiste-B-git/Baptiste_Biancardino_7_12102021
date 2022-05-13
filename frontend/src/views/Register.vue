@@ -10,17 +10,18 @@
       <form v-on:submit.prevent="onSubmit" class="registerForm">
         <!-- Username -->
         <div class="form-group">
+          <!-- <div v-if="error" style="color: red" class="error">{{ error }}</div> -->
           <input
             name="username"
             type="pseudo"
             class="form-control"
             placeholder="Nom d'utilisateur"
             maxlength="15"
+            minlength="3"
             autofocus
             required
             v-model="username"
           />
-          <!-- <div v-if="error" style="color: red" class="error">{{ error }}</div> -->
         </div>
 
         <!-- Email -->
@@ -44,26 +45,21 @@
             class="form-control"
             placeholder="Mot de passe"
             maxlength="25"
+            minlength="3"
             required
             v-model="password"
           />
+          <div v-if="error" style="color: red" class="error">{{ error }}</div>
+
         </div>
 
         <!-- Vers Connexion -->
         <div class="form-group">
-          <!-- <div v-if="error" class="error">{{ error }}</div> -->
-          <button
-            class="btn btn-primary btn-block" href="/login"
-            @click="signup"
-          >
-            <span>Inscription</span>
-          </button>
+          <button class="btn-block" @click="signup">Inscription</button>
         </div>
         <p>
           Vous avez déjà un compte ?
-          <a class="link-to" href="/login">
-            <span>Se connecter</span>
-          </a>
+          <a class="link-to" href="/login">Se connecter</a>
         </p>
       </form>
     </div>
@@ -73,12 +69,13 @@
 <script>
 import authservice from "../services/authservice";
 export default {
+  name: "Register",
   data() {
     return {
       email: "",
       username: "",
       password: "",
-      error: false,
+      error: "",
     };
   },
   methods: {
@@ -86,7 +83,6 @@ export default {
       if(this.username=="" || this.email=="" || this.password==""){ // Message d'erreur renseigner un champ
         return false;
       }
-
       try {
         const response = await authservice.signup({
           email: this.email,
@@ -96,12 +92,13 @@ export default {
         const res = response.data.token;
         const parsed = JSON.stringify(res);
         localStorage.setItem("res", parsed);
+        console.log(response);
         this.$router.push({ name: "Login" }); // Push vers Login
         // this.error="erreur de création"
-        console.log("ok");
       } catch (error) {
-        this.error = error;
-        console.log(error);
+        // this.error = "erreur de création";
+        console.log(error.response.data);
+        this.error=error.response.data[0].message;
       }
     },
   },
@@ -109,15 +106,4 @@ export default {
 </script>
 
 <style>
-/* input:invalid {
-  box-shadow: 0 0 5px 1px red;
-} */
-/* 
-input:valid {
-  border: 1px solid black;
-} */
-/* :required
-{
-  box-shadow: 0 0 5px 1px red;
-} */
 </style>

@@ -4,18 +4,7 @@
       <img class="logo" src="../assets/logo.png" alt="Logo Groupomania" />
       <h2 class="name-user">Bonjour {{ username }}</h2> |
       <router-link to="/" title="Accueil">Accueil</router-link> |
-      <!-- <router-link to="/register">S'inscrire</router-link> |
-      <router-link to="/login">Se connecter</router-link> | -->
-      
-
-        <!-- <h2 class="name-user">Bonjour {{ username }}</h2> -->
-
-      <router-link to="/profil">
-        <!-- <li class="btn-user-test"><a href="#/profile">
-          <i class="fas fa-user-alt" title="Profil"></i>
-          </a>
-        </li> -->Profil
-      </router-link>|
+      <router-link to="/profil" title="Profil">Profil</router-link>|
       <button class="btn-logout" title="Déconnexion" @click="logout">Déconnexion</button>
     </nav>
   </div>

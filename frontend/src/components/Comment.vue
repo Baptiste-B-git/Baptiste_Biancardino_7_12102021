@@ -11,7 +11,7 @@
 
             <div class="comment-text-and-delete">
               <div class="comment-text">{{ comment.content }} </div>
-              <div class="button-delete-comment" v-if="id == comment.id || isAdmin" @click="deleteComment(comment.id)" >
+              <div class="button-delete-comment" @click="deleteComment(comment.id)" v-if="isAdmin || id === comment.User.id">
                 
                 <button><i class="far fa-trash-alt"></i></button>
               </div>
@@ -37,7 +37,7 @@ import axios from "axios";
 export default {
   name: "Comment",
   props:["comments", "postId",],
-  emits: ["commentAdded"],
+  emits: ["commentAdded", "postAdded"],
   data() {
     return {
       showComments: false,
@@ -56,6 +56,7 @@ export default {
 
   beforeMount(){
     this.getComments();
+    this.checkId();
   },
 
   methods : {
@@ -64,11 +65,22 @@ export default {
     this.showComments = !this.showComments;
     },
 
-    async getId() {
+    async checkId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
-      this.token = token;
-      this.UserId = id;
+      this.id = id;
+      try {
+        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const user = await res.json();
+        this.isAdmin = user.isAdmin;
+        console.log(this.isAdmin);
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     async createComment() {
@@ -85,8 +97,8 @@ export default {
           Authorization: `Bearer ${token}`
           }
         })
-      window.location.reload();
         console.log(response)
+        this.$emit("commentAdded");
       } catch (error) {
         console.log(error);
       }},
@@ -106,10 +118,10 @@ export default {
         this.isAdmin = comments.isAdmin;
         // TEST
 
-        comments.forEach(comment => {
-          this.content = comment.content;
-          this.commentUserName =  comment.User.userName;
-        });
+        // comments.forEach(comment => {
+        //   this.content = comment.content;
+        //   this.commentUserName =  comment.User.userName;
+        // });
       }
       catch(error) {
         console.log(error)
@@ -124,7 +136,7 @@ export default {
         },
       })
         .then(() => {
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((error) => {
           window.alert(error);
@@ -204,5 +216,10 @@ button {
   padding: 5px;
   width: 300px;
   margin-right: 10px;
+}
+@media (max-width: 500px) {
+  .comment-field {
+    width: 130px;
+  }
 }
 </style>
