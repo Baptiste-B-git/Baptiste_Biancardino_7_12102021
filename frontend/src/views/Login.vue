@@ -15,12 +15,12 @@
         <div class="form-group">
           <label for="email"></label>
 
-          <div v-if="error" style="color: red" class="error" :key='error'>{{ error }}</div>
+          <div v-if="error" style="color: crimson" class="error" :key='error'>{{ error }}</div>
           <input
             name="email"
             type="email"
             class="form-control"
-            placeholder="Adresse mail"
+            placeholder="Adresse e-mail"
             maxlength="25"
             autofocus
             required
@@ -84,7 +84,7 @@ export default {
         // this.error.push('Name required.');
 
       } catch (error) {
-        this.error = "Email ou mot de passe incorrect";
+        this.error = "Adresse e-mail ou mot de passe incorrect";
         console.log(error);
       }
     },
@@ -133,6 +133,9 @@ input {
   background-color: #00acee;
   color: white;
   font-weight: bold;
+}
+.error{
+  font-size: 13px;
 }
 
 .form-control {

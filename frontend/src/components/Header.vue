@@ -4,7 +4,7 @@
       <img class="logo" src="../assets/logo.png" alt="Logo Groupomania" />
       <h2 class="name-user">Bonjour {{ username }}</h2> |
       <router-link to="/" title="Accueil">Accueil</router-link> |
-      <router-link to="/profil" title="Profil">Profil</router-link>|
+      <router-link to="/profil" title="Profil">Profil</router-link> |
       <button class="btn-logout" title="Déconnexion" @click="logout">Déconnexion</button>
     </nav>
   </div>

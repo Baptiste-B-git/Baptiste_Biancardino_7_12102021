@@ -10,14 +10,13 @@
       <form v-on:submit.prevent="onSubmit" class="registerForm">
         <!-- Username -->
         <div class="form-group">
-          <!-- <div v-if="error" style="color: red" class="error">{{ error }}</div> -->
+          <div v-if="error" style="color: crimson" class="error">{{ error }}</div>
           <input
             name="username"
             type="pseudo"
             class="form-control"
             placeholder="Nom d'utilisateur"
             maxlength="15"
-            minlength="3"
             autofocus
             required
             v-model="username"
@@ -30,7 +29,7 @@
             name="email"
             type="email"
             class="form-control"
-            placeholder="Adresse mail"
+            placeholder="Adresse e-mail"
             maxlength="25"
             required
             v-model="email"
@@ -45,12 +44,9 @@
             class="form-control"
             placeholder="Mot de passe"
             maxlength="25"
-            minlength="3"
             required
             v-model="password"
           />
-          <div v-if="error" style="color: red" class="error">{{ error }}</div>
-
         </div>
 
         <!-- Vers Connexion -->

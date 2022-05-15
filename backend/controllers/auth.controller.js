@@ -12,13 +12,24 @@ module.exports.signUp = async (req, res) => {
           .alphanum()
           .min(3)
           .max(30)
-          .required(),
+          .required()
+          .messages({
+            'string.min': `"Nom d'utilisateur" doit avoir une longueur minimale de {#limit} caractères`,
+          }),
 
           email: Joi.string().email()
-          .required(),
+          .required()
+          .messages({
+            'string.email': `L'adresse e-mail est incorrecte. Veuillez renseigner le champs (ex. : jean@gmail.fr)`,
+            'string.required': `L'adresse e-mail est manquante`,
+          }),
         
           password: Joi.string()
-          .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+          .min(3)
+          .required()
+          .messages({
+            'string.min': `"Mot de passe" doit avoir une longueur minimale de {#limit} caractères`,
+          }),
     });
     if (schema.validate(req.body).error){
 
