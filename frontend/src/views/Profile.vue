@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div>
     <Header />
     <div class="card">
       <h1>Profil</h1>

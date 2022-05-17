@@ -1,5 +1,7 @@
+// Imports
 const UserModel = require('../models').User;
 const postModel = require('../models').Message;
+const commentModel = require('../models').Comment;
 
 // Afficher tous les users
 module.exports.getAllUsers = async (req, res) => {
@@ -24,18 +26,17 @@ module.exports.userInfo = async (req, res) => {
     }
 }; 
 
-// Supprimer l'utilisateur et les posts
+// Supprimer le user
 module.exports.deleteUser = async (req, res) => {
     try{
-        await postModel.destroy({ where: { userId: req.params.id }})
         const user = await UserModel.findByPk(req.params.id);
-        if (!user) return res.status(400).json({ message: 'Utilisateur inexistant !'});
-        
-        await user.destroy();  
-        res.status(200).json({ message: "Compte supprimé"});
+        postModel.destroy({ where: { userId: req.params.id } })
+        commentModel.destroy({ where: { userId: req.params.id } })
+        user.destroy({ where: { userId: req.params.id } })
+        .then(() => res.status(200).json({ message: 'Commentaires, posts et compte supprimés !' }))
+        .catch(error => res.status(400).json({ error }));
     }
     catch (err){
-        console.log(err);
         return res.status(500).json({ message: err});
     }
 }

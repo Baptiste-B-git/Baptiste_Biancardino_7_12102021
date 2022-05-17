@@ -1,9 +1,11 @@
+// Imports
 const PostModel = require('../models').Message;
 const db = require('../models/index')
 const CommentModel = require('../models').Comment;
 const UserModel = require('../models').User;
 
 // CRUD
+// -------------- Les Posts -------------------
 // Création du post
 module.exports.createPost = (req, res) => {
   const UserId = req.userId;
@@ -116,21 +118,10 @@ exports.deletePost = (req, res) => {
         message: "Impossible de supprimer le post avec id=" + id
       });
     });
-  };
+};
 
-  exports.updatePicture = (req, res, next) => {
-    const postObject = req.file ?
-      {
-        ...req.body.post,
-        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      } : { ...req.body };
-  
-    Post.update({ ...postObject, id: req.params.id }, { where: { id: req.params.id } })
-      .then(() => res.status(200).json({ message: 'Post modifié' }))
-      .catch(error => res.status(400).json({ error }));
-  };
-
-// -------------- Commentaires -------------------
+// -------------- Les Commentaires -------------------
+// Récupérer un Commentaire
 module.exports.getCommentPost = (req, res) => {
   const postId = req.params.id;
   CommentModel.findAll({where:{messageId:postId}})
@@ -150,6 +141,7 @@ module.exports.getCommentPost = (req, res) => {
     });
 }
 
+// Enregistrer un Commentaire
 module.exports.commentPost = (req, res) => {
   const UserId = req.userId;
   const content = req.body.content;
@@ -189,4 +181,3 @@ exports.deleteComment = (req, res) => {
       });
     });
   };
-// CRUD

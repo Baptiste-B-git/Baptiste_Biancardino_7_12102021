@@ -99,6 +99,7 @@ export default {
         })
         console.log(response)
         this.$emit("commentAdded");
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }},
@@ -186,7 +187,7 @@ button {
 }
 .comment-date{
   font-style: italic;
-  font-size: 13px;
+  font-size: 12px;
   text-align: left;
   margin-top: 5px;
   opacity: 0.5;
@@ -208,6 +209,7 @@ button {
 .comment-text{
   padding-top: 10px;
   font-weight: 100;
+  font-size: 14px;
 }
 .comment-field {
   margin-top: 20px;

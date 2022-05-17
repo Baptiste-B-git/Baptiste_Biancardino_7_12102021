@@ -45,7 +45,7 @@ export default {
     logout() {
       localStorage.clear();   
       this.$router.push({ name: "Login" });
-      console.log("Deconnexion");
+      console.log("Deconnexion du compte");
     },
   },
 };
