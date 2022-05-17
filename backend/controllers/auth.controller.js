@@ -18,6 +18,7 @@ module.exports.signUp = async (req, res) => {
       .required()
       .messages({
         'string.min': `"Nom d'utilisateur" doit avoir une longueur minimale de {#limit} caractères`,
+        'string.alphanum': `"Nom d'utilisateur" ne doit contenir que des caractères alphanumériques`,
       }),
 
       email: Joi.string().email()
