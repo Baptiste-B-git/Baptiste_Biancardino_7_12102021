@@ -55,7 +55,7 @@ export default {
   },
 
   beforeMount(){
-    this.getComments();
+    // this.getComments();
     this.checkId();
   },
 
@@ -86,9 +86,9 @@ export default {
     async createComment() {
       const token = JSON.parse(localStorage.getItem('res'));
       // l'ensemble de valeurs à envoyer à l'aide de l'api requete http
-    const data = {
+      const data = {
       content: this.content
-    }
+      }
       try {
         const response = await axios.post('http://localhost:5000/api/post/'+ this.postId +'/commentPost', data,
         {
@@ -104,30 +104,22 @@ export default {
         console.log(error);
       }},
 
-    async getComments() {
-      const token = JSON.parse(localStorage.getItem('res'));
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      try {
-        const response = await fetch(`http://localhost:5000/api/post/commentPost`, {
-          headers,
-        });
-        const comments = await response.json();
-
-        // TEST
-        this.isAdmin = comments.isAdmin;
-        // TEST
-
-        // comments.forEach(comment => {
-        //   this.content = comment.content;
-        //   this.commentUserName =  comment.User.userName;
-        // });
-      }
-      catch(error) {
-        console.log(error)
-      }    
-    },
+    // async getComments() {
+    //   const token = JSON.parse(localStorage.getItem('res'));
+    //   const headers = {
+    //     Authorization: `Bearer ${token}`,
+    //   };
+    //   try {
+    //     const response = await fetch(`http://localhost:5000/api/post/commentPost`, {
+    //       headers,
+    //     });
+    //     const comments = await response.json();
+    //     this.isAdmin = comments.isAdmin;
+    //   }
+    //   catch(error) {
+    //     console.log(error)
+    //   }    
+    // },
 
     deleteComment(commentId) {
       const token = JSON.parse(localStorage.getItem("res"));

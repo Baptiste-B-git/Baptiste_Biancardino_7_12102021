@@ -27,9 +27,9 @@ export default {
   data(){
     return{
       error: null,
-      user: null,
-      username: null,
-      email: null,
+      user: "",
+      username: "",
+      email: "",
     }
   },
     beforeMount() {

@@ -1,6 +1,4 @@
-# PROJET 7 - OPENCLASSROOMS - DEVELOPPEUR WEB
-
-Groupomania - Réseau social d'entreprise
+# Groupomania - Réseau social d'entreprise
 
 - Importer la database (terminal de commande) :
 

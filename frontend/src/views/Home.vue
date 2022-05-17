@@ -15,7 +15,14 @@ export default {
   components: {
     Header, Post
   },
+  //   mounted() {
+  //   if (!localStorage.getItem("username")) {
+  //     this.$router.push("/login");
+  //   }
+  // },
 };
+
+
 </script>
 
 <style>

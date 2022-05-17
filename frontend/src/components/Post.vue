@@ -49,6 +49,11 @@ import VueJwtDecode from "vue-jwt-decode";
 import axios from "axios";
 
 export default {
+  //   mounted() {
+  //   if (!localStorage.getItem("user")) {
+  //     this.$router.push("/login");
+  //   }
+  // },
   components: { Posts, Comment }, 
   data() {
     return {
@@ -69,7 +74,8 @@ export default {
   beforeMount() {
     this.getPosts();
     this.getIdPostUser();
-    this.checkId();
+    this.getId();
+    this.check();
   },
 
   methods: {
@@ -78,8 +84,16 @@ export default {
       this.showModify = !this.showModify;
       console.log("ok");
     },
-    
-    async checkId() {
+    check() {
+      const token = JSON.parse(localStorage.getItem("res"));
+      if (!token) {
+        this.$router.push({ name: "Login" });
+      } else {
+        const id = VueJwtDecode.decode(token).userId;
+        this.id = id;
+      }
+    },
+    async getId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;
       this.id = id;
