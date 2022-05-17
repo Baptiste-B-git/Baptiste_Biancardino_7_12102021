@@ -2,14 +2,10 @@
 
 Groupomania - Réseau social d'entreprise
 
-- Compétences évaluées :
-Authentifier un utilisateur et maintenir sa session
-Personnaliser le contenu envoyé à un client web
-Gérer un stockage de données à l'aide de SQL
-Implémenter un stockage de données sécurisé en utilisant SQL
+Importer la database (terminal de commande) :
 
-- Technologies utilisées :
-NodeJs - VueJs - MySQL
+mysql -u root -p database_development< database_development.sql
+
 
 Installation du Projet :
 
