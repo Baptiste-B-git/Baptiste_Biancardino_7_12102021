@@ -4,9 +4,7 @@
       <h1>Connexion</h1>
       <img
         class="profile-img-card"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      />
-
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
       <form v-on:submit.prevent="onSubmit">
         <div class="form-group">
           <label for="username"></label>
@@ -24,8 +22,7 @@
             maxlength="25"
             autofocus
             required
-            v-model="email"
-          />
+            v-model="email"/>
         </div>
 
         <div class="form-group">
@@ -37,9 +34,7 @@
             placeholder="Mot de passe"
             maxlength="25"
             required
-            v-model="password"
-
-          />
+            v-model="password"/>
         </div>
 
         <div class="form-group">
@@ -80,20 +75,12 @@ export default {
         const parsed = JSON.stringify(res);
         localStorage.setItem("res", parsed);
         this.$router.push({ name: "Home" }); // Push vers Home
-
-        // this.error.push('Name required.');
-
       } catch (error) {
         this.error = "Adresse e-mail ou mot de passe incorrect";
         console.log(error);
       }
     },
   },
-  // computed: {
-  //   isDisabled: function () {
-  //     return !this.email || !this.password;
-  //   },
-  // },
 };
 </script>
 
@@ -153,8 +140,8 @@ p {
 }
 
 .link-to{
-    color: black;
-      text-decoration: none;
+  color: black;
+  text-decoration: none;
 }
 .link-to:hover {
   color: #007bff;

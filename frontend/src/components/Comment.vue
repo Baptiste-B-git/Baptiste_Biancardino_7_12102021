@@ -12,7 +12,6 @@
             <div class="comment-text-and-delete">
               <div class="comment-text">{{ comment.content }} </div>
               <div class="button-delete-comment" @click="deleteComment(comment.id)" v-if="isAdmin || id === comment.User.id">
-                
                 <button><i class="far fa-trash-alt"></i></button>
               </div>
             </div>
@@ -55,7 +54,6 @@ export default {
   },
 
   beforeMount(){
-    // this.getComments();
     this.checkId();
   },
 
@@ -83,6 +81,7 @@ export default {
       }
     },
 
+    // Ajouter un commentaire
     async createComment() {
       const token = JSON.parse(localStorage.getItem('res'));
       // l'ensemble de valeurs à envoyer à l'aide de l'api requete http
@@ -104,23 +103,7 @@ export default {
         console.log(error);
       }},
 
-    // async getComments() {
-    //   const token = JSON.parse(localStorage.getItem('res'));
-    //   const headers = {
-    //     Authorization: `Bearer ${token}`,
-    //   };
-    //   try {
-    //     const response = await fetch(`http://localhost:5000/api/post/commentPost`, {
-    //       headers,
-    //     });
-    //     const comments = await response.json();
-    //     this.isAdmin = comments.isAdmin;
-    //   }
-    //   catch(error) {
-    //     console.log(error)
-    //   }    
-    // },
-
+    // Supprimer un commentaire
     deleteComment(commentId) {
       const token = JSON.parse(localStorage.getItem("res"));
       axios.delete('http://localhost:5000/api/post/deleteComment/' + commentId, {

@@ -90,9 +90,7 @@ export default {
         localStorage.setItem("res", parsed);
         console.log(response);
         this.$router.push({ name: "Login" }); // Push vers Login
-        // this.error="erreur de création"
       } catch (error) {
-        // this.error = "erreur de création";
         console.log(error.response.data);
         this.error=error.response.data[0].message;
       }

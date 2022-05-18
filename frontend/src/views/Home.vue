@@ -2,27 +2,20 @@
   <div class="home">
     <Header />
 
-    <Post />
+    <Posts />
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
-import Post from "@/components/Post.vue";
+import Posts from "@/components/Posts.vue";
 
 export default {
   name: "Home",
   components: {
-    Header, Post
+    Header, Posts
   },
-  //   mounted() {
-  //   if (!localStorage.getItem("username")) {
-  //     this.$router.push("/login");
-  //   }
-  // },
 };
-
-
 </script>
 
 <style>

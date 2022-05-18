@@ -42,6 +42,7 @@ export default {
       }
     },
 
+    // Déconnexion du compte
     logout() {
       localStorage.clear();   
       this.$router.push({ name: "Login" });
@@ -52,7 +53,6 @@ export default {
 </script>
 
 <style scoped>
-
 .logo {
 	width: 250px;
 	height: 80px;
@@ -76,7 +76,6 @@ export default {
 .profile-img-card{
   width: 25px;
   height: 25px;
-  /* margin: 0 auto 10px; */
   border-radius: 50%;
 }
 a {
@@ -86,7 +85,6 @@ a {
 a:hover {
   color: white;
   font-size: 20px;
-  /* text-shadow: 4px 4px 5px #00acee; */
 }
 .router-link-active {
   color: white;
