@@ -49,10 +49,12 @@
           />
         </div>
 
-        <!-- Vers Connexion -->
+        <!-- Bouton Inscription -->
         <div class="form-group">
           <button class="btn-block" @click="signup">Inscription</button>
         </div>
+
+        <!-- Redirection vers Connexion -->
         <p>
           Vous avez déjà un compte ?
           <a class="link-to" href="/login">Se connecter</a>

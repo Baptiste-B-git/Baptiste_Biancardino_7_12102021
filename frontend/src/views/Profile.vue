@@ -66,6 +66,7 @@ export default {
       }
     },
 
+// Supprimer le compte utilisateur
     async deleteAccount() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;

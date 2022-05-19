@@ -10,9 +10,9 @@
           <label for="username"></label>
         </div>
 
+        <!-- e-mail -->
         <div class="form-group">
           <label for="email"></label>
-
           <div v-if="error" style="color: crimson" class="error" :key='error'>{{ error }}</div>
           <input
             name="email"
@@ -25,6 +25,7 @@
             v-model="email"/>
         </div>
 
+        <!-- Mot de passe -->
         <div class="form-group">
           <label for="password"></label>
           <input
@@ -37,9 +38,12 @@
             v-model="password"/>
         </div>
 
+        <!-- Bouton Connexion -->
         <div class="form-group">
           <button class="btn-block" @click="login">Connexion</button>
         </div>
+
+        <!-- Redicrection vers l'inscription -->
           <p>
             Vous n'avez pas de compte ?
             <a class="link-to" href="/register">Créer un compte</a>
