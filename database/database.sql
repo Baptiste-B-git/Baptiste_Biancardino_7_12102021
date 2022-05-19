@@ -30,7 +30,7 @@ CREATE TABLE `comments` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (114,112,'190','Le soleil couchant est un artiste de génie.','2022-05-17 13:36:49','2022-05-17 13:36:49'),(117,28,'190','Magnifique !','2022-05-17 14:00:46','2022-05-17 14:00:46'),(118,28,'191','L\'expression a des frontières, la pensée n\'en a pas.','2022-05-17 14:03:26','2022-05-17 14:03:26'),(120,25,'192','J\'adore le Japon.','2022-05-17 14:05:09','2022-05-17 14:05:09'),(123,168,'194','Je projette d\'inviter ma famille au chalet pendant l\'été.','2022-05-17 14:34:03','2022-05-17 14:34:03'),(124,168,'192','Le paradis tropical...','2022-05-17 14:36:51','2022-05-17 14:36:51'),(127,112,'194','Il y a pire ','2022-05-17 14:46:16','2022-05-17 14:46:16'),(129,170,'194','Jolie vue !','2022-05-17 14:52:48','2022-05-17 14:52:48');
+INSERT INTO `comments` VALUES (148,25,'192','J\'adore le Japon','2022-05-18 21:48:18','2022-05-18 21:48:18'),(149,28,'190','Magnifique !','2022-05-18 21:50:31','2022-05-18 21:50:31'),(150,28,'191','L\'expression a des frontières, la pensée n\'en a pas.','2022-05-18 21:51:10','2022-05-18 21:51:10'),(151,112,'190','Le soleil couchant est un artiste de génie.','2022-05-18 21:51:49','2022-05-18 21:51:49'),(152,112,'194','Il y a pire comme lieu de travail','2022-05-18 21:52:26','2022-05-18 21:52:26'),(153,168,'194','Je projette d\'inviter ma famille au chalet pendant l\'été','2022-05-18 21:54:01','2022-05-18 21:54:01'),(154,168,'192','Le paradis tropical...','2022-05-18 21:54:19','2022-05-18 21:54:19'),(155,170,'194','Jolie vue !','2022-05-18 21:55:03','2022-05-18 21:55:03');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`),
   KEY `messages_ibfk_1` (`UserId`),
   CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `users` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (25,'eric@gmail.com','Eric','$2b$10$otuJcF.Gi2a4VRTkj5PZgObXga2TKqP58ys4NPWqdeCcECeaMvN1G',0,'2022-01-12 14:04:02','2022-01-12 14:04:02'),(28,'lorie@gmail.com','Lorie','$2b$10$Pem7UKkQ2MMqi8fSXVwFk.h5OKFSm9WecYoEB7jaUtBFvpJNtN4Ji',NULL,'2022-01-20 13:32:47','2022-01-20 13:32:47'),(112,'pierre@gmail.com','Pierre','$2b$10$EpU5gicXz5XcJ2V5ySJs2utdhEH8BX45C6pXF5vhlJF2HV2vsFLQW',NULL,'2022-05-04 13:33:32','2022-05-04 13:33:32'),(168,'marie@gmail.com','Marie','$2b$10$hGKIg5li.IioJzUoUIzQeeap0XTto4vpXjgEB6bcUj5Ljjfedd6Xi',NULL,'2022-05-17 13:21:17','2022-05-17 13:21:17'),(170,'stephanie@gmail.com','Stephanie','$2b$10$7PLnSxbBEJIDShYJzsNKrOD712iYg8lQxXTfW92als.kHLZF9oeBm',NULL,'2022-05-17 14:52:25','2022-05-17 14:52:25');
+INSERT INTO `users` VALUES (25,'eric@gmail.com','Eric','$2b$10$otuJcF.Gi2a4VRTkj5PZgObXga2TKqP58ys4NPWqdeCcECeaMvN1G',0,'2022-01-12 14:04:02','2022-01-12 14:04:02'),(28,'lorie@gmail.com','Lorie','$2b$10$Pem7UKkQ2MMqi8fSXVwFk.h5OKFSm9WecYoEB7jaUtBFvpJNtN4Ji',NULL,'2022-01-20 13:32:47','2022-01-20 13:32:47'),(112,'pierre@gmail.com','Pierre','$2b$10$EpU5gicXz5XcJ2V5ySJs2utdhEH8BX45C6pXF5vhlJF2HV2vsFLQW',NULL,'2022-05-04 13:33:32','2022-05-04 13:33:32'),(168,'marie@gmail.com','Marie','$2b$10$hGKIg5li.IioJzUoUIzQeeap0XTto4vpXjgEB6bcUj5Ljjfedd6Xi',NULL,'2022-05-17 13:21:17','2022-05-17 13:21:17'),(170,'stephanie@gmail.com','Stephanie','$2b$10$7PLnSxbBEJIDShYJzsNKrOD712iYg8lQxXTfW92als.kHLZF9oeBm',NULL,'2022-05-17 14:52:25','2022-05-17 14:52:25'),(179,'admin@gmail.com','Admin','$2b$10$tJc1/0JPbB5hOkPxOUfoC.y.ESI9KRYazAO21QaeKKQhpeq2IpFI.',NULL,'2022-05-19 12:04:46','2022-05-19 12:04:46');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-17 16:57:24
+-- Dump completed on 2022-05-19 14:05:54
