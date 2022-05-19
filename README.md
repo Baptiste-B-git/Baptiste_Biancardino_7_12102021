@@ -10,7 +10,7 @@ Noter dans le terminal : mysql -u root -p database_development < database_develo
 backend :  
 cd Baptiste_Biancardino_7_12102021>backend  
 npm install  
-npm start  
+npm start
 
 frontend :  
 cd Baptiste_Biancardino_7_12102021>frontend  
@@ -20,7 +20,7 @@ npm run serve
 - Compte administrateur :  
 Pour se connecter en tant qu'admin, sur la page login entrez les informations suivantes :  
 e-mail : admin@gmail.com  
-mdp : admin7812  
+mdp : admin7812
 
 Donner à un utilisateur l'autorisation d'être admin :  
 Utilisation de Workbench  
