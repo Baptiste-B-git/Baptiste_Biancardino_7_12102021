@@ -1,13 +1,12 @@
 # Groupomania - Réseau social d'entreprise
 
-- Stack technique utilisées  
+- Stack technique utilisées :  
 JavaScript, HTML, CSS, VueJS, MySQL, sequelize, nodeJs, express, axios, joi, multer, bcrypt  
 
-- Importer la database   
+- Importer la database :   
 Noter dans le terminal : mysql -u root -p database_development < database_development.sql  
 
-- Installation du Projet   
-
+- Installation du Projet :  
 backend :  
 cd Baptiste_Biancardino_7_12102021>backend  
 npm install  
@@ -18,7 +17,7 @@ cd Baptiste_Biancardino_7_12102021>frontend
 npm install  
 npm run serve  
 
-- Compte administrateur  
+- Compte administrateur :  
 Pour se connecter en tant qu'admin, sur la page login entrez les informations suivantes :  
 e-mail : admin@gmail.com  
 mdp : admin7812  
