@@ -30,7 +30,7 @@ CREATE TABLE `comments` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`),
   KEY `messages_ibfk_1` (`UserId`),
   CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (190,168,'Monet disait que la sagesse, c\'est de se lever et se coucher avec le soleil.',NULL,'http://localhost:5000/images/coucher_de_soleil.png1652793990916.png','2022-05-17 13:26:30','2022-05-17 14:30:39'),(191,112,'Citation du jour : “La seule chose qu\'on est sûr de ne pas réussir est celle qu\'on ne tente pas.”',NULL,NULL,'2022-05-17 13:45:09','2022-05-17 14:42:39'),(192,28,'Mes vacances à Okinawa !',NULL,'http://localhost:5000/images/Okinawa.jpeg1652795809729.jpg','2022-05-17 13:56:49','2022-05-17 13:56:49'),(194,25,'Voici une photo de mon voyage. PS: Je ne suis pas en vacances mais au travail :)',NULL,'http://localhost:5000/images/chalet.jpg1652797658409.jpg','2022-05-17 14:27:38','2022-05-17 14:27:38');
+INSERT INTO `messages` VALUES (190,168,'Monet disait que la sagesse, c\'est de se lever et se coucher avec le soleil.',NULL,'http://localhost:5000/images/coucher_de_soleil.png1652793990916.png','2022-05-17 13:26:30','2022-05-17 14:30:39'),(191,112,'Citation du jour : “La seule chose qu\'on est sûr de ne pas réussir est celle qu\'on ne tente pas.”',NULL,NULL,'2022-05-17 13:45:09','2022-05-17 14:42:39'),(192,28,'Mes vacances à Okinawa',NULL,'http://localhost:5000/images/Okinawa.jpeg1652795809729.jpg','2022-05-17 13:56:49','2022-05-21 12:11:12'),(194,25,'Voici une photo de mon voyage. PS: Je ne suis pas en vacances mais au travail :)',NULL,'http://localhost:5000/images/chalet.jpg1652797658409.jpg','2022-05-17 14:27:38','2022-05-17 14:27:38');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `users` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (25,'eric@gmail.com','Eric','$2b$10$otuJcF.Gi2a4VRTkj5PZgObXga2TKqP58ys4NPWqdeCcECeaMvN1G',0,'2022-01-12 14:04:02','2022-01-12 14:04:02'),(28,'lorie@gmail.com','Lorie','$2b$10$Pem7UKkQ2MMqi8fSXVwFk.h5OKFSm9WecYoEB7jaUtBFvpJNtN4Ji',NULL,'2022-01-20 13:32:47','2022-01-20 13:32:47'),(112,'pierre@gmail.com','Pierre','$2b$10$EpU5gicXz5XcJ2V5ySJs2utdhEH8BX45C6pXF5vhlJF2HV2vsFLQW',NULL,'2022-05-04 13:33:32','2022-05-04 13:33:32'),(168,'marie@gmail.com','Marie','$2b$10$hGKIg5li.IioJzUoUIzQeeap0XTto4vpXjgEB6bcUj5Ljjfedd6Xi',NULL,'2022-05-17 13:21:17','2022-05-17 13:21:17'),(170,'stephanie@gmail.com','Stephanie','$2b$10$7PLnSxbBEJIDShYJzsNKrOD712iYg8lQxXTfW92als.kHLZF9oeBm',NULL,'2022-05-17 14:52:25','2022-05-17 14:52:25'),(179,'admin@gmail.com','Admin','$2b$10$tJc1/0JPbB5hOkPxOUfoC.y.ESI9KRYazAO21QaeKKQhpeq2IpFI.',NULL,'2022-05-19 12:04:46','2022-05-19 12:04:46');
+INSERT INTO `users` VALUES (25,'eric@gmail.com','Eric','$2b$10$otuJcF.Gi2a4VRTkj5PZgObXga2TKqP58ys4NPWqdeCcECeaMvN1G',0,'2022-01-12 14:04:02','2022-01-12 14:04:02'),(28,'lorie@gmail.com','Lorie','$2b$10$Pem7UKkQ2MMqi8fSXVwFk.h5OKFSm9WecYoEB7jaUtBFvpJNtN4Ji',NULL,'2022-01-20 13:32:47','2022-01-20 13:32:47'),(112,'pierre@gmail.com','Pierre','$2b$10$EpU5gicXz5XcJ2V5ySJs2utdhEH8BX45C6pXF5vhlJF2HV2vsFLQW',NULL,'2022-05-04 13:33:32','2022-05-04 13:33:32'),(168,'marie@gmail.com','Marie','$2b$10$hGKIg5li.IioJzUoUIzQeeap0XTto4vpXjgEB6bcUj5Ljjfedd6Xi',NULL,'2022-05-17 13:21:17','2022-05-17 13:21:17'),(170,'stephanie@gmail.com','Stephanie','$2b$10$7PLnSxbBEJIDShYJzsNKrOD712iYg8lQxXTfW92als.kHLZF9oeBm',NULL,'2022-05-17 14:52:25','2022-05-17 14:52:25'),(179,'admin@gmail.com','Admin','$2b$10$tJc1/0JPbB5hOkPxOUfoC.y.ESI9KRYazAO21QaeKKQhpeq2IpFI.',1,'2022-05-19 12:04:46','2022-05-19 12:04:46');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-19 14:05:54
+-- Dump completed on 2022-05-21 14:18:04

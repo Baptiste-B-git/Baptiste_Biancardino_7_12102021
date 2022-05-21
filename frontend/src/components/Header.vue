@@ -25,6 +25,7 @@ export default {
     this.getId();
   },
   methods:{
+    // On récupère l'id et donc le nom d'utilisateur 
     async getId() {
       const token = JSON.parse(localStorage.getItem("res"));
       const id = VueJwtDecode.decode(token).userId;

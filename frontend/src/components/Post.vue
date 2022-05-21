@@ -43,6 +43,7 @@ export default {
   },
 
   methods: {
+    // Gère le téléchargement de l'image
     handleFileUpload() {
       this.image = this.$refs.image.files[0];
     },
@@ -62,11 +63,9 @@ export default {
 
       // append() ajoute une nouvelle valeur dans l'objet FormData
       const formData = new FormData();
-
       formData.append("image", this.image);
       formData.append("UserId", this.UserId);
       formData.append("content", this.content);
-
         try {
         const response = await axios.post(
           "http://localhost:5000/api/post",

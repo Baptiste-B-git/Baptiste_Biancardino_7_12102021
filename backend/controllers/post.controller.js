@@ -2,7 +2,7 @@
 const PostModel = require('../models').Message;
 const db = require('../models/index')
 const CommentModel = require('../models').Comment;
-const UserModel = require('../models').User;
+// const UserModel = require('../models').User;
 
 // CRUD
 // -------------- Les Posts -------------------
@@ -20,13 +20,13 @@ module.exports.createPost = (req, res) => {
   console.log(req.body);
   console.log(req.file);
   const newPost = new PostModel(data); 
-newPost
-.save()
-.then(() => res.status(201).json({ message: "Post enregistré" }))
-.catch((error) => {
-  console.log(error);
-  res.status(400).json({ error })
-});
+  newPost
+  .save()
+  .then(() => res.status(201).json({ message: "Post enregistré" }))
+  .catch((error) => {
+    console.log(error);
+    res.status(400).json({ error })
+  });
 };
 
 // Tous les posts

@@ -4,6 +4,7 @@
       <div>
         <button class="button-show-comment" @click="commentary">{{ showComments == 0 ? 'Afficher les commentaires' : 'Cacher les commentaires' }}</button>
         <div v-show="showComments">
+          <!-- Pour chaque comment dans les comments -->
           <div v-for="comment in comments" :key="comment.id">
             <div class="comment-name"> {{comment.User.username}}</div>
             
@@ -101,7 +102,8 @@ export default {
         window.location.reload();
       } catch (error) {
         console.log(error);
-      }},
+      }
+    },
 
     // Supprimer un commentaire
     deleteComment(commentId) {
