@@ -148,7 +148,7 @@ button {
   border: none;
   border-radius: 8px;
   padding: 10px;
-  background-color: #00acee;
+  background-color: #06729c;
   color: white;
 }
 .button-delete-comment {

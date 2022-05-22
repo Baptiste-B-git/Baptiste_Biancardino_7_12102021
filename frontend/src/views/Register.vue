@@ -25,10 +25,11 @@
 
         <!-- Email -->
         <div class="form-group">
+          <label aria-label="form-control" for="form-control"></label>
           <input
             name="email"
             type="email"
-            class="form-control"
+            id="form-control"
             placeholder="Adresse e-mail"
             maxlength="25"
             required

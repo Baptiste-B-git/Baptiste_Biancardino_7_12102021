@@ -9,7 +9,7 @@
         <div class="post-date">Posté le {{ datePost(message.createdAt) }}</div>
         <div class="post-text">{{ message.content }}</div>
         <div class="post-image" v-if="message.image">
-          <img :src="message.image" />
+          <img alt="post-image" :src="message.image" />
         </div>
 
         <div class="bloc-update-delete" v-if="id == message.User.id || isAdmin">
@@ -265,7 +265,7 @@ button {
   padding: 10px;
   margin-top: 20px;
   margin-right: 10px;
-  background-color: #00acee;
+  background-color: #06729c;
   color: white;
 }
 button:hover {

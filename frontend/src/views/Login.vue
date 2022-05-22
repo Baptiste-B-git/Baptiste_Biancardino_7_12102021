@@ -4,20 +4,22 @@
       <h1>Connexion</h1>
       <img
         class="profile-img-card"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        alt="png"/>
       <form v-on:submit.prevent="onSubmit">
         <div class="form-group">
-          <label for="username"></label>
+          <area-label id="username" for="username"></area-label>
+          <!-- area label -->
         </div>
 
         <!-- e-mail -->
         <div class="form-group">
-          <label for="email"></label>
           <div v-if="error" style="color: crimson" class="error" :key='error'>{{ error }}</div>
+          <label for="email">Adresse e-mail :</label>
           <input
             name="email"
             type="email"
-            class="form-control"
+            id="form-control"
             placeholder="Adresse e-mail"
             maxlength="25"
             autofocus
@@ -27,7 +29,7 @@
 
         <!-- Mot de passe -->
         <div class="form-group">
-          <label for="password"></label>
+          <area-label for="password"></area-label>
           <input
             name="password"
             type="password"
@@ -121,7 +123,7 @@ input {
   border-radius: 10px;
   padding: 10px;
   margin-top: 20px;
-  background-color: #00acee;
+  background-color: #247b9e;
   color: white;
   font-weight: bold;
 }
@@ -137,6 +139,15 @@ input {
   border-radius: 10px;
   padding: 10px;
 }
+#form-control {
+  max-width: 100%;
+  width: 300px;
+  margin-top: 12px;
+  background: #eeeeee;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 p {
   font-size: 14px;
   font-weight: 500;
