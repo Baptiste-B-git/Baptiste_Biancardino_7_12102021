@@ -4,7 +4,7 @@
 JavaScript, HTML, CSS, VueJS, MySQL, sequelize, nodeJs, express, axios, joi, multer, bcrypt  
 
 - Importer la database :   
-Noter dans le terminal : mysql -u root -p database_development < database_development.sql  
+Noter dans le terminal : mysql -u root -p database_development < database.sql  
 
 - Installation du Projet :  
 Pour le backend noter dans le terminal :  
