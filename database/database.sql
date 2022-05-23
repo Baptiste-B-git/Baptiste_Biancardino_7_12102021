@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: database_development
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version 8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,72 +16,74 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `comments`
+-- Table structure for table `Comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `Comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comments` (
+CREATE TABLE `Comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `UserId` int NOT NULL,
-  `messageId` varchar(255) NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `messageId` int DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `UserId` (`UserId`),
+  KEY `messageId` (`messageId`),
+  CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `Comments_ibfk_2` FOREIGN KEY (`messageId`) REFERENCES `Messages` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `comments`
+-- Dumping data for table `Comments`
 --
 
-LOCK TABLES `comments` WRITE;
-/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (148,25,'192','J\'adore le Japon','2022-05-18 21:48:18','2022-05-18 21:48:18'),(149,28,'190','Magnifique !','2022-05-18 21:50:31','2022-05-18 21:50:31'),(150,28,'191','L\'expression a des frontières, la pensée n\'en a pas.','2022-05-18 21:51:10','2022-05-18 21:51:10'),(151,112,'190','Le soleil couchant est un artiste de génie.','2022-05-18 21:51:49','2022-05-18 21:51:49'),(152,112,'194','Il y a pire comme lieu de travail','2022-05-18 21:52:26','2022-05-18 21:52:26'),(153,168,'194','Je projette d\'inviter ma famille au chalet pendant l\'été','2022-05-18 21:54:01','2022-05-18 21:54:01'),(154,168,'192','Le paradis tropical...','2022-05-18 21:54:19','2022-05-18 21:54:19'),(155,170,'194','Jolie vue !','2022-05-18 21:55:03','2022-05-18 21:55:03');
-/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+LOCK TABLES `Comments` WRITE;
+/*!40000 ALTER TABLE `Comments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `messages`
+-- Table structure for table `Messages`
 --
 
-DROP TABLE IF EXISTS `messages`;
+DROP TABLE IF EXISTS `Messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `messages` (
+CREATE TABLE `Messages` (
   `id` int NOT NULL AUTO_INCREMENT,
   `UserId` int NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
   `attachment` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `messages_ibfk_1` (`UserId`),
-  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`)
+  KEY `UserId` (`UserId`),
+  CONSTRAINT `Messages_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `messages`
+-- Dumping data for table `Messages`
 --
 
-LOCK TABLES `messages` WRITE;
-/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (190,168,'Monet disait que la sagesse, c\'est de se lever et se coucher avec le soleil.',NULL,'http://localhost:5000/images/coucher_de_soleil.png1652793990916.png','2022-05-17 13:26:30','2022-05-17 14:30:39'),(191,112,'Citation du jour : “La seule chose qu\'on est sûr de ne pas réussir est celle qu\'on ne tente pas.”',NULL,NULL,'2022-05-17 13:45:09','2022-05-17 14:42:39'),(192,28,'Mes vacances à Okinawa',NULL,'http://localhost:5000/images/Okinawa.jpeg1652795809729.jpg','2022-05-17 13:56:49','2022-05-21 12:11:12'),(194,25,'Voici une photo de mon voyage. PS: Je ne suis pas en vacances mais au travail :)',NULL,'http://localhost:5000/images/chalet.jpg1652797658409.jpg','2022-05-17 14:27:38','2022-05-17 14:27:38');
-/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+LOCK TABLES `Messages` WRITE;
+/*!40000 ALTER TABLE `Messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Table structure for table `sequelizemeta`
 --
 
-DROP TABLE IF EXISTS `sequelizemeta`;
+DROP TABLE IF EXISTS `Sequelizemeta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sequelizemeta` (
+CREATE TABLE `Sequelizemeta` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`name`),
   UNIQUE KEY `name` (`name`)
@@ -89,42 +91,43 @@ CREATE TABLE `sequelizemeta` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `sequelizemeta`
+-- Dumping data for table `Sequelizemeta`
 --
 
-LOCK TABLES `sequelizemeta` WRITE;
-/*!40000 ALTER TABLE `sequelizemeta` DISABLE KEYS */;
-INSERT INTO `sequelizemeta` VALUES ('20211015083455-create-user.js'),('20211015084200-create-message.js');
-/*!40000 ALTER TABLE `sequelizemeta` ENABLE KEYS */;
+LOCK TABLES `Sequelizemeta` WRITE;
+/*!40000 ALTER TABLE `Sequelizemeta` DISABLE KEYS */;
+INSERT INTO `Sequelizemeta` VALUES ('20211015083455-create-user.js'),('20211015084200-create-message.js');
+/*!40000 ALTER TABLE `Sequelizemeta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `users`
+-- Table structure for table `Users`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `Users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `Users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `isAdmin` tinyint(1) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `Users`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (25,'eric@gmail.com','Eric','$2b$10$otuJcF.Gi2a4VRTkj5PZgObXga2TKqP58ys4NPWqdeCcECeaMvN1G',0,'2022-01-12 14:04:02','2022-01-12 14:04:02'),(28,'lorie@gmail.com','Lorie','$2b$10$Pem7UKkQ2MMqi8fSXVwFk.h5OKFSm9WecYoEB7jaUtBFvpJNtN4Ji',NULL,'2022-01-20 13:32:47','2022-01-20 13:32:47'),(112,'pierre@gmail.com','Pierre','$2b$10$EpU5gicXz5XcJ2V5ySJs2utdhEH8BX45C6pXF5vhlJF2HV2vsFLQW',NULL,'2022-05-04 13:33:32','2022-05-04 13:33:32'),(168,'marie@gmail.com','Marie','$2b$10$hGKIg5li.IioJzUoUIzQeeap0XTto4vpXjgEB6bcUj5Ljjfedd6Xi',NULL,'2022-05-17 13:21:17','2022-05-17 13:21:17'),(170,'stephanie@gmail.com','Stephanie','$2b$10$7PLnSxbBEJIDShYJzsNKrOD712iYg8lQxXTfW92als.kHLZF9oeBm',NULL,'2022-05-17 14:52:25','2022-05-17 14:52:25'),(179,'admin@gmail.com','Admin','$2b$10$tJc1/0JPbB5hOkPxOUfoC.y.ESI9KRYazAO21QaeKKQhpeq2IpFI.',1,'2022-05-19 12:04:46','2022-05-19 12:04:46');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `Users` WRITE;
+/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (1,'admin@gmail.com','Admin','$2b$10$tJc1/0JPbB5hOkPxOUfoC.y.ESI9KRYazAO21QaeKKQhpeq2IpFI.',1,'2022-05-23 13:00:00','2022-05-23 13:00:00');
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -136,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-21 14:18:04
+-- Dump completed on 2022-05-23 13:03:11

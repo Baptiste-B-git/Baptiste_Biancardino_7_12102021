@@ -3,9 +3,9 @@
     <nav class="menu-nav">
       <img class="logo" src="../assets/logo.png" alt="Logo Groupomania" />
       <h1 class="name-user">Bonjour {{ username }}</h1> |
-      <router-link to="/" title="Accueil">Accueil</router-link> |
-      <router-link to="/profil" title="Profil">Profil</router-link> |
-      <button class="btn-logout" title="Déconnexion" @click="logout">Déconnexion</button>
+      <router-link to="/" title="accueil">Accueil</router-link> |
+      <router-link to="/profil" title="profil">Profil</router-link> |
+      <button class="btn-logout" title="Deconnexion" @click="logout">Déconnexion</button>
     </nav>
   </div>
 </template>
