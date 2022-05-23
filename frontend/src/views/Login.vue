@@ -7,19 +7,15 @@
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         alt="png"/>
       <form v-on:submit.prevent="onSubmit">
-        <div class="form-group">
-          <area-label id="username" for="username"></area-label>
-          <!-- area label -->
-        </div>
 
         <!-- e-mail -->
         <div class="form-group">
           <div v-if="error" style="color: crimson" class="error" :key='error'>{{ error }}</div>
-          <label for="email">Adresse e-mail :</label>
+          <label class="label" for="input-login-email">email</label>
           <input
             name="email"
             type="email"
-            id="form-control"
+            id="input-login-email"
             placeholder="Adresse e-mail"
             maxlength="25"
             autofocus
@@ -29,11 +25,11 @@
 
         <!-- Mot de passe -->
         <div class="form-group">
-          <area-label for="password"></area-label>
+          <label class="label" for="input-login-password">password</label>
           <input
             name="password"
             type="password"
-            class="form-control"
+            id="input-login-password"
             placeholder="Mot de passe"
             maxlength="25"
             required
@@ -130,8 +126,7 @@ input {
 .error{
   font-size: 13px;
 }
-
-.form-control {
+input{
   max-width: 100%;
   width: 300px;
   margin-top: 12px;
@@ -139,15 +134,14 @@ input {
   border-radius: 10px;
   padding: 10px;
 }
-#form-control {
-  max-width: 100%;
-  width: 300px;
-  margin-top: 12px;
-  background: #eeeeee;
-  border-radius: 10px;
-  padding: 10px;
+.label{
+   position:absolute;
+   left:-10000px;
+   top:auto;
+   width:1px;
+   height:1px;
+   overflow:hidden;
 }
-
 p {
   font-size: 14px;
   font-weight: 500;

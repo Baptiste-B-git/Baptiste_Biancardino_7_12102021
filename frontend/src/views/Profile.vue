@@ -2,9 +2,9 @@
   <div>
     <Header />
     <div class="card">
-      <h1>Profil</h1>
+      <h2>Profil</h2>
       <div>
-        <h2 class="name-user"> {{ user.username }}</h2>
+        <h3 class="name-user"> {{ user.username }}</h3>
         <p class="email">{{user.email}}</p>
       </div>
       <button class="btn-delete" @click="deleteAccount">
@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-h1{
+h2{
   padding-bottom: 10px;
   border-bottom: solid 1px black;
 }
@@ -111,7 +111,7 @@ h1{
   border-radius: 8px;
   padding: 10px;
   margin-top: 20px;
-  background-color: #00acee;
+  background-color: #247b9e;
   color: white;
   font-weight: bold;
 }

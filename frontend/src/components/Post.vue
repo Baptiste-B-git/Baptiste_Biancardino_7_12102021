@@ -2,17 +2,19 @@
   <div>
     <h2 class="subtitle">Exprimez-vous...</h2>
     <div class="card">
+      <label class="label" for="post-field">post</label>
       <textarea
-        class="post-field"
+        id="post-field"
         placeholder="Quoi de neuf ?"
         v-model="content"
       ></textarea
       ><br />
 
+      <label class="label" for="input-image">image</label>
       <input
         type="file"
         name="image"
-        id="image"
+        id="input-image"
         ref="image"
         class="custom-file-input"
         v-on:change="handleFileUpload()"/>
@@ -94,7 +96,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.post-field {
+#post-field {
   width: 100%;
   border-radius: 8px;
   padding: 12px 0 0 12px;
@@ -106,6 +108,22 @@ textarea:focus {
   box-shadow: 0 0 10px #719ece;
 }
 
+input{
+  max-width: 100%;
+  width: 300px;
+  margin-top: 12px;
+  background: #eeeeee;
+  border-radius: 10px;
+  padding: 10px;
+}
+.label{
+   position:absolute;
+   left:-10000px;
+   top:auto;
+   width:1px;
+   height:1px;
+   overflow:hidden;
+}
 .bloc-btn {
   display: flex;
   flex-direction: row;

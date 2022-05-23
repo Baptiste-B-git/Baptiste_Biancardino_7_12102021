@@ -9,13 +9,14 @@
         <div class="post-date">Posté le {{ datePost(message.createdAt) }}</div>
         <div class="post-text">{{ message.content }}</div>
         <div class="post-image" v-if="message.image">
-          <img alt="post-image" :src="message.image" />
+          <img alt="" :src="message.image" />
         </div>
 
         <div class="bloc-update-delete" v-if="id == message.User.id || isAdmin">
           <button @click="modify">Modifier</button>
           <div v-show="showModify">
-            <input type="text" class="message" v-model="updateContent" />
+            <label class="label" for="input-modify-post">comment</label>
+            <input type="text" id="input-modify-post" v-model="updateContent" />
             <button class="button-update-post" @click="updatePost(message.id)">
               <i class="fas fa-edit"></i>
             </button> 
@@ -115,8 +116,6 @@ export default {
       }
     },
 
-
-
     async getPosts() {
       const token = JSON.parse(localStorage.getItem("res"));
       const headers = {
@@ -186,6 +185,22 @@ export default {
 </script>
 
 <style scoped>
+input{
+  max-width: 100%;
+  width: 300px;
+  margin-top: 12px;
+  background: #eeeeee;
+  border-radius: 10px;
+  padding: 10px;
+}
+.label{
+   position:absolute;
+   left:-10000px;
+   top:auto;
+   width:1px;
+   height:1px;
+   overflow:hidden;
+}
 .container {
   background-color: #333;
   padding: 15px 20px 5px;
@@ -195,11 +210,11 @@ export default {
   border-radius: 8px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
-.message {
+#input-modify-post {
   border: 1px solid rgb(104, 104, 104);
   background: #f2f2f2;
   border-radius: 15px;
-  height: 30px;
+  /* height: 30px; */
   margin-top: 20px;
   padding-left: 10px;
 }

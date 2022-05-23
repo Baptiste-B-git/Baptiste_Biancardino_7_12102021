@@ -13,13 +13,19 @@
             <div class="comment-text-and-delete">
               <div class="comment-text">{{ comment.content }} </div>
               <div class="button-delete-comment" @click="deleteComment(comment.id)" v-if="isAdmin || id === comment.User.id">
-                <button><i class="far fa-trash-alt"></i></button>
+                <button type="submit"><i class="far fa-trash-alt" aria-hidden="true"></i></button>
               </div>
             </div>
           </div>
 
           <div class="input-and-button">
-            <input v-model="content" type="text" class="comment-field" placeholder="Ecrire un commentaire" required >
+            <label class="label" for="input-comment">comment</label>
+            <input name=comment
+            type="text"
+            id="input-comment"
+            placeholder="Ecrire un commentaire"
+            required
+            v-model="content">
             <div class="button-comment">
               <button class="button-input-comment" @click="createComment()">Commenter</button>
             </div>
@@ -162,6 +168,23 @@ button {
 .button-input-comment{
   margin-top: 15px;
 }
+input{
+  max-width: 100%;
+  width: 300px;
+  margin-top: 12px;
+  background: #eeeeee;
+  border-radius: 10px;
+  padding: 10px;
+}
+.label{
+   position:absolute;
+   left:-10000px;
+   top:auto;
+   width:1px;
+   height:1px;
+   overflow:hidden;
+}
+
 .comment-date{
   font-style: italic;
   font-size: 12px;
@@ -188,7 +211,7 @@ button {
   font-weight: 100;
   font-size: 14px;
 }
-.comment-field {
+#input-comment {
   margin-top: 20px;
   border-radius: 3px;
   border: 1px solid;
@@ -197,7 +220,7 @@ button {
   margin-right: 10px;
 }
 @media (max-width: 500px) {
-  .comment-field {
+  #input-comment {
     width: 130px;
   }
 }

@@ -2,7 +2,7 @@
   <div>
     <nav class="menu-nav">
       <img class="logo" src="../assets/logo.png" alt="Logo Groupomania" />
-      <h2 class="name-user">Bonjour {{ username }}</h2> |
+      <h1 class="name-user">Bonjour {{ username }}</h1> |
       <router-link to="/" title="Accueil">Accueil</router-link> |
       <router-link to="/profil" title="Profil">Profil</router-link> |
       <button class="btn-logout" title="Déconnexion" @click="logout">Déconnexion</button>
@@ -141,7 +141,7 @@ li {
   color: white;
   height: 220px;
 }
-  h2{
+  h1{
     margin-top: 0px;
   }
 }

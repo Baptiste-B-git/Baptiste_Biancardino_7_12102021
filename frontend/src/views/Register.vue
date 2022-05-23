@@ -6,15 +6,17 @@
         id="profile-img"
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
+        alt="profile-img"
       />
       <form v-on:submit.prevent="onSubmit" class="registerForm">
         <!-- Username -->
         <div class="form-group">
           <div v-if="error" style="color: crimson" class="error">{{ error }}</div>
+          <label class="label" for="input-username">test</label>
           <input
             name="username"
             type="pseudo"
-            class="form-control"
+            id="input-username"
             placeholder="Nom d'utilisateur"
             maxlength="15"
             autofocus
@@ -25,11 +27,11 @@
 
         <!-- Email -->
         <div class="form-group">
-          <label aria-label="form-control" for="form-control"></label>
+          <label class="label" for="input-email">test</label>
           <input
             name="email"
-            type="email"
-            id="form-control"
+            type="text"
+            id="input-email"
             placeholder="Adresse e-mail"
             maxlength="25"
             required
@@ -39,10 +41,11 @@
 
         <!-- Password -->
         <div class="form-group">
+          <label class="label" for="input-password">test</label>
           <input
             name="password"
             type="password"
-            class="form-control"
+            id="input-password"
             placeholder="Mot de passe"
             maxlength="25"
             required

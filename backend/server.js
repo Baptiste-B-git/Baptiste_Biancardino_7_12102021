@@ -15,6 +15,12 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+db.sequelize
+    .sync() 
+    .then(() => {
+    console.log("Sync to db successful")
+});
+
 // Configure routes
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
