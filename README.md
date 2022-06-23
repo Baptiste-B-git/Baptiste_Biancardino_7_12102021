@@ -1,6 +1,6 @@
 # Groupomania - Réseau social d'entreprise
 
-- Stack technique utilisées :  
+- Stack technique :  
 JavaScript, HTML, CSS, VueJS, MySQL, sequelize, nodeJs, express, axios, joi, multer, bcrypt  
 
 - Importer la database :   
